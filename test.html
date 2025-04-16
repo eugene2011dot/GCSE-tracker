@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCSE Study Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --primary-color: #4e73df;
+      --secondary-color: #858796;
+      --success-color: #1cc88a;
+      --info-color: #36b9cc;
+      --warning-color: #f6c23e;
+      --danger-color: #e74a3b;
+      --light-color: #f8f9fc;
+      --dark-color: #5a5c69;
+    }
+    
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f8f9fc;
+      color: #333;
+    }
+    
+    .navbar {
+      box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    }
+    
+    .card {
+      border: none;
+      border-radius: 0.35rem;
+      box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+      background-color: #f8f9fc;
+      border-bottom: 1px solid #e3e6f0;
+      padding: 1rem 1.35rem;
+    }
+    
+    .card-body {
+      padding: 1.25rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: #2e59d9;
+      border-color: #2653d4;
+    }
+    
+    .btn-danger {
+      background-color: var(--danger-color);
+      border-color: var(--danger-color);
+    }
+    
+    .btn-danger:hover {
+      background-color: #e02d1b;
+      border-color: #d52a1a;
+    }
+    
+    .btn-success {
+      background-color: var(--success-color);
+      border-color: var(--success-color);
+    }
+    
+    .btn-success:hover {
+      background-color: #17a673;
+      border-color: #169b6b;
+    }
+    
+    #timerDisplay {
+      font-family: 'Courier New', monospace;
+      background-color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      border: 1px solid #d1d3e2;
+      font-weight: bold;
+      color: var(--dark-color);
+    }
+    
+    .subject-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .topic-item {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+    }
+    
+    .topic-checkbox {
+      margin-right: 0.75rem;
+    }
+    
+    .progress-card {
+      border-left: 0.25rem solid var(--primary-color);
+    }
+    
+    .progress-card.success {
+      border-left-color: var(--success-color);
+    }
+    
+    .progress-card.info {
+      border-left-color: var(--info-color);
+    }
+    
+    .progress-card.warning {
+      border-left-color: var(--warning-color);
+    }
+    
+    .sidebar {
+      min-width: 250px;
+      max-width: 250px;
+      background: #fff;
+      box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+      transition: all 0.3s;
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        margin-left: -250px;
+      }
+      .sidebar.active {
+        margin-left: 0;
+      }
+    }
+    
+    .sidebar-header {
+      padding: 1.5rem 1.5rem 0.5rem;
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .sidebar-menu {
+      padding: 0.5rem 0;
+    }
+    
+    .sidebar-menu .nav-link {
+      color: #d1d3e2;
+      padding: 0.75rem 1.5rem;
+    }
+    
+    .sidebar-menu .nav-link:hover {
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .sidebar-menu .nav-link.active {
+      color: #fff;
+      font-weight: 700;
+    }
+    
+    .sidebar-menu .nav-link i {
+      margin-right: 0.5rem;
+    }
+    
+    .page-content {
+      width: 100%;
+      padding: 20px;
+    }
+    
+    .toggle-sidebar {
+      cursor: pointer;
+    }
+    
+    .badge-primary {
+      background-color: var(--primary-color);
+    }
+    
+    .badge-success {
+      background-color: var(--success-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header d-flex justify-content-between align-items-center">
+        <h3 class="m-0">GCSE Tracker</h3>
+        <i class="bi bi-x toggle-sidebar"></i>
+      </div>
+      <div class="sidebar-menu">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#dashboard">
+              <i class="bi bi-speedometer2"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tracker">
+              <i class="bi bi-stopwatch"></i>
+              <span>Study Tracker</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#progress">
+              <i class="bi bi-graph-up"></i>
+              <span>Progress</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#subjects">
+              <i class="bi bi-book"></i>
+              <span>Subjects</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <nav class="navbar navbar-expand navbar-light bg-white mb-4 static-top shadow">
+        <div class="container-fluid">
+          <button class="btn btn-link d-md-none mr-3 toggle-sidebar">
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="h3 mb-0 text-gray-800">GCSE Study Tracker</h1>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="mb-5">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h2 class="h3 mb-0 text-gray-800">Study Dashboard</h2>
+          </div>
+          
+          <div class="row">
+            <!-- Weekly Study Time Card -->
+            <div class="col-xl-6 col-md-12 mb-4">
+              <div class="card shadow h-100 py-2 progress-card">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Weekly Study Time
+                      </div>
+                      <canvas id="weeklyTimeChart" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Topic Completion Card -->
+            <div class="col-xl-6 col-md-12 mb-4">
+              <div class="card shadow h-100 py-2 progress-card success">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        Topic Completion
+                      </div>
+                      <canvas id="topicCompletionChart" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <!-- Time by Subject Card -->
+            <div class="col-xl-6 col-md-12 mb-4">
+              <div class="card shadow h-100 py-2 progress-card info">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Time Spent by Subject
+                      </div>
+                      <canvas id="subjectTimeChart" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Weekly Progress Card -->
+            <div class="col-xl-6 col-md-12 mb-4">
+              <div class="card shadow h-100 py-2 progress-card warning">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                        Weekly Progress
+                      </div>
+                      <canvas id="weeklyProgressChart" height="100"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Study Tracker Section -->
+        <section id="tracker" class="mb-5" style="display: none;">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h2 class="h3 mb-0 text-gray-800">Study Session Tracker</h2>
+          </div>
+          
+          <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Track Your Study Session</h6>
+            </div>
+            <div class="card-body">
+              <form id="studySessionForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="subjectSelect" class="form-label">Subject</label>
+                    <select class="form-select" id="subjectSelect" required>
+                      <option value="" selected disabled>Select subject</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="topicSelect" class="form-label">Topic (optional)</label>
+                    <select class="form-select" id="topicSelect" disabled>
+                      <option value="" selected>All topics</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <label class="form-label">Session Timer</label>
+                  <div class="d-flex align-items-center">
+                    <span id="timerDisplay" class="fs-3 me-3">00:00:00</span>
+                    <button type="button" id="startTimer" class="btn btn-success me-2">
+                      <i class="bi bi-play-fill"></i> Start
+                    </button>
+                    <button type="button" id="stopTimer" class="btn btn-danger" disabled>
+                      <i class="bi bi-stop-fill"></i> Stop
+                    </button>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-save"></i> Log Session
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress" class="mb-5" style="display: none;">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h2 class="h3 mb-0 text-gray-800">Progress Overview</h2>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Time Spent by Subject</h6>
+                </div>
+                <div class="card-body">
+                  <canvas id="subjectTimeChartFull" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Weekly Progress</h6>
+                </div>
+                <div class="card-body">
+                  <canvas id="weeklyProgressChartFull" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-12">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Recent Study Sessions</h6>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="sessionsTable" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Subject</th>
+                          <th>Topic</th>
+                          <th>Duration</th>
+                        </tr>
+                      </thead>
+                      <tbody id="sessionsTableBody">
+                        <!-- Sessions will be populated here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section id="subjects" class="mb-5" style="display: none;">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h2 class="h3 mb-0 text-gray-800">My Subjects</h2>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Add New Subject</h6>
+                </div>
+                <div class="card-body">
+                  <form id="addSubjectForm">
+                    <div class="mb-3">
+                      <label for="subject" class="form-label">Select Subject</label>
+                      <select class="form-select" id="subject" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option>English Language</option>
+                        <option>English Literature</option>
+                        <option>Mathematics</option>
+                        <option>Combined Science</option>
+                        <option>Biology</option>
+                        <option>Chemistry</option>
+                        <option>Physics</option>
+                        <option>History</option>
+                        <option>Geography</option>
+                        <option>Religious Studies</option>
+                        <option>Citizenship Studies</option>
+                        <option>French</option>
+                        <option>German</option>
+                        <option>Spanish</option>
+                        <option>Latin</option>
+                        <option>Greek</option>
+                        <option>Art and Design</option>
+                        <option>Music</option>
+                        <option>Drama</option>
+                        <option>Dance</option>
+                        <option>Design and Technology</option>
+                        <option>Food Preparation and Nutrition</option>
+                        <option>Computer Science</option>
+                        <option>Engineering</option>
+                        <option>Business Studies</option>
+                        <option>Economics</option>
+                        <option>Physical Education</option>
+                        <option>Psychology</option>
+                        <option>Sociology</option>
+                        <option>Media Studies</option>
+                        <option>Statistics</option>
+                        <option>Astronomy</option>
+                      </select>
+                    </div>
+
+                    <div class="mb-3 d-none" id="math-options">
+                      <label for="math-set" class="form-label">Maths Set Number</label>
+                      <input type="number" id="math-set" class="form-control" min="1" max="10">
+
+                      <label for="math-tier" class="form-label mt-3">Maths Tier</label>
+                      <select id="math-tier" class="form-select">
+                        <option value="" selected>Choose Tier</option>
+                        <option value="Foundation">Foundation</option>
+                        <option value="Higher">Higher</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-plus-circle"></i> Add Subject
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">My Subjects</h6>
+                </div>
+                <div class="card-body">
+                  <div id="subjectAccordion" class="accordion">
+                    <!-- Subjects will be added here dynamically -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Subject Modal -->
+  <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Subject</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editSubjectForm">
+            <input type="hidden" id="edit-subject-id">
+            <div class="mb-3">
+              <label for="edit-subject-name" class="form-label">Subject Name</label>
+              <input type="text" class="form-control" id="edit-subject-name" readonly>
+            </div>
+            <div class="mb-3 d-none" id="edit-math-options">
+              <label for="edit-math-set" class="form-label">Maths Set Number</label>
+              <input type="number" id="edit-math-set" class="form-control" min="1" max="10">
+
+              <label for="edit-math-tier" class="form-label mt-3">Maths Tier</label>
+              <select id="edit-math-tier" class="form-select">
+                <option value="" selected>Choose Tier</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Higher">Higher</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+          <button type="button" class="btn btn-primary" id="save-edit-subject">
+            <i class="bi bi-save"></i> Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this subject? All related study sessions will also be deleted.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+          <button type="button" class="btn btn-danger" id="confirm-delete">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+   // Sample GCSE subjects and topics
+const gcseSubjects = {
+  "Mathematics": {
+    topics: [
+      "Number", "Algebra", "Ratio, proportion and rates of change",
+      "Geometry and measures", "Probability", "Statistics"
+    ],
+    examBoard: "AQA"
+  },
+  "English Literature": {
+    topics: [
+      "Shakespeare", "19th-century novel", "Modern text",
+      "Poetry", "Unseen poetry"
+    ],
+    examBoard: "Edexcel"
+  },
+  "English Language": {
+    topics: [
+      "Fiction reading", "Non-fiction reading", "Fiction writing",
+      "Non-fiction writing", "Spoken language"
+    ],
+    examBoard: "AQA"
+  },
+  "Biology": {
+    topics: [
+      "Cell biology", "Organisation", "Infection and response",
+      "Bioenergetics", "Homeostasis and response",
+      "Inheritance, variation and evolution", "Ecology"
+    ],
+    examBoard: "OCR"
+  },
+  "Chemistry": {
+    topics: [
+      "Atomic structure", "Bonding", "Quantitative chemistry",
+      "Chemical changes", "Energy changes", "Organic chemistry"
+    ],
+    examBoard: "AQA"
+  },
+  "Physics": {
+    topics: [
+      "Energy", "Electricity", "Particle model of matter",
+      "Atomic structure", "Forces", "Waves", "Magnetism"
+    ],
+    examBoard: "Edexcel"
+  },
+  "History": {
+    topics: [
+      "Medicine in Britain", "Early Elizabethan England",
+      "Superpower relations and the Cold War", "Weimar and Nazi Germany"
+    ],
+    examBoard: "AQA"
+  },
+  "Geography": {
+    topics: [
+      "Natural hazards", "Physical landscapes in the UK",
+      "Urban issues and challenges", "Changing economic world"
+    ],
+    examBoard: "Edexcel"
+  },
+  "Computer Science": {
+    topics: [
+      "Algorithms", "Programming", "Data representation",
+      "Computer systems", "Networks", "Cybersecurity"
+    ],
+    examBoard: "OCR"
+  }
+};
+
+// User data
+let userData = {
+  subjects: [],
+  studySessions: [],
+  goals: {
+    weeklyTarget: 10 // hours per week
+  }
+};
+
+// DOM elements
+const subjectSelect = document.getElementById('subjectSelect');
+const topicSelect = document.getElementById('topicSelect');
+const timerDisplay = document.getElementById('timerDisplay');
+const startTimerBtn = document.getElementById('startTimer');
+const stopTimerBtn = document.getElementById('stopTimer');
+const studySessionForm = document.getElementById('studySessionForm');
+const addSubjectForm = document.getElementById('addSubjectForm');
+const subjectEl = document.getElementById('subject');
+const mathOptions = document.getElementById('math-options');
+const mathSet = document.getElementById('math-set');
+const mathTier = document.getElementById('math-tier');
+const subjectAccordion = document.getElementById('subjectAccordion');
+const editSubjectModal = new bootstrap.Modal(document.getElementById('editSubjectModal'));
+const editSubjectForm = document.getElementById('editSubjectForm');
+const editSubjectName = document.getElementById('edit-subject-name');
+const editMathSet = document.getElementById('edit-math-set');
+const editMathTier = document.getElementById('edit-math-tier');
+const editMathOptions = document.getElementById('edit-math-options');
+const saveEditSubjectBtn = document.getElementById('save-edit-subject');
+const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+const confirmDeleteBtn = document.getElementById('confirm-delete');
+const sessionsTableBody = document.getElementById('sessionsTableBody');
+const sidebar = document.getElementById('sidebar');
+const toggleSidebarButtons = document.querySelectorAll('.toggle-sidebar');
+
+// Timer variables
+let timerInterval;
+let seconds = 0;
+let currentSession = {
+  subject: null,
+  topic: null,
+  startTime: null,
+  endTime: null,
+  duration: 0
+};
+let currentlyEditingSubjectId = null;
+let subjectToDeleteId = null;
+
+// Initialize the app
+function init() {
+  loadUserData();
+  setupNavigation();
+  populateSubjectSelects();
+  renderSubjects();
+  renderCharts();
+  renderRecentSessions();
+  setupEventListeners();
+  setupSidebarToggle();
+}
+
+// Load user data from localStorage
+function loadUserData() {
+  const savedData = localStorage.getItem('gcseStudyTrackerData');
+  if (savedData) {
+    userData = JSON.parse(savedData);
+  }
+}
+
+// Save user data to localStorage
+function saveUserData() {
+  localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
+}
+
+// Setup navigation
+function setupNavigation() {
+  // Show dashboard by default
+  document.querySelector('#dashboard').style.display = 'block';
+  
+  // Set up nav links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Hide all sections
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Show selected section
+      const target = this.getAttribute('href');
+      document.querySelector(target).style.display = 'block';
+      
+      // Update active nav link
+      document.querySelectorAll('.nav-link').forEach(navLink => {
+        navLink.classList.remove('active');
+      });
+      this.classList.add('active');
+      
+      // Render charts when switching to dashboard or progress
+      if (target === '#dashboard' || target === '#progress') {
+        renderCharts();
+      }
+      
+      // Close sidebar on mobile
+      if (window.innerWidth < 768) {
+        sidebar.classList.remove('active');
+      }
+    });
+  });
+}
+
+// Toggle sidebar
+function setupSidebarToggle() {
+  toggleSidebarButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+    });
+  });
+}
+
+// Populate subject dropdowns
+function populateSubjectSelects() {
+  // Clear existing options
+  subjectSelect.innerHTML = '<option value="" selected disabled>Select subject</option>';
+  
+  // Add available subjects to tracker dropdown
+  userData.subjects.forEach(subject => {
+    const option = document.createElement('option');
+    option.value = subject.name;
+    option.textContent = subject.displayName || subject.name;
+    subjectSelect.appendChild(option);
+  });
+}
+
+// Update topic dropdown based on selected subject
+function updateTopicSelect(subjectName) {
+  topicSelect.innerHTML = '<option value="" selected>All topics</option>';
+  
+  if (subjectName && gcseSubjects[subjectName]) {
+    topicSelect.disabled = false;
+    gcseSubjects[subjectName].topics.forEach(topic => {
+      const option = document.createElement('option');
+      option.value = topic;
+      option.textContent = topic;
+      topicSelect.appendChild(option);
+    });
+  } else {
+    topicSelect.disabled = true;
+  }
+}
+
+// Start the study timer
+function startTimer() {
+  if (!subjectSelect.value) {
+    alert('Please select a subject first');
+    return;
+  }
+  
+  currentSession.startTime = new Date();
+  timerInterval = setInterval(updateTimer, 1000);
+  startTimerBtn.disabled = true;
+  stopTimerBtn.disabled = false;
+}
+
+// Stop the study timer
+function stopTimer() {
+  clearInterval(timerInterval);
+  currentSession.endTime = new Date();
+  currentSession.duration = seconds;
+  startTimerBtn.disabled = false;
+  stopTimerBtn.disabled = true;
+}
+
+// Update the timer display
+function updateTimer() {
+  seconds++;
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  
+  timerDisplay.textContent = 
+    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Log a study session
+function logStudySession(event) {
+  event.preventDefault();
+  
+  const subject = subjectSelect.value;
+  const topic = topicSelect.value || 'General study';
+  
+  if (!subject) {
+    alert('Please select a subject');
+    return;
+  }
+  
+  const session = {
+    date: new Date().toISOString(),
+    subject,
+    topic,
+    duration: currentSession.duration || seconds
+  };
+  
+  userData.studySessions.push(session);
+  saveUserData();
+  
+  // Reset timer and form
+  seconds = 0;
+  timerDisplay.textContent = '00:00:00';
+  studySessionForm.reset();
+  topicSelect.disabled = true;
+  
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    startTimerBtn.disabled = false;
+    stopTimerBtn.disabled = true;
+  }
+  
+  // Update UI
+  renderCharts();
+  renderSubjects();
+  renderRecentSessions();
+}
+
+// Add a new subject
+function addSubject(event) {
+  event.preventDefault();
+  
+  const subjectName = subjectEl.value;
+  
+  if (!subjectName) {
+    alert('Please select a subject');
+    return;
+  }
+  
+  // Check if subject already exists
+  if (userData.subjects.some(s => s.name === subjectName)) {
+    alert('You already have this subject added');
+    return;
+  }
+  
+  let displayName = subjectName;
+  const subjectDetails = { name: subjectName };
+  
+  // Special handling for Mathematics
+  if (subjectName === "Mathematics") {
+    const setNumber = mathSet.value;
+    const tier = mathTier.value;
+    
+    if (setNumber) {
+      displayName += ` - Set ${setNumber}`;
+      subjectDetails.set = setNumber;
+    }
+    if (tier) {
+      displayName += ` (${tier} Tier)`;
+      subjectDetails.tier = tier;
+    }
+  }
+  
+  subjectDetails.displayName = displayName;
+  userData.subjects.push(subjectDetails);
+  saveUserData();
+  
+  // Update UI
+  populateSubjectSelects();
+  renderSubjects();
+  addSubjectForm.reset();
+  mathOptions.classList.add('d-none');
+}
+
+// Edit a subject
+function editSubject(subjectId) {
+  const subject = userData.subjects[subjectId];
+  if (!subject) return;
+
+  currentlyEditingSubjectId = subjectId;
+  editSubjectName.value = subject.name;
+  
+  // Show math options if subject is Mathematics
+  if (subject.name === "Mathematics") {
+    editMathOptions.classList.remove('d-none');
+    editMathSet.value = subject.set || '';
+    editMathTier.value = subject.tier || '';
+  } else {
+    editMathOptions.classList.add('d-none');
+  }
+  
+  editSubjectModal.show();
+}
+
+// Save edited subject
+function saveEditedSubject() {
+  if (currentlyEditingSubjectId === null) return;
+  
+  const subject = userData.subjects[currentlyEditingSubjectId];
+  if (!subject) return;
+  
+  // Update subject details (only for Mathematics)
+  if (subject.name === "Mathematics") {
+    const setNumber = editMathSet.value;
+    const tier = editMathTier.value;
+    
+    let displayName = subject.name;
+    if (setNumber) {
+      displayName += ` - Set ${setNumber}`;
+      subject.set = setNumber;
+    }
+    if (tier) {
+      displayName += ` (${tier} Tier)`;
+      subject.tier = tier;
+    }
+    
+    subject.displayName = displayName;
+  }
+  
+  saveUserData();
+  populateSubjectSelects();
+  renderSubjects();
+  editSubjectModal.hide();
+  currentlyEditingSubjectId = null;
+}
+
+// Confirm subject deletion
+function confirmDeleteSubject(subjectId) {
+  subjectToDeleteId = subjectId;
+  confirmationModal.show();
+}
+
+// Delete a subject
+function deleteSubject() {
+  if (subjectToDeleteId === null) return;
+  
+  const subjectName = userData.subjects[subjectToDeleteId].name;
+  
+  // Remove subject
+  userData.subjects.splice(subjectToDeleteId, 1);
+  
+  // Remove related study sessions
+  userData.studySessions = userData.studySessions.filter(
+    session => session.subject !== subjectName
+  );
+  
+  saveUserData();
+  populateSubjectSelects();
+  renderSubjects();
+  renderCharts();
+  renderRecentSessions();
+  
+  confirmationModal.hide();
+  subjectToDeleteId = null;
+}
+
+// Render the subjects list with topics
+function renderSubjects() {
+  subjectAccordion.innerHTML = '';
+  
+  if (userData.subjects.length === 0) {
+    subjectAccordion.innerHTML = `
+      <div class="alert alert-info">
+        You haven't added any subjects yet. Add your first subject using the form above.
+      </div>
+    `;
+    return;
+  }
+  
+  userData.subjects.forEach((subject, index) => {
+    const subjectName = subject.name;
+    const subjectData = gcseSubjects[subjectName];
+    if (!subjectData) return;
+    
+    const accordionItem = document.createElement('div');
+    accordionItem.className = 'accordion-item mb-2';
+    
+    const accordionHeader = document.createElement('h2');
+    accordionHeader.className = 'accordion-header';
+    accordionHeader.id = `heading${subjectName.replace(/\s+/g, '')}`;
+    
+    const accordionButton = document.createElement('button');
+    accordionButton.className = 'accordion-button collapsed';
+    accordionButton.type = 'button';
+    accordionButton.setAttribute('data-bs-toggle', 'collapse');
+    accordionButton.setAttribute('data-bs-target', `#collapse${subjectName.replace(/\s+/g, '')}`);
+    
+    // Create container for subject name and actions
+    const subjectHeaderContent = document.createElement('div');
+    subjectHeaderContent.className = 'd-flex justify-content-between align-items-center w-100';
+    
+    // Subject name
+    const subjectNameSpan = document.createElement('span');
+    subjectNameSpan.className = 'fw-bold';
+    subjectNameSpan.textContent = `${subject.displayName || subjectName}`;
+    
+    // Exam board badge
+    const examBoardBadge = document.createElement('span');
+    examBoardBadge.className = 'badge bg-secondary me-2';
+    examBoardBadge.textContent = subjectData.examBoard;
+    
+    // Action buttons
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'subject-actions';
+    
+    const editButton = document.createElement('button');
+    editButton.className = 'btn btn-sm btn-outline-primary';
+    editButton.innerHTML = '<i class="bi bi-pencil"></i>';
+    editButton.title = 'Edit subject';
+    editButton.onclick = (e) => {
+      e.stopPropagation();
+      editSubject(index);
+    };
+    
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-sm btn-outline-danger';
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteButton.title = 'Delete subject';
+    deleteButton.onclick = (e) => {
+      e.stopPropagation();
+      confirmDeleteSubject(index);
+    };
+    
+    actionButtons.appendChild(editButton);
+    actionButtons.appendChild(deleteButton);
+    
+    subjectHeaderContent.appendChild(subjectNameSpan);
+    subjectHeaderContent.appendChild(examBoardBadge);
+    subjectHeaderContent.appendChild(actionButtons);
+    accordionButton.appendChild(subjectHeaderContent);
+    
+    accordionHeader.appendChild(accordionButton);
+    
+    const accordionCollapse = document.createElement('div');
+    accordionCollapse.id = `collapse${subjectName.replace(/\s+/g, '')}`;
+    accordionCollapse.className = 'accordion-collapse collapse';
+    accordionCollapse.setAttribute('aria-labelledby', `heading${subjectName.replace(/\s+/g, '')}`);
+    accordionCollapse.setAttribute('data-bs-parent', '#subjectAccordion');
+    
+    const accordionBody = document.createElement('div');
+    accordionBody.className = 'accordion-body';
+    
+    const topicsList = document.createElement('div');
+    topicsList.className = 'list-group';
+    
+    subjectData.topics.forEach(topic => {
+      const topicItem = document.createElement('label');
+      topicItem.className = 'list-group-item d-flex justify-content-between align-items-center topic-item';
+      
+      const topicCheckbox = document.createElement('input');
+      topicCheckbox.type = 'checkbox';
+      topicCheckbox.className = 'form-check-input me-1 topic-checkbox';
+      topicCheckbox.value = topic;
+      
+      // Check if topic is completed
+      const sessionsOnTopic = userData.studySessions.filter(
+        session => session.subject === subjectName && session.topic === topic
+      ).length;
+      
+      if (sessionsOnTopic > 0) {
+        topicCheckbox.checked = true;
+      }
+      
+      topicItem.appendChild(topicCheckbox);
+      topicItem.appendChild(document.createTextNode(topic));
+      
+      const badge = document.createElement('span');
+      badge.className = 'badge bg-primary rounded-pill';
+      badge.textContent = `${sessionsOnTopic} session${sessionsOnTopic !== 1 ? 's' : ''}`;
+      topicItem.appendChild(badge);
+      
+      topicsList.appendChild(topicItem);
+    });
+    
+    accordionBody.appendChild(topicsList);
+    accordionCollapse.appendChild(accordionBody);
+    accordionItem.appendChild(accordionHeader);
+    accordionItem.appendChild(accordionCollapse);
+    subjectAccordion.appendChild(accordionItem);
+  });
+}
+
+// Render recent study sessions
+function renderRecentSessions() {
+  sessionsTableBody.innerHTML = '';
+  
+  // Sort sessions by date (newest first)
+  const sortedSessions = [...userData.studySessions].sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+  
+  // Show only the 10 most recent sessions
+  const recentSessions = sortedSessions.slice(0, 10);
+  
+  if (recentSessions.length === 0) {
+    sessionsTableBody.innerHTML = `
+      <tr>
+        <td colspan="4" class="text-center">No study sessions recorded yet</td>
+      </tr>
+    `;
+    return;
+  }
+  
+  recentSessions.forEach(session => {
+    const row = document.createElement('tr');
+    
+    const dateCell = document.createElement('td');
+    dateCell.textContent = new Date(session.date).toLocaleDateString();
+    
+    const subjectCell = document.createElement('td');
+    const subject = userData.subjects.find(s => s.name === session.subject);
+    subjectCell.textContent = subject ? subject.displayName || subject.name : session.subject;
+    
+    const topicCell = document.createElement('td');
+    topicCell.textContent = session.topic;
+    
+    const durationCell = document.createElement('td');
+    const hours = Math.floor(session.duration / 3600);
+    const minutes = Math.floor((session.duration % 3600) / 60);
+    const secs = session.duration % 60;
+    durationCell.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    
+    row.appendChild(dateCell);
+    row.appendChild(subjectCell);
+    row.appendChild(topicCell);
+    row.appendChild(durationCell);
+    sessionsTableBody.appendChild(row);
+  });
+}
+
+// Render all charts
+function renderCharts() {
+  renderWeeklyTimeChart();
+  renderTopicCompletionChart();
+  renderSubjectTimeChart();
+  renderWeeklyProgressChart();
+}
+
+// Render weekly study time chart
+function renderWeeklyTimeChart() {
+  const ctx = document.getElementById('weeklyTimeChart').getContext('2d');
+  
+  // Calculate study time for last 7 days
+  const now = new Date();
+  const dailyStudy = Array(7).fill(0);
+  
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - (6 - i));
+    const dateStr = date.toISOString().split('T')[0];
+    
+    userData.studySessions.forEach(session => {
+      const sessionDate = new Date(session.date).toISOString().split('T')[0];
+      if (sessionDate === dateStr) {
+        dailyStudy[i] += session.duration / 3600; // Convert to hours
+      }
+    });
+  }
+  
+  const labels = [];
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - i);
+    labels.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+  }
+  
+  if (window.weeklyTimeChart) {
+    window.weeklyTimeChart.destroy();
+  }
+  
+  window.weeklyTimeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Hours studied',
+        data: dailyStudy,
+        backgroundColor: 'rgba(78, 115, 223, 0.5)',
+        borderColor: 'rgba(78, 115, 223, 1)',
+        borderWidth: 1
+      }, {
+        label: 'Daily target',
+        data: Array(7).fill(userData.goals.weeklyTarget / 7),
+        type: 'line',
+        borderColor: 'rgba(231, 74, 59, 1)',
+        borderWidth: 2,
+        fill: false,
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Hours'
+          }
+        }
+      }
+    }
+  });
+}
+
+// Render topic completion chart
+function renderTopicCompletionChart() {
+  const ctx = document.getElementById('topicCompletionChart').getContext('2d');
+  
+  const subjectsWithCompletion = userData.subjects.map(subject => {
+    const subjectName = subject.name;
+    const topics = gcseSubjects[subjectName]?.topics || [];
+    const completedTopics = topics.filter(topic => {
+      return userData.studySessions.some(
+        session => session.subject === subjectName && session.topic === topic
+      );
+    }).length;
+    
+    return {
+      subject: subject.displayName || subjectName,
+      completion: topics.length > 0 ? (completedTopics / topics.length) * 100 : 0
+    };
+  });
+  
+  if (window.topicCompletionChart) {
+    window.topicCompletionChart.destroy();
+  }
+  
+  window.topicCompletionChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: subjectsWithCompletion.map(item => item.subject),
+      datasets: [{
+        data: subjectsWithCompletion.map(item => item.completion),
+        backgroundColor: [
+          'rgba(78, 115, 223, 0.5)',
+          'rgba(28, 200, 138, 0.5)',
+          'rgba(246, 194, 62, 0.5)',
+          'rgba(231, 74, 59, 0.5)',
+          'rgba(54, 185, 204, 0.5)'
+        ],
+        borderColor: [
+          'rgba(78, 115, 223, 1)',
+          'rgba(28, 200, 138, 1)',
+          'rgba(246, 194, 62, 1)',
+          'rgba(231, 74, 59, 1)',
+          'rgba(54, 185, 204, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ${context.raw.toFixed(1)}% complete`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+// Render time spent by subject chart
+function renderSubjectTimeChart() {
+  const ctx = document.getElementById('subjectTimeChart').getContext('2d');
+  const ctxFull = document.getElementById('subjectTimeChartFull')?.getContext('2d');
+  
+  const subjectTime = {};
+  userData.subjects.forEach(subject => {
+    subjectTime[subject.displayName || subject.name] = 0;
+  });
+  
+  userData.studySessions.forEach(session => {
+    const subject = userData.subjects.find(s => s.name === session.subject);
+    if (subject) {
+      const displayName = subject.displayName || subject.name;
+      subjectTime[displayName] += session.duration / 3600; // Convert to hours
+    }
+  });
+  
+  if (window.subjectTimeChart) {
+    window.subjectTimeChart.destroy();
+  }
+  
+  window.subjectTimeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(subjectTime),
+      datasets: [{
+        label: 'Hours studied',
+        data: Object.values(subjectTime),
+        backgroundColor: 'rgba(54, 185, 204, 0.5)',
+        borderColor: 'rgba(54, 185, 204, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Hours'
+          }
+        }
+      }
+    }
+  });
+  
+  if (ctxFull) {
+    if (window.subjectTimeChartFull) {
+      window.subjectTimeChartFull.destroy();
+    }
+    
+    window.subjectTimeChartFull = new Chart(ctxFull, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(subjectTime),
+        datasets: [{
+          label: 'Hours studied',
+          data: Object.values(subjectTime),
+          backgroundColor: 'rgba(54, 185, 204, 0.5)',
+          borderColor: 'rgba(54, 185, 204, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Hours'
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+// Render weekly progress chart
+function renderWeeklyProgressChart() {
+  const ctx = document.getElementById('weeklyProgressChart').getContext('2d');
+  const ctxFull = document.getElementById('weeklyProgressChartFull')?.getContext('2d');
+  
+  // Calculate weekly totals for last 8 weeks
+  const weeklyTotals = Array(8).fill(0);
+  const now = new Date();
+  
+  for (let i = 0; i < 8; i++) {
+    const weekStart = new Date(now);
+    weekStart.setDate(weekStart.getDate() - (7 - i) * 7);
+    const weekStartStr = weekStart.toISOString().split('T')[0];
+    
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekEnd.getDate() + 6);
+    const weekEndStr = weekEnd.toISOString().split('T')[0];
+    
+    userData.studySessions.forEach(session => {
+      const sessionDate = new Date(session.date).toISOString().split('T')[0];
+      if (sessionDate >= weekStartStr && sessionDate <= weekEndStr) {
+        weeklyTotals[i] += session.duration / 3600; // Convert to hours
+      }
+    });
+  }
+  
+  const labels = [];
+  for (let i = 7; i >= 0; i--) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - i * 7);
+    labels.push(`Week ${i === 0 ? 'Current' : i}`);
+  }
+  
+  if (window.weeklyProgressChart) {
+    window.weeklyProgressChart.destroy();
+  }
+  
+  window.weeklyProgressChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Weekly study time',
+        data: weeklyTotals,
+        fill: false,
+        borderColor: 'rgba(78, 115, 223, 1)',
+        tension: 0.1
+      }, {
+        label: 'Weekly target',
+        data: Array(8).fill(userData.goals.weeklyTarget),
+        borderColor: 'rgba(231, 74, 59, 1)',
+        borderWidth: 2,
+        borderDash: [5, 5],
+        pointRadius: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Hours'
+          }
+        }
+      }
+    }
+  });
+  
+  if (ctxFull) {
+    if (window.weeklyProgressChartFull) {
+      window.weeklyProgressChartFull.destroy();
+    }
+    
+    window.weeklyProgressChartFull = new Chart(ctxFull, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Weekly study time',
+          data: weeklyTotals,
+          fill: false,
+          borderColor: 'rgba(78, 115, 223, 1)',
+          tension: 0.1
+        }, {
+          label: 'Weekly target',
+          data: Array(8).fill(userData.goals.weeklyTarget),
+          borderColor: 'rgba(231, 74, 59, 1)',
+          borderWidth: 2,
+          borderDash: [5, 5],
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Hours'
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+// Set up event listeners
+function setupEventListeners() {
+  // Subject selection
+  subjectEl.addEventListener('change', () => {
+    if (subjectEl.value === "Mathematics") {
+      mathOptions.classList.remove('d-none');
+    } else {
+      mathOptions.classList.add('d-none');
+    }
+  });
+  
+  // Study session subject selection
+  subjectSelect.addEventListener('change', (e) => {
+    updateTopicSelect(e.target.value);
+    currentSession.subject = e.target.value;
+  });
+  
+  // Study session topic selection
+  topicSelect.addEventListener('change', (e) => {
+    currentSession.topic = e.target.value || 'General study';
+  });
+  
+  // Timer controls
+  startTimerBtn.addEventListener('click', startTimer);
+  stopTimerBtn.addEventListener('click', stopTimer);
+  
+  // Forms
+  studySessionForm.addEventListener('submit', logStudySession);
+  addSubjectForm.addEventListener('submit', addSubject);
+  saveEditSubjectBtn.addEventListener('click', saveEditedSubject);
+  confirmDeleteBtn.addEventListener('click', deleteSubject);
+  
+  // Window resize - destroy and recreate charts for responsiveness
+  window.addEventListener('resize', () => {
+    if (window.innerWidth < 768) {
+      sidebar.classList.remove('active');
+    }
+    renderCharts();
+  });
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
