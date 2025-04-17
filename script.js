@@ -175,6 +175,7 @@ const gcseSubjects = {
 // Initialize the app
 function init() {
     loadUserData();
+    updateUserProfileDisplay(); // Ensure profile is updated on page load
     setupNavigation();
     setupEventListeners();
     updateCurrentDate();
@@ -186,7 +187,7 @@ function init() {
     setupResourceModal();
     renderTimetableSubjects();
     renderTimetableGrid();
-    updateUserProfileDisplay();
+    WellbeingManager.init(); // Initialize the Wellbeing Manager
 }
 
 // Load user data from localStorage
@@ -194,6 +195,19 @@ function loadUserData() {
     const savedData = localStorage.getItem('gcseStudyTrackerData');
     if (savedData) {
         userData = JSON.parse(savedData);
+
+        // Ensure all user profile fields are loaded correctly
+        if (!userData.userProfile) {
+            userData.userProfile = {
+                name: "Student",
+                role: "GCSE",
+                avatar: null,
+                initials: "JS",
+                gcseDate: null
+            };
+        }
+    } else {
+        saveUserData(); // Initialize the storage if it's empty
     }
 }
 
@@ -201,6 +215,7 @@ function loadUserData() {
 function saveUserData() {
     localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
 }
+
 
 // Update current date display
 function updateCurrentDate() {
@@ -1072,17 +1087,18 @@ function updateUserProfileDisplay() {
     userRole.textContent = `GCSE (${formatGCSEDate(userData.userProfile.gcseDate)})`;
 }
 
+// Helper function to format the GCSE date
 function formatGCSEDate(dateString) {
     if (!dateString) return 'No date set';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
+// Helper function to generate a random color for initials
 function getRandomColor() {
     const colors = ['#4361ee', '#3f37c9', '#4cc9f0', '#4895ef', '#f72585', '#7209b7'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
-
 // Chart functions
 function renderCharts() {
     renderWeeklyTimeChart();
@@ -1946,328 +1962,250 @@ function deleteResource(category, index) {
         renderResources();
     }
 }
-// Wellbeing Module
+// Wellbeing Module Fixes
 const WellbeingManager = {
-    // Initialize all wellbeing features
     init() {
-      this.initBreakReminders();
-      this.initMindfulnessTimer();
-      this.initSleepCalculator();
-      this.loadPreferences();
-      this.setupEventListeners();
+        this.loadPreferences();
+        this.setupEventListeners();
+        this.startBreakReminder(); // Automatically start break reminders if enabled
     },
-  
-    // Load user preferences
+
     loadPreferences() {
-      if (!userData.wellbeing) {
-        userData.wellbeing = {
-          breakReminders: true,
-          reminderInterval: 50,
-          lastBreakTime: null,
-          mindfulnessDuration: 5,
-          wakeUpTime: '07:00',
-          sleepCycles: 5
-        };
-        saveUserData();
-      }
-      this.updateUIFromPreferences();
-    },
-  
-    // Update UI based on saved preferences
-    updateUIFromPreferences() {
-      const { wellbeing } = userData;
-      document.getElementById('breakRemindersSwitch').checked = wellbeing.breakReminders;
-      document.getElementById('reminderInterval').value = wellbeing.reminderInterval;
-      document.getElementById('mindfulnessDuration').value = wellbeing.mindfulnessDuration;
-      document.getElementById('wakeUpTime').value = wellbeing.wakeUpTime;
-      document.getElementById('sleepCycles').value = wellbeing.sleepCycles;
-    },
-  
-    // Setup event listeners
-    setupEventListeners() {
-      // Break reminders
-      document.getElementById('breakRemindersSwitch').addEventListener('change', (e) => {
-        userData.wellbeing.breakReminders = e.target.checked;
-        saveUserData();
-        if (e.target.checked) this.startBreakReminder();
-        else this.stopBreakReminder();
-      });
-  
-      document.getElementById('reminderInterval').addEventListener('change', (e) => {
-        userData.wellbeing.reminderInterval = parseInt(e.target.value);
-        saveUserData();
-        this.restartBreakReminder();
-      });
-  
-      document.getElementById('takeBreakNowBtn').addEventListener('click', () => {
-        this.showBreakReminder(true);
-      });
-  
-      // Mindfulness timer
-      document.getElementById('startMindfulnessBtn').addEventListener('click', () => {
-        this.startMindfulnessTimer();
-      });
-  
-      document.getElementById('stopMindfulnessBtn').addEventListener('click', () => {
-        this.stopMindfulnessTimer();
-      });
-  
-      document.getElementById('mindfulnessDuration').addEventListener('change', (e) => {
-        userData.wellbeing.mindfulnessDuration = parseInt(e.target.value);
-        saveUserData();
-        this.updateMindfulnessDisplay();
-      });
-  
-      // Sleep calculator
-      document.getElementById('calculateSleepBtn').addEventListener('click', () => {
-        this.calculateOptimalSleepTimes();
-      });
-  
-      document.getElementById('saveSleepPrefsBtn').addEventListener('click', () => {
-        this.saveSleepPreferences();
-      });
-    },
-  
-    // Break reminder system
-    breakInterval: null,
-    startBreakReminder() {
-      this.stopBreakReminder();
-      this.breakInterval = setInterval(() => {
-        const now = new Date();
-        const lastBreak = userData.wellbeing.lastBreakTime ? new Date(userData.wellbeing.lastBreakTime) : null;
-        
-        if (!lastBreak || (now - lastBreak) >= userData.wellbeing.reminderInterval * 60 * 1000) {
-          this.showBreakReminder();
-          userData.wellbeing.lastBreakTime = now.toISOString();
-          saveUserData();
+        if (!userData.wellbeing) {
+            userData.wellbeing = {
+                breakReminders: true,
+                reminderInterval: 50,
+                mindfulnessDuration: 5,
+                lastBreakTime: null,
+                wakeUpTime: "07:00",
+                sleepCycles: 5,
+            };
+            saveUserData();
         }
-      }, 60000); // Check every minute
+        this.updateUIFromPreferences();
     },
-  
+
+    updateUIFromPreferences() {
+        const wellbeing = userData.wellbeing;
+        document.getElementById("breakRemindersSwitch").checked = wellbeing.breakReminders;
+        document.getElementById("reminderInterval").value = wellbeing.reminderInterval;
+        document.getElementById("mindfulnessDuration").value = wellbeing.mindfulnessDuration;
+        document.getElementById("wakeUpTime").value = wellbeing.wakeUpTime;
+        document.getElementById("sleepCycles").value = wellbeing.sleepCycles;
+    },
+
+    setupEventListeners() {
+        // Break Reminders
+        document.getElementById("breakRemindersSwitch").addEventListener("change", (e) => {
+            userData.wellbeing.breakReminders = e.target.checked;
+            saveUserData();
+            if (e.target.checked) this.startBreakReminder();
+            else this.stopBreakReminder();
+        });
+
+        document.getElementById("reminderInterval").addEventListener("change", (e) => {
+            userData.wellbeing.reminderInterval = parseInt(e.target.value, 10);
+            saveUserData();
+            this.restartBreakReminder();
+        });
+
+        document.getElementById("takeBreakNowBtn").addEventListener("click", () => {
+            this.showBreakReminder(true);
+        });
+
+        // Mindfulness Timer
+        document.getElementById("startMindfulnessBtn").addEventListener("click", () => {
+            this.startMindfulnessTimer();
+        });
+
+        document.getElementById("stopMindfulnessBtn").addEventListener("click", () => {
+            this.stopMindfulnessTimer();
+        });
+
+        document.getElementById("mindfulnessDuration").addEventListener("change", (e) => {
+            userData.wellbeing.mindfulnessDuration = parseInt(e.target.value, 10);
+            saveUserData();
+            this.updateMindfulnessDisplay();
+        });
+
+        // Sleep Calculator
+        document.getElementById("calculateSleepBtn").addEventListener("click", () => {
+            this.calculateOptimalSleepTimes();
+        });
+
+        document.getElementById("saveSleepPrefsBtn").addEventListener("click", () => {
+            this.saveSleepPreferences();
+        });
+    },
+
+    // Break Reminder Logic
+    breakInterval: null,
+
+    startBreakReminder() {
+        this.stopBreakReminder();
+        if (!userData.wellbeing.breakReminders) return;
+
+        this.breakInterval = setInterval(() => {
+            const now = new Date();
+            const lastBreak = userData.wellbeing.lastBreakTime ? new Date(userData.wellbeing.lastBreakTime) : null;
+
+            if (!lastBreak || (now - lastBreak) >= userData.wellbeing.reminderInterval * 60 * 1000) {
+                this.showBreakReminder();
+                userData.wellbeing.lastBreakTime = now.toISOString();
+                saveUserData();
+            }
+        }, 60000); // Check every minute
+    },
+
     stopBreakReminder() {
-      if (this.breakInterval) {
-        clearInterval(this.breakInterval);
-        this.breakInterval = null;
-      }
+        if (this.breakInterval) {
+            clearInterval(this.breakInterval);
+            this.breakInterval = null;
+        }
     },
-  
+
     restartBreakReminder() {
-      if (userData.wellbeing.breakReminders) {
-        this.startBreakReminder();
-      }
+        if (userData.wellbeing.breakReminders) {
+            this.startBreakReminder();
+        }
     },
-  
+
     showBreakReminder(manual = false) {
-      const stretches = [
-        "Neck Rolls: Slowly roll your head in circles 5 times each direction",
-        "Shoulder Shrugs: Lift shoulders up and down 10 times",
-        "Stand and Stretch: Reach up high, then touch your toes",
-        "Eye Rest: Look away from screen and focus on distant object for 30 seconds",
-        "Wrist Circles: Rotate wrists 10 times each direction"
-      ];
-      
-      const exercise = stretches[Math.floor(Math.random() * stretches.length)];
-      const title = manual ? "Recommended Break" : "Time for a Break!";
-      const message = manual ? 
-        "Here's a good exercise to refresh yourself:" : 
-        `You've been studying for ${userData.wellbeing.reminderInterval} minutes. Try this exercise:`;
-      
-      const modal = new bootstrap.Modal(document.getElementById('breakReminderModal'));
-      document.getElementById('breakReminderTitle').textContent = title;
-      document.getElementById('breakReminderMessage').textContent = message;
-      document.getElementById('breakReminderExercise').textContent = exercise;
-      modal.show();
+        const stretches = [
+            "Neck Rolls: Slowly roll your head in circles 5 times each direction.",
+            "Shoulder Shrugs: Lift shoulders up and down 10 times.",
+            "Stand and Stretch: Reach up high, then touch your toes.",
+            "Eye Rest: Look away from your screen and focus on a distant object for 30 seconds.",
+            "Wrist Circles: Rotate your wrists 10 times each direction.",
+        ];
+        const exercise = stretches[Math.floor(Math.random() * stretches.length)];
+        const title = manual ? "Recommended Break" : "Time for a Break!";
+        const message = manual
+            ? "Here's a good exercise to refresh yourself:"
+            : `You've been studying for ${userData.wellbeing.reminderInterval} minutes. Try this exercise:`;
+
+        const modal = new bootstrap.Modal(document.getElementById("breakReminderModal"));
+        document.getElementById("breakReminderTitle").textContent = title;
+        document.getElementById("breakReminderMessage").textContent = message;
+        document.getElementById("breakReminderExercise").textContent = exercise;
+        modal.show();
     },
-  
-    // Mindfulness timer
+
+    // Mindfulness Timer Logic
     mindfulnessInterval: null,
     mindfulnessTimeLeft: 0,
+
     startMindfulnessTimer() {
-      this.stopMindfulnessTimer();
-      this.mindfulnessTimeLeft = userData.wellbeing.mindfulnessDuration * 60;
-      
-      this.updateMindfulnessDisplay();
-      document.getElementById('startMindfulnessBtn').disabled = true;
-      document.getElementById('stopMindfulnessBtn').disabled = false;
-      
-      this.mindfulnessInterval = setInterval(() => {
-        this.mindfulnessTimeLeft--;
+        this.stopMindfulnessTimer();
+        this.mindfulnessTimeLeft = userData.wellbeing.mindfulnessDuration * 60;
         this.updateMindfulnessDisplay();
-        
-        if (this.mindfulnessTimeLeft <= 0) {
-          this.stopMindfulnessTimer();
-          this.showMindfulnessComplete();
-        }
-      }, 1000);
+
+        document.getElementById("startMindfulnessBtn").disabled = true;
+        document.getElementById("stopMindfulnessBtn").disabled = false;
+
+        this.mindfulnessInterval = setInterval(() => {
+            this.mindfulnessTimeLeft--;
+            this.updateMindfulnessDisplay();
+
+            if (this.mindfulnessTimeLeft <= 0) {
+                this.stopMindfulnessTimer();
+                this.showMindfulnessComplete();
+            }
+        }, 1000);
     },
-  
+
     stopMindfulnessTimer() {
-      if (this.mindfulnessInterval) {
-        clearInterval(this.mindfulnessInterval);
-        this.mindfulnessInterval = null;
-      }
-      document.getElementById('startMindfulnessBtn').disabled = false;
-      document.getElementById('stopMindfulnessBtn').disabled = true;
+        if (this.mindfulnessInterval) {
+            clearInterval(this.mindfulnessInterval);
+            this.mindfulnessInterval = null;
+        }
+        document.getElementById("startMindfulnessBtn").disabled = false;
+        document.getElementById("stopMindfulnessBtn").disabled = true;
     },
-  
+
     updateMindfulnessDisplay() {
-      const minutes = Math.floor(this.mindfulnessTimeLeft / 60);
-      const seconds = this.mindfulnessTimeLeft % 60;
-      document.getElementById('mindfulnessDisplay').textContent = 
-        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        const minutes = Math.floor(this.mindfulnessTimeLeft / 60);
+        const seconds = this.mindfulnessTimeLeft % 60;
+        document.getElementById("mindfulnessDisplay").textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     },
-  
+
     showMindfulnessComplete() {
-      const breaths = [
-        "Deep Breathing: Inhale for 4s, hold for 4s, exhale for 6s",
-        "Box Breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s",
-        "4-7-8 Breathing: Inhale 4s, hold 7s, exhale 8s"
-      ];
-      
-      const modal = new bootstrap.Modal(document.getElementById('mindfulnessCompleteModal'));
-      document.getElementById('mindfulnessBreathExercise').textContent = 
-        breaths[Math.floor(Math.random() * breaths.length)];
-      modal.show();
+        const breaths = [
+            "Deep Breathing: Inhale for 4s, hold for 4s, exhale for 6s.",
+            "Box Breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s.",
+            "4-7-8 Breathing: Inhale 4s, hold 7s, exhale 8s.",
+        ];
+        const exercise = breaths[Math.floor(Math.random() * breaths.length)];
+
+        const modal = new bootstrap.Modal(document.getElementById("mindfulnessCompleteModal"));
+        document.getElementById("mindfulnessBreathExercise").textContent = exercise;
+        modal.show();
     },
-  
-    // Sleep calculator
+
+    // Sleep Calculator Logic
     calculateOptimalSleepTimes() {
-      const wakeUpTime = document.getElementById('wakeUpTime').value;
-      const cycles = parseInt(document.getElementById('sleepCycles').value);
-      
-      if (!wakeUpTime || isNaN(cycles) || cycles < 1 || cycles > 6) {
-        alert('Please enter valid wake-up time and sleep cycles (1-6)');
-        return;
-      }
-      
-      const [hours, minutes] = wakeUpTime.split(':').map(Number);
-      const wakeUpDate = new Date();
-      wakeUpDate.setHours(hours, minutes, 0, 0);
-      
-      const cycleDuration = 90; // minutes per sleep cycle
-      const results = [];
-      
-      for (let i = 1; i <= cycles; i++) {
-        const bedtime = new Date(wakeUpDate.getTime() - i * cycleDuration * 60000);
-        results.push({
-          time: bedtime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          cycles: i
-        });
-      }
-      
-      this.displaySleepResults(results, wakeUpTime);
+        const wakeUpTime = document.getElementById("wakeUpTime").value;
+        const cycles = parseInt(document.getElementById("sleepCycles").value, 10);
+
+        if (!wakeUpTime || isNaN(cycles) || cycles < 1 || cycles > 6) {
+            alert("Please enter valid wake-up time and sleep cycles (1-6).");
+            return;
+        }
+
+        const [hours, minutes] = wakeUpTime.split(":").map(Number);
+        const wakeUpDate = new Date();
+        wakeUpDate.setHours(hours, minutes, 0, 0);
+
+        const cycleDuration = 90; // minutes per sleep cycle
+        const results = [];
+
+        for (let i = 1; i <= cycles; i++) {
+            const bedtime = new Date(wakeUpDate.getTime() - i * cycleDuration * 60000);
+            results.push({
+                time: bedtime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+                cycles: i,
+            });
+        }
+
+        this.displaySleepResults(results, wakeUpTime);
     },
-  
+
     displaySleepResults(results, wakeUpTime) {
-      const resultsContainer = document.getElementById('sleepResults');
-      resultsContainer.innerHTML = `
-        <div class="sleep-results-header">
-          <h5>Optimal Bedtimes for ${wakeUpTime} Wake-up</h5>
-          <p class="text-muted">Based on 90-minute sleep cycles</p>
-        </div>
-        <div class="sleep-cycles-container">
-          ${results.map(item => `
-            <div class="sleep-cycle-card">
-              <div class="sleep-cycle-time">${item.time}</div>
-              <div class="sleep-cycle-badge">${item.cycles} cycle${item.cycles > 1 ? 's' : ''}</div>
+        const resultsContainer = document.getElementById("sleepResults");
+        resultsContainer.innerHTML = `
+            <div class="sleep-results-header">
+                <h5>Optimal Bedtimes for ${wakeUpTime} Wake-Up</h5>
+                <p class="text-muted">Based on 90-minute sleep cycles.</p>
             </div>
-          `).join('')}
-        </div>
-      `;
+            <div class="sleep-cycles-container">
+                ${results
+                    .map(
+                        (item) => `
+                    <div class="sleep-cycle-card">
+                        <div class="sleep-cycle-time">${item.time}</div>
+                        <div class="sleep-cycle-badge">${item.cycles} cycle${item.cycles > 1 ? "s" : ""}</div>
+                    </div>
+                `
+                    )
+                    .join("")}
+            </div>
+        `;
     },
-  
+
     saveSleepPreferences() {
-      userData.wellbeing.wakeUpTime = document.getElementById('wakeUpTime').value;
-      userData.wellbeing.sleepCycles = parseInt(document.getElementById('sleepCycles').value);
-      saveUserData();
-      
-      const toast = new bootstrap.Toast(document.getElementById('preferencesToast'));
-      document.getElementById('toastMessage').textContent = 'Sleep preferences saved successfully!';
-      toast.show();
-    }
-  };
-  
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
+        userData.wellbeing.wakeUpTime = document.getElementById("wakeUpTime").value;
+        userData.wellbeing.sleepCycles = parseInt(document.getElementById("sleepCycles").value, 10);
+        saveUserData();
+
+        const toast = new bootstrap.Toast(document.getElementById("preferencesToast"));
+        document.getElementById("toastMessage").textContent = "Sleep preferences saved successfully!";
+        toast.show();
+    },
+};
+
+// Initialize the Wellbeing Module
+document.addEventListener("DOMContentLoaded", () => {
     WellbeingManager.init();
-    
-    // Initialize modals if they don't exist in HTML
-    this.ensureModalsExist();
-  });
-  
-  // Helper function to create modals if missing
-  function ensureModalsExist() {
-    if (!document.getElementById('breakReminderModal')) {
-      document.body.insertAdjacentHTML('beforeend', `
-        <div class="modal fade wellbeing-modal" id="breakReminderModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="breakReminderTitle">Time for a Break!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body text-center">
-                <i class="bi bi-alarm" style="font-size: 3rem; color: #4a6cf7;"></i>
-                <p class="mt-3" id="breakReminderMessage"></p>
-                <div class="alert alert-info mt-3">
-                  <strong id="breakReminderExercise"></strong>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                  I've Taken My Break
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `);
-    }
-  
-    if (!document.getElementById('mindfulnessCompleteModal')) {
-      document.body.insertAdjacentHTML('beforeend', `
-        <div class="modal fade wellbeing-modal" id="mindfulnessCompleteModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header bg-success text-white">
-                <h5 class="modal-title">Mindfulness Session Complete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body text-center">
-                <i class="bi bi-emoji-smile" style="font-size: 3rem; color: #10b981;"></i>
-                <h4 class="my-3">Great job taking a mindful break!</h4>
-                <p>Try this breathing exercise to continue relaxing:</p>
-                <div class="alert alert-success mt-3">
-                  <strong id="mindfulnessBreathExercise"></strong>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-                  Return to Studying
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `);
-    }
-  
-    if (!document.getElementById('preferencesToast')) {
-      document.body.insertAdjacentHTML('beforeend', `
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-          <div id="preferencesToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-primary text-white">
-              <strong class="me-auto">Success</strong>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body">
-              <p id="toastMessage"></p>
-            </div>
-          </div>
-        </div>
-      `);
-    }
-  }
-// Initialize the timing tools when the page loads
+});// Initialize the timing tools when the page loads
 document.addEventListener('DOMContentLoaded', initTimingTools);
 document.addEventListener('DOMContentLoaded', init);

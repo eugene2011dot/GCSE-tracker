@@ -1755,233 +1755,233 @@ body {
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
 }
-/* Wellbeing Features - Enhanced CSS */
-.wellbeing-section {
-    background: white;
+/* Wellbeing Tab - Modern Design */
+#wellbeing {
+    background-color: #f8fafc;
+    padding: 2rem;
     border-radius: 12px;
-    padding: 1.8rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-}
-
-.wellbeing-section:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-}
-
-.wellbeing-section h3 {
-    color: #4a6cf7;
-    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin: 1.5rem auto;
+    max-width: 900px;
+  }
+  
+  /* Section Headers */
+  .wellbeing-section h3 {
+    color: #334155;
+    font-size: 1.4rem;
     font-weight: 600;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.wellbeing-section h3 i {
-    font-size: 1.3em;
-}
-
-/* Break Reminder Styles */
-#breakRemindersSwitch {
-    width: 3em;
-    height: 1.5em;
-    margin-right: 0.5rem;
-}
-
-#takeBreakNowBtn {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    color: white;
+    gap: 0.75rem;
+  }
+  
+  .wellbeing-section h3 i {
+    color: #6366f1;
+  }
+  
+  /* Dividers */
+  #wellbeing hr {
+    margin: 2rem 0;
     border: none;
-    padding: 0.6rem 1.2rem;
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  /* Form Controls */
+  .wellbeing-section .form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .wellbeing-section .form-select {
     border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+  }
+  
+  .wellbeing-section .form-select:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+  }
+  
+  /* Buttons */
+  #wellbeing .btn {
+    border-radius: 8px;
+    padding: 0.6rem 1.25rem;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-}
-
-#takeBreakNowBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
-}
-
-/* Mindfulness Timer Styles */
-.mindfulness-timer {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
+    gap: 0.5rem;
+  }
+  
+  #wellbeing .btn-outline-primary {
+    border: 1px solid #6366f1;
+    color: #6366f1;
+  }
+  
+  #wellbeing .btn-outline-primary:hover {
+    background-color: #6366f1;
+    color: white;
+  }
+  
+  #wellbeing .btn-primary {
+    background-color: #6366f1;
     border: none;
-    position: relative;
-    overflow: hidden;
-}
-
-.mindfulness-timer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, #4a6cf7, #a855f7);
-}
-
-#mindfulnessDisplay {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    color: #2d3748;
-    font-weight: 700;
-    font-size: 3rem;
-    letter-spacing: 1px;
-    margin: 0.5rem 0;
-}
-
-.mindfulness-timer .btn-group {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.mindfulness-timer .btn {
-    padding: 0.6rem 1.2rem;
-    font-weight: 500;
+  }
+  
+  #wellbeing .btn-primary:hover {
+    background-color: #4f46e5;
+  }
+  
+  #wellbeing .btn-success {
+    background-color: #10b981;
     border: none;
-    transition: all 0.3s ease;
-}
-
-#startMindfulnessBtn {
-    background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-}
-
-#stopMindfulnessBtn {
-    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-}
-
-/* Sleep Calculator Styles */
-#sleepResults {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    border-left: 4px solid #4a6cf7;
-}
-
-#sleepResults h5 {
-    color: #2d3748;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.sleep-cycle-list {
-    list-style: none;
-    padding: 0;
-}
-
-.sleep-cycle-list li {
+  }
+  
+  #wellbeing .btn-success:hover {
+    background-color: #0d9e6e;
+  }
+  
+  #wellbeing .btn-danger {
+    background-color: #ef4444;
+    border: none;
+  }
+  
+  #wellbeing .btn-danger:hover {
+    background-color: #dc2626;
+  }
+  
+  /* Mindfulness Timer */
+  .mindfulness-timer {
     background: white;
-    padding: 0.8rem 1.2rem;
-    margin-bottom: 0.8rem;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-}
-
-.sleep-cycle-list li:hover {
-    transform: translateX(4px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.sleep-cycle-badge {
-    background: linear-gradient(135deg, #4a6cf7 0%, #a855f7 100%);
-    color: white;
-    padding: 0.3rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-/* Form Elements */
-.wellbeing-section .form-control,
-.wellbeing-section .form-select {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    transition: all 0.3s ease;
-}
-
-.wellbeing-section .form-control:focus,
-.wellbeing-section .form-select:focus {
-    border-color: #4a6cf7;
-    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
-}
-
-/* Buttons */
-#calculateSleepBtn {
-    background: linear-gradient(135deg, #4a6cf7 0%, #a855f7 100%);
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-#calculateSleepBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(74, 108, 247, 0.3);
-}
-
-#saveSleepPrefsBtn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-}
-
-#saveSleepPrefsBtn:hover {
-    background-color: #f8fafc;
-    border-color: linear-gradient(135deg, #4a6cf7 0%, #a855f7 100%);
-    color: var(--secondary-color);
-}
-
-/* Modal Styles */
-.wellbeing-modal .modal-header {
-    background: linear-gradient(135deg, #4a6cf7 0%, #a855f7 100%);
-    color: white;
-    border-radius: 12px 12px 0 0;
-}
-
-.wellbeing-modal .modal-content {
     border-radius: 12px;
-    overflow: hidden;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  #mindfulnessDisplay {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #6366f1;
+    margin: 0.5rem 0;
+  }
+  
+  /* Sleep Calculator */
+  .sleep-results-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sleep-results-header h5 {
+    color: #334155;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sleep-results-header p {
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+  
+  .sleep-cycles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .sleep-cycle-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .sleep-cycle-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .sleep-cycle-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sleep-cycle-badge {
+    background-color: #6366f1;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    display: inline-block;
+  }
+  
+  /* Modals */
+  .wellbeing-modal .modal-content {
+    border-radius: 12px;
     border: none;
-}
-
-.wellbeing-modal .modal-body {
+    overflow: hidden;
+  }
+  
+  .wellbeing-modal .modal-header {
+    background-color: #6366f1;
+    color: white;
+    border-bottom: none;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .wellbeing-modal .modal-body {
     padding: 2rem;
     text-align: center;
-}
-
-.wellbeing-modal .modal-footer {
-    border-top: none;
-    padding: 1.5rem;
-    justify-content: center;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .wellbeing-section {
-        padding: 1.2rem;
+  }
+  
+  .wellbeing-modal .modal-body i {
+    font-size: 3rem;
+    color: #6366f1;
+    margin-bottom: 1rem;
+  }
+  
+  .wellbeing-modal .alert {
+    border-radius: 8px;
+    border: none;
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Toast Notification */
+  #preferencesToast .toast-header {
+    background-color: #6366f1;
+    color: white;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  #preferencesToast .toast-body {
+    padding: 1rem;
+    color: #334155;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    #wellbeing {
+      padding: 1.5rem;
     }
     
-    #mindfulnessDisplay {
-        font-size: 2.2rem;
+    .sleep-cycles-container {
+      grid-template-columns: 1fr;
     }
-}
+    
+    .wellbeing-section h3 {
+      font-size: 1.25rem;
+    }
+  }
