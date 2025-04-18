@@ -195,6 +195,8 @@ function init() {
     renderTimetableGrid();
     updateUserProfileDisplay();
     initMusicPlayer();
+    initTracker();
+    populateSubjectSelects();
 }
 
 // Load user data from localStorage
@@ -237,7 +239,6 @@ function setupNavigation() {
 
 // Setup all event listeners
 function setupEventListeners() {
-    // Subject selection in tracker
     subjectSelect.addEventListener('change', (e) => {
         updateTopicSelect(e.target.value);
         currentSession.subject = e.target.value;
@@ -254,7 +255,6 @@ function setupEventListeners() {
 
     // Study session form
     studySessionForm.addEventListener('submit', logStudySession);
-
     // Add subject button
     addSubjectBtn.addEventListener('click', () => {
         addSubjectModal.show();
@@ -385,7 +385,16 @@ function setupEventListeners() {
         }
     });
 }
+let currentSession = {
+    subject: null,
+    topic: null,
+    startTime: null,
+    endTime: null,
+    duration: 0
+};
 
+let timerInterval = null;
+let seconds = 0;
 // Start study timer
 function startTimer() {
     if (!subjectSelect.value) {
@@ -393,6 +402,9 @@ function startTimer() {
         return;
     }
 
+    // Reset seconds counter
+    seconds = 0;
+    
     currentSession.startTime = new Date();
     currentSession.subject = subjectSelect.value;
     currentSession.topic = topicSelect.value || 'General study';
@@ -407,13 +419,15 @@ function startTimer() {
     startTimerBtn.disabled = true;
     stopTimerBtn.disabled = false;
 }
-
 // Stop study timer
 function stopTimer() {
-    clearInterval(timerInterval);
-    currentSession.endTime = new Date();
-    currentSession.duration = seconds;
-    stopTimerBtn.disabled = true;
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        currentSession.endTime = new Date();
+        currentSession.duration = seconds;
+        stopTimerBtn.disabled = true;
+        startTimerBtn.disabled = false;
+    }
 }
 
 // Update timer display
@@ -426,6 +440,7 @@ function updateTimer() {
     timerDisplay.textContent =
         `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
+
 
 // Format time for display
 function formatTime(date) {
@@ -445,7 +460,7 @@ function logStudySession(event) {
         date: currentSession.startTime.toISOString(),
         subject: currentSession.subject,
         topic: currentSession.topic,
-        duration: currentSession.duration || seconds
+        duration: seconds
     };
 
     userData.studySessions.push(session);
@@ -464,14 +479,42 @@ function logStudySession(event) {
         clearInterval(timerInterval);
         startTimerBtn.disabled = false;
     }
-    document.getElementById('stopAlarmButton').addEventListener('click', stopAlarm);
+
     // Update UI
     renderRecentSessions();
     updateDashboardStats();
     renderCharts();
     renderSubjects();
 }
+function populateSubjectSelects() {
+    // Clear existing options
+    subjectSelect.innerHTML = '<option value="" disabled selected>Select subject</option>';
 
+    // Add subjects to dropdown
+    userData.subjects.forEach(subject => {
+        const option = document.createElement('option');
+        option.value = subject.name;
+        option.textContent = subject.displayName || subject.name;
+        subjectSelect.appendChild(option);
+    });
+}
+
+// Update topic select based on subject
+function updateTopicSelect(subjectName) {
+    topicSelect.innerHTML = '<option value="" selected>All topics</option>';
+
+    if (subjectName && gcseSubjects[subjectName]) {
+        topicSelect.disabled = false;
+        gcseSubjects[subjectName].topics.forEach(topic => {
+            const option = document.createElement('option');
+            option.value = topic;
+            option.textContent = topic;
+            topicSelect.appendChild(option);
+        });
+    } else {
+        topicSelect.disabled = true;
+    }
+}
 // Add new subject
 // Update the addSubject function to include exam board and custom topics
 function addSubject() {
@@ -985,7 +1028,7 @@ function renderSubjects() {
         subjectItem.dataset.subjectId = subject.name;
         subjectItem.innerHTML = `
             <div class="subject-name">${subject.displayName || subject.name}</div>
-            <div class="subject-exam-board">${gcseSubjects[subject.name]?.examBoard || 'Unknown'}</div>
+            <div class="subject-exam-board">${subject.examBoard || 'Not specified'}</div>
         `;
 
         // Add click event to show details
