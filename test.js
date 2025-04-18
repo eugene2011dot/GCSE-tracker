@@ -1,25 +1,31 @@
-// Wait for the page to load fully before executing the login script
-window.addEventListener('load', function () {
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-    // Check if we are on the login page
-    if (window.location.href === 'https://beehive.lionhearttrust.org.uk/#/main/assignments') {
+async function fetchExams() {
+  const url = "https://timetoexams.com/";
+  
+  try {
+    const { data: html } = await axios.get(url);
+    const $ = cheerio.load(html);
 
-        // Target the login form and its input fields (example selectors, these may vary)
-        const usernameField = document.querySelector('input[name="username"]'); // Replace with the correct name or id of the field
-        const passwordField = document.querySelector('input[name="password"]'); // Replace with the correct name or id of the field
-        const submitButton = document.querySelector('button[type="submit"]'); // Replace with the correct selector for the submit button
+    const exams = [];
 
-        // Check if the fields exist before proceeding
-        if (usernameField && passwordField && submitButton) {
-            // Fill in the credentials
-            usernameField.value = 'abc123';
-            passwordField.value = '123423';
+    $(".exam").each((i, elem) => {
+      const subject = $(elem).find(".subject").text().trim();
+      const paper = $(elem).find(".paper").text().trim();
+      const countdown = $(elem).find(".countdown").text().trim();
 
-            // Submit the form (this will trigger the form's submit event)
-            submitButton.click();
-        } else {
-            console.log('Form elements not found. Please check the selectors.');
-        }
-    }
+      exams.push({ subject, paper, countdown });
+    });
 
+    return exams;
+  } catch (err) {
+    console.error("Error fetching exams:", err.message);
+    return [];
+  }
+}
+
+// Example use
+fetchExams().then(exams => {
+  console.table(exams);
 });

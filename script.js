@@ -1,4 +1,3 @@
-// Initialize with empty data
 let userData = {
     subjects: [],
     studySessions: [],
@@ -13,14 +12,22 @@ let userData = {
         gcseDate: null
     },
     timetable: {},
-    resources: { // Add this
+    resources: {
         websites: [],
         documents: [],
         videos: [],
         other: []
     },
-    currentDay: new Date().getDay(), // 0=Sunday, 1=Monday, etc.
-    currentHour: new Date().getHours() // 0-23
+    currentDay: new Date().getDay(),
+    currentHour: new Date().getHours(),
+    wellbeing: {  // Add wellbeing to initial structure
+        breakReminders: true,
+        reminderInterval: 50,
+        lastBreakTime: null,
+        mindfulnessDuration: 5,
+        wakeUpTime: '07:00',
+        sleepCycles: 5
+    }
 };
 
 // DOM Elements
@@ -175,7 +182,6 @@ const gcseSubjects = {
 // Initialize the app
 function init() {
     loadUserData();
-    updateUserProfileDisplay(); // Ensure profile is updated on page load
     setupNavigation();
     setupEventListeners();
     updateCurrentDate();
@@ -187,7 +193,8 @@ function init() {
     setupResourceModal();
     renderTimetableSubjects();
     renderTimetableGrid();
-    WellbeingManager.init(); // Initialize the Wellbeing Manager
+    updateUserProfileDisplay();
+    initMusicPlayer();
 }
 
 // Load user data from localStorage
@@ -195,19 +202,6 @@ function loadUserData() {
     const savedData = localStorage.getItem('gcseStudyTrackerData');
     if (savedData) {
         userData = JSON.parse(savedData);
-
-        // Ensure all user profile fields are loaded correctly
-        if (!userData.userProfile) {
-            userData.userProfile = {
-                name: "Student",
-                role: "GCSE",
-                avatar: null,
-                initials: "JS",
-                gcseDate: null
-            };
-        }
-    } else {
-        saveUserData(); // Initialize the storage if it's empty
     }
 }
 
@@ -215,7 +209,6 @@ function loadUserData() {
 function saveUserData() {
     localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
 }
-
 
 // Update current date display
 function updateCurrentDate() {
@@ -367,6 +360,30 @@ function setupEventListeners() {
     document.getElementById('countdownStart')?.addEventListener('click', startCountdown);
     document.getElementById('countdownPause')?.addEventListener('click', pauseCountdown);
     document.getElementById('countdownReset')?.addEventListener('click', resetCountdown);
+
+    document.getElementById('addTopicBtn')?.addEventListener('click', addTopicInput);
+    
+    // Subject selection change
+    subjectInput.addEventListener('change', function() {
+        const subjectName = this.value;
+        
+        // Show/hide math options
+        if (subjectName === "Mathematics") {
+            mathOptions.classList.remove('d-none');
+        } else {
+            mathOptions.classList.add('d-none');
+        }
+        
+        // Clear topics container
+        document.getElementById('topicsContainer').innerHTML = '';
+        
+        // Add default topics if available
+        if (gcseSubjects[subjectName]?.topics) {
+            gcseSubjects[subjectName].topics.forEach(topic => {
+                addTopicInput(topic);
+            });
+        }
+    });
 }
 
 // Start study timer
@@ -456,11 +473,13 @@ function logStudySession(event) {
 }
 
 // Add new subject
+// Update the addSubject function to include exam board and custom topics
 function addSubject() {
-    const subjectName = subjectInput.value;
-
-    if (!subjectName) {
-        alert('Please select a subject');
+    const subjectName = subjectInput.value.trim();
+    const examBoard = document.getElementById('examBoard').value;
+    
+    if (!subjectName || !examBoard) {
+        alert('Please select both a subject and exam board');
         return;
     }
 
@@ -472,7 +491,9 @@ function addSubject() {
 
     const subjectDetails = {
         name: subjectName,
-        displayName: subjectName // Default display name
+        displayName: subjectName, // Default display name
+        examBoard: examBoard,
+        customTopics: [] // Will store any custom topics
     };
 
     // Special handling for Mathematics
@@ -489,6 +510,14 @@ function addSubject() {
             subjectDetails.tier = tier;
         }
     }
+    
+    // Get custom topics
+    const topicInputs = document.querySelectorAll('.topic-input');
+    topicInputs.forEach(input => {
+        if (input.value.trim()) {
+            subjectDetails.customTopics.push(input.value.trim());
+        }
+    });
 
     userData.subjects.push(subjectDetails);
     saveUserData();
@@ -501,9 +530,9 @@ function addSubject() {
     // Reset form and close modal
     document.getElementById('addSubjectForm').reset();
     mathOptions.classList.add('d-none');
+    document.getElementById('topicsContainer').innerHTML = '';
     addSubjectModal.hide();
 }
-
 // Delete selected subject
 function deleteSelectedSubject() {
     userData.subjects = userData.subjects.filter(subject => subject.name !== selectedSubject);
@@ -608,7 +637,7 @@ function showSubjectDetails(subjectName) {
         <div class="subject-info">
             <div class="subject-info-item">
                 <span class="subject-info-label">Exam Board:</span>
-                <span>${subjectData.examBoard || 'Not specified'}</span>
+                <span>${subject.examBoard || 'Not specified'}</span>
             </div>
             ${subject.set ? `
             <div class="subject-info-item">
@@ -624,7 +653,7 @@ function showSubjectDetails(subjectName) {
             ` : ''}
             <div class="subject-info-item">
                 <span class="subject-info-label">Topics:</span>
-                <span>${subjectData.topics ? subjectData.topics.length : '0'} total</span>
+                <span>${(subjectData.topics?.length || 0) + (subject.customTopics?.length || 0)} total</span>
             </div>
             <div class="subject-info-item">
                 <span class="subject-info-label">Completed:</span>
@@ -646,19 +675,38 @@ function showSubjectDetails(subjectName) {
         
         <div class="topics-header">
             <h4>Topics</h4>
-            <button class="btn btn-sm btn-outline-primary" id="markAllComplete">Mark All Complete</button>
+            <div class="topic-actions">
+                <button class="btn btn-sm btn-outline-primary" id="markAllComplete">Mark All Complete</button>
+                <button class="btn btn-sm btn-outline-success" id="addCustomTopic">
+                    <i class="bi bi-plus-lg"></i> Add Topic
+                </button>
+            </div>
         </div>
         
         <div class="topics-list" id="topicsList"></div>
+        
+        <div class="add-topic-form mt-3 d-none" id="addTopicForm">
+            <div class="input-group">
+                <input type="text" class="form-control" id="newTopicName" placeholder="Enter topic name">
+                <button class="btn btn-success" type="button" id="saveNewTopic">
+                    <i class="bi bi-check-lg"></i> Save
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="cancelAddTopic">
+                    <i class="bi bi-x-lg"></i> Cancel
+                </button>
+            </div>
+        </div>
     `;
 
     // Append the content to the container
     subjectDetailsContainer.appendChild(contentDiv);
 
-    // Add topics with checkboxes
-    if (subjectData.topics && subjectData.topics.length > 0) {
+    // Add topics with checkboxes - combine predefined and custom topics
+    const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
+    
+    if (allTopics.length > 0) {
         const topicsList = document.getElementById('topicsList');
-        subjectData.topics.forEach(topic => {
+        allTopics.forEach(topic => {
             const isCompleted = userData.studySessions.some(
                 session => session.subject === subjectName && session.topic === topic
             );
@@ -675,9 +723,16 @@ function showSubjectDetails(subjectName) {
                         ${topic}
                     </label>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary study-topic-btn" data-topic="${topic}">
-                    <i class="bi bi-stopwatch"></i> Study Now
-                </button>
+                <div class="topic-actions">
+                    <button class="btn btn-sm btn-outline-secondary study-topic-btn" data-topic="${topic}">
+                        <i class="bi bi-stopwatch"></i> Study
+                    </button>
+                    ${subject.customTopics?.includes(topic) ? `
+                    <button class="btn btn-sm btn-outline-danger delete-topic-btn" data-topic="${topic}">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    ` : ''}
+                </div>
             `;
             topicsList.appendChild(topicItem);
         });
@@ -708,20 +763,7 @@ function showSubjectDetails(subjectName) {
                 }
 
                 // Update progress display
-                const completion = calculateTopicCompletion(subjectName);
-                const progressFill = document.querySelector('.progress-fill');
-                if (progressFill) {
-                    progressFill.style.width = `${completion}%`;
-                    progressFill.style.backgroundColor = getProgressColor(completion);
-                }
-                const progressInfo = document.querySelector('.progress-info span');
-                if (progressInfo) {
-                    progressInfo.textContent = `Progress: ${completion}%`;
-                }
-                const completionPercentageElement = document.getElementById('completionPercentage');
-                if (completionPercentageElement) {
-                    completionPercentageElement.textContent = `${completion}%`;
-                }
+                updateCompletionDisplay(subjectName);
             });
         });
 
@@ -738,35 +780,86 @@ function showSubjectDetails(subjectName) {
             });
         });
 
-        // Add event listener for "Mark All Complete" button
-        document.getElementById('markAllComplete').addEventListener('click', function () {
-            subjectData.topics.forEach(topic => {
-                if (!userData.studySessions.some(
-                    session => session.subject === subjectName && session.topic === topic
-                )) {
-                    userData.studySessions.push({
-                        date: new Date().toISOString(),
-                        subject: subjectName,
-                        topic: topic,
-                        duration: 0
-                    });
+        // Add event listener for "Delete Topic" buttons (only for custom topics)
+        document.querySelectorAll('.delete-topic-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const topic = this.dataset.topic;
+                if (confirm(`Are you sure you want to delete the topic "${topic}"?`)) {
+                    // Remove from custom topics
+                    subject.customTopics = subject.customTopics.filter(t => t !== topic);
+                    
+                    // Remove any study sessions for this topic
+                    userData.studySessions = userData.studySessions.filter(
+                        session => !(session.subject === subjectName && session.topic === topic)
+                    );
+                    
+                    saveUserData();
+                    
+                    // Refresh the view
+                    showSubjectDetails(subjectName);
                 }
             });
-            saveUserData();
-
-            // Update UI
-            document.querySelectorAll('.topic-checkbox').forEach(checkbox => {
-                checkbox.checked = true;
-            });
-            const completion = calculateTopicCompletion(subjectName);
-            const progressFill = document.querySelector('.progress-fill');
-            if (progressFill) {
-                progressFill.style.width = `${completion}%`;
-                progressFill.style.backgroundColor = getProgressColor(completion);
-            }
-            document.getElementById('completionPercentage').textContent = `${completion}%`;
         });
     }
+
+    // Add event listener for "Mark All Complete" button
+    document.getElementById('markAllComplete')?.addEventListener('click', function () {
+        const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
+        allTopics.forEach(topic => {
+            if (!userData.studySessions.some(
+                session => session.subject === subjectName && session.topic === topic
+            )) {
+                userData.studySessions.push({
+                    date: new Date().toISOString(),
+                    subject: subjectName,
+                    topic: topic,
+                    duration: 0
+                });
+            }
+        });
+        saveUserData();
+        
+        // Update UI
+        updateCompletionDisplay(subjectName);
+    });
+
+    // Add event listeners for topic management
+    document.getElementById('addCustomTopic')?.addEventListener('click', function() {
+        document.getElementById('addTopicForm').classList.remove('d-none');
+        document.getElementById('newTopicName').focus();
+    });
+
+    document.getElementById('cancelAddTopic')?.addEventListener('click', function() {
+        document.getElementById('addTopicForm').classList.add('d-none');
+        document.getElementById('newTopicName').value = '';
+    });
+
+    document.getElementById('saveNewTopic')?.addEventListener('click', function() {
+        const topicName = document.getElementById('newTopicName').value.trim();
+        if (topicName) {
+            // Add to custom topics
+            if (!subject.customTopics) {
+                subject.customTopics = [];
+            }
+            
+            // Check if topic already exists
+            const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
+            if (allTopics.includes(topicName)) {
+                alert('This topic already exists!');
+                return;
+            }
+            
+            subject.customTopics.push(topicName);
+            saveUserData();
+            
+            // Reset and hide the form
+            document.getElementById('newTopicName').value = '';
+            document.getElementById('addTopicForm').classList.add('d-none');
+            
+            // Refresh the view
+            showSubjectDetails(subjectName);
+        }
+    });
 
     // Add delete button
     const deleteBtn = document.createElement('button');
@@ -781,6 +874,35 @@ function showSubjectDetails(subjectName) {
     });
 }
 
+// Helper function to update completion display
+function updateCompletionDisplay(subjectName) {
+    const completion = calculateTopicCompletion(subjectName);
+    const progressFill = document.querySelector('.progress-fill');
+    if (progressFill) {
+        progressFill.style.width = `${completion}%`;
+        progressFill.style.backgroundColor = getProgressColor(completion);
+    }
+    const progressInfo = document.querySelector('.progress-info span');
+    if (progressInfo) {
+        progressInfo.textContent = `Progress: ${completion}%`;
+    }
+    const completionPercentageElement = document.getElementById('completionPercentage');
+    if (completionPercentageElement) {
+        completionPercentageElement.textContent = `${completion}%`;
+    }
+    
+    // Update all checkboxes
+    const subject = userData.subjects.find(s => s.name === subjectName);
+    const subjectData = gcseSubjects[subjectName] || {};
+    const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
+    
+    document.querySelectorAll('.topic-checkbox').forEach(checkbox => {
+        const topic = checkbox.dataset.topic;
+        checkbox.checked = userData.studySessions.some(
+            session => session.subject === subjectName && session.topic === topic
+        );
+    });
+}
 // Helper function to get progress color based on percentage
 function getProgressColor(percentage) {
     if (percentage >= 80) return '#28a745'; // Green
@@ -991,7 +1113,7 @@ function calculateCompletionRate() {
 // User profile functions
 function openUserProfileModal() {
     // Load current profile data
-    userNameInput.value = userData.userProfile.name;
+    userNameInput.value = userData.userProfile.name || 'Student';
     gcseDateInput.value = userData.userProfile.gcseDate || '';
 
     // Set avatar preview
@@ -1000,14 +1122,13 @@ function openUserProfileModal() {
         avatarImage.classList.remove('d-none');
         avatarInitials.classList.add('d-none');
     } else {
-        avatarInitials.textContent = userData.userProfile.initials;
+        avatarInitials.textContent = userData.userProfile.initials || 'JS';
         avatarInitials.classList.remove('d-none');
         avatarImage.classList.add('d-none');
     }
 
     userProfileModal.show();
 }
-
 function handleAvatarUpload(e) {
     const file = e.target.files[0];
     if (file) {
@@ -1047,11 +1168,6 @@ function saveUserProfile() {
         return;
     }
 
-    if (!gcseDate) {
-        alert('Please select your GCSE completion date');
-        return;
-    }
-
     // Update user data
     userData.userProfile.name = name;
     userData.userProfile.gcseDate = gcseDate;
@@ -1068,37 +1184,37 @@ function saveUserProfile() {
     updateUserProfileDisplay();
     userProfileModal.hide();
 }
-
 function updateUserProfileDisplay() {
     const avatar = document.querySelector('.user-profile .avatar');
     const username = document.querySelector('.user-profile .username');
     const userRole = document.querySelector('.user-profile .user-role');
 
+    if (!avatar || !username || !userRole) return;
+
     // Update avatar
     if (userData.userProfile.avatar) {
         avatar.innerHTML = `<img src="${userData.userProfile.avatar}" alt="Profile" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
     } else {
-        avatar.textContent = userData.userProfile.initials;
+        avatar.textContent = userData.userProfile.initials || 'JS';
         avatar.style.backgroundColor = getRandomColor();
     }
 
     // Update name and role
-    username.textContent = userData.userProfile.name;
-    userRole.textContent = `GCSE (${formatGCSEDate(userData.userProfile.gcseDate)})`;
+    username.textContent = userData.userProfile.name || 'Student';
+    userRole.textContent = `GCSE${userData.userProfile.gcseDate ? ` (${formatGCSEDate(userData.userProfile.gcseDate)})` : ''}`;
 }
 
-// Helper function to format the GCSE date
 function formatGCSEDate(dateString) {
     if (!dateString) return 'No date set';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
-// Helper function to generate a random color for initials
 function getRandomColor() {
     const colors = ['#4361ee', '#3f37c9', '#4cc9f0', '#4895ef', '#f72585', '#7209b7'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
 // Chart functions
 function renderCharts() {
     renderWeeklyTimeChart();
@@ -1962,93 +2078,122 @@ function deleteResource(category, index) {
         renderResources();
     }
 }
-// Wellbeing Module Fixes
+// Wellbeing Module
+// Wellbeing Module
 const WellbeingManager = {
+    // Initialize all wellbeing features
     init() {
-        this.loadPreferences();
-        this.setupEventListeners();
-        this.startBreakReminder(); // Automatically start break reminders if enabled
-    },
-
-    loadPreferences() {
         if (!userData.wellbeing) {
             userData.wellbeing = {
                 breakReminders: true,
                 reminderInterval: 50,
-                mindfulnessDuration: 5,
                 lastBreakTime: null,
-                wakeUpTime: "07:00",
-                sleepCycles: 5,
+                mindfulnessDuration: 5,
+                wakeUpTime: '07:00',
+                sleepCycles: 5
             };
             saveUserData();
         }
         this.updateUIFromPreferences();
+        this.setupEventListeners();
+        
+        // Start break reminders if enabled
+        if (userData.wellbeing.breakReminders) {
+            this.startBreakReminder();
+        }
     },
 
+    // Update UI based on saved preferences
     updateUIFromPreferences() {
-        const wellbeing = userData.wellbeing;
-        document.getElementById("breakRemindersSwitch").checked = wellbeing.breakReminders;
-        document.getElementById("reminderInterval").value = wellbeing.reminderInterval;
-        document.getElementById("mindfulnessDuration").value = wellbeing.mindfulnessDuration;
-        document.getElementById("wakeUpTime").value = wellbeing.wakeUpTime;
-        document.getElementById("sleepCycles").value = wellbeing.sleepCycles;
+        const { wellbeing } = userData;
+        if (wellbeing) {
+            document.getElementById('breakRemindersSwitch').checked = wellbeing.breakReminders;
+            document.getElementById('reminderInterval').value = wellbeing.reminderInterval;
+            document.getElementById('mindfulnessDuration').value = wellbeing.mindfulnessDuration;
+            document.getElementById('wakeUpTime').value = wellbeing.wakeUpTime;
+            document.getElementById('sleepCycles').value = wellbeing.sleepCycles;
+        }
     },
 
+    // Setup event listeners
     setupEventListeners() {
-        // Break Reminders
-        document.getElementById("breakRemindersSwitch").addEventListener("change", (e) => {
-            userData.wellbeing.breakReminders = e.target.checked;
-            saveUserData();
-            if (e.target.checked) this.startBreakReminder();
-            else this.stopBreakReminder();
-        });
+        // Break reminders
+        const breakRemindersSwitch = document.getElementById('breakRemindersSwitch');
+        if (breakRemindersSwitch) {
+            breakRemindersSwitch.addEventListener('change', (e) => {
+                userData.wellbeing.breakReminders = e.target.checked;
+                saveUserData();
+                if (e.target.checked) this.startBreakReminder();
+                else this.stopBreakReminder();
+            });
+        }
 
-        document.getElementById("reminderInterval").addEventListener("change", (e) => {
-            userData.wellbeing.reminderInterval = parseInt(e.target.value, 10);
-            saveUserData();
-            this.restartBreakReminder();
-        });
+        const reminderInterval = document.getElementById('reminderInterval');
+        if (reminderInterval) {
+            reminderInterval.addEventListener('change', (e) => {
+                userData.wellbeing.reminderInterval = parseInt(e.target.value);
+                saveUserData();
+                if (userData.wellbeing.breakReminders) {
+                    this.restartBreakReminder();
+                }
+            });
+        }
 
-        document.getElementById("takeBreakNowBtn").addEventListener("click", () => {
-            this.showBreakReminder(true);
-        });
+        const takeBreakNowBtn = document.getElementById('takeBreakNowBtn');
+        if (takeBreakNowBtn) {
+            takeBreakNowBtn.addEventListener('click', () => {
+                this.showBreakReminder(true);
+            });
+        }
 
-        // Mindfulness Timer
-        document.getElementById("startMindfulnessBtn").addEventListener("click", () => {
-            this.startMindfulnessTimer();
-        });
+        // Mindfulness timer
+        const startMindfulnessBtn = document.getElementById('startMindfulnessBtn');
+        if (startMindfulnessBtn) {
+            startMindfulnessBtn.addEventListener('click', () => {
+                this.startMindfulnessTimer();
+            });
+        }
 
-        document.getElementById("stopMindfulnessBtn").addEventListener("click", () => {
-            this.stopMindfulnessTimer();
-        });
+        const stopMindfulnessBtn = document.getElementById('stopMindfulnessBtn');
+        if (stopMindfulnessBtn) {
+            stopMindfulnessBtn.addEventListener('click', () => {
+                this.stopMindfulnessTimer();
+            });
+        }
 
-        document.getElementById("mindfulnessDuration").addEventListener("change", (e) => {
-            userData.wellbeing.mindfulnessDuration = parseInt(e.target.value, 10);
-            saveUserData();
-            this.updateMindfulnessDisplay();
-        });
+        const mindfulnessDuration = document.getElementById('mindfulnessDuration');
+        if (mindfulnessDuration) {
+            mindfulnessDuration.addEventListener('change', (e) => {
+                userData.wellbeing.mindfulnessDuration = parseInt(e.target.value);
+                saveUserData();
+                this.updateMindfulnessDisplay();
+            });
+        }
 
-        // Sleep Calculator
-        document.getElementById("calculateSleepBtn").addEventListener("click", () => {
-            this.calculateOptimalSleepTimes();
-        });
+        // Sleep calculator
+        const calculateSleepBtn = document.getElementById('calculateSleepBtn');
+        if (calculateSleepBtn) {
+            calculateSleepBtn.addEventListener('click', () => {
+                this.calculateOptimalSleepTimes();
+            });
+        }
 
-        document.getElementById("saveSleepPrefsBtn").addEventListener("click", () => {
-            this.saveSleepPreferences();
-        });
+        const saveSleepPrefsBtn = document.getElementById('saveSleepPrefsBtn');
+        if (saveSleepPrefsBtn) {
+            saveSleepPrefsBtn.addEventListener('click', () => {
+                this.saveSleepPreferences();
+            });
+        }
     },
 
-    // Break Reminder Logic
+    // Break reminder system
     breakInterval: null,
-
     startBreakReminder() {
         this.stopBreakReminder();
-        if (!userData.wellbeing.breakReminders) return;
-
         this.breakInterval = setInterval(() => {
             const now = new Date();
             const lastBreak = userData.wellbeing.lastBreakTime ? new Date(userData.wellbeing.lastBreakTime) : null;
-
+            
             if (!lastBreak || (now - lastBreak) >= userData.wellbeing.reminderInterval * 60 * 1000) {
                 this.showBreakReminder();
                 userData.wellbeing.lastBreakTime = now.toISOString();
@@ -2065,48 +2210,74 @@ const WellbeingManager = {
     },
 
     restartBreakReminder() {
-        if (userData.wellbeing.breakReminders) {
-            this.startBreakReminder();
-        }
+        this.stopBreakReminder();
+        this.startBreakReminder();
     },
 
     showBreakReminder(manual = false) {
         const stretches = [
-            "Neck Rolls: Slowly roll your head in circles 5 times each direction.",
-            "Shoulder Shrugs: Lift shoulders up and down 10 times.",
-            "Stand and Stretch: Reach up high, then touch your toes.",
-            "Eye Rest: Look away from your screen and focus on a distant object for 30 seconds.",
-            "Wrist Circles: Rotate your wrists 10 times each direction.",
+            "Neck Rolls: Slowly roll your head in circles 5 times each direction",
+            "Shoulder Shrugs: Lift shoulders up and down 10 times",
+            "Stand and Stretch: Reach up high, then touch your toes",
+            "Eye Rest: Look away from screen and focus on distant object for 30 seconds",
+            "Wrist Circles: Rotate wrists 10 times each direction"
         ];
+        
         const exercise = stretches[Math.floor(Math.random() * stretches.length)];
         const title = manual ? "Recommended Break" : "Time for a Break!";
-        const message = manual
-            ? "Here's a good exercise to refresh yourself:"
-            : `You've been studying for ${userData.wellbeing.reminderInterval} minutes. Try this exercise:`;
+        const message = manual ? 
+            "Here's a good exercise to refresh yourself:" : 
+            `You've been studying for ${userData.wellbeing.reminderInterval} minutes. Try this exercise:`;
+        
+        // Create modal if it doesn't exist
+        if (!document.getElementById('breakReminderModal')) {
+            const modalHTML = `
+                <div class="modal fade" id="breakReminderModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${title}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>${message}</p>
+                                <div class="alert alert-info">${exercise}</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
 
-        const modal = new bootstrap.Modal(document.getElementById("breakReminderModal"));
-        document.getElementById("breakReminderTitle").textContent = title;
-        document.getElementById("breakReminderMessage").textContent = message;
-        document.getElementById("breakReminderExercise").textContent = exercise;
+        // Update modal content
+        document.getElementById('breakReminderModal').querySelector('.modal-title').textContent = title;
+        document.getElementById('breakReminderModal').querySelector('.modal-body p').textContent = message;
+        document.getElementById('breakReminderModal').querySelector('.alert').textContent = exercise;
+
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('breakReminderModal'));
         modal.show();
     },
 
-    // Mindfulness Timer Logic
+    // Mindfulness timer
     mindfulnessInterval: null,
     mindfulnessTimeLeft: 0,
-
     startMindfulnessTimer() {
         this.stopMindfulnessTimer();
         this.mindfulnessTimeLeft = userData.wellbeing.mindfulnessDuration * 60;
+        
         this.updateMindfulnessDisplay();
-
-        document.getElementById("startMindfulnessBtn").disabled = true;
-        document.getElementById("stopMindfulnessBtn").disabled = false;
-
+        document.getElementById('startMindfulnessBtn').disabled = true;
+        document.getElementById('stopMindfulnessBtn').disabled = false;
+        
         this.mindfulnessInterval = setInterval(() => {
             this.mindfulnessTimeLeft--;
             this.updateMindfulnessDisplay();
-
+            
             if (this.mindfulnessTimeLeft <= 0) {
                 this.stopMindfulnessTimer();
                 this.showMindfulnessComplete();
@@ -2119,93 +2290,192 @@ const WellbeingManager = {
             clearInterval(this.mindfulnessInterval);
             this.mindfulnessInterval = null;
         }
-        document.getElementById("startMindfulnessBtn").disabled = false;
-        document.getElementById("stopMindfulnessBtn").disabled = true;
+        const startBtn = document.getElementById('startMindfulnessBtn');
+        const stopBtn = document.getElementById('stopMindfulnessBtn');
+        if (startBtn) startBtn.disabled = false;
+        if (stopBtn) stopBtn.disabled = true;
     },
 
     updateMindfulnessDisplay() {
         const minutes = Math.floor(this.mindfulnessTimeLeft / 60);
         const seconds = this.mindfulnessTimeLeft % 60;
-        document.getElementById("mindfulnessDisplay").textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        const display = document.getElementById('mindfulnessDisplay');
+        if (display) {
+            display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
     },
 
     showMindfulnessComplete() {
         const breaths = [
-            "Deep Breathing: Inhale for 4s, hold for 4s, exhale for 6s.",
-            "Box Breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s.",
-            "4-7-8 Breathing: Inhale 4s, hold 7s, exhale 8s.",
+            "Deep Breathing: Inhale for 4s, hold for 4s, exhale for 6s",
+            "Box Breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s",
+            "4-7-8 Breathing: Inhale 4s, hold 7s, exhale 8s"
         ];
+        
         const exercise = breaths[Math.floor(Math.random() * breaths.length)];
+        
+        // Create modal if it doesn't exist
+        if (!document.getElementById('mindfulnessCompleteModal')) {
+            const modalHTML = `
+                <div class="modal fade" id="mindfulnessCompleteModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title">Mindfulness Session Complete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Great job! Try this breathing exercise:</p>
+                                <div class="alert alert-success">${exercise}</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        } else {
+            // Update modal content
+            document.getElementById('mindfulnessCompleteModal').querySelector('.alert').textContent = exercise;
+        }
 
-        const modal = new bootstrap.Modal(document.getElementById("mindfulnessCompleteModal"));
-        document.getElementById("mindfulnessBreathExercise").textContent = exercise;
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('mindfulnessCompleteModal'));
         modal.show();
     },
 
-    // Sleep Calculator Logic
+    // Sleep calculator
     calculateOptimalSleepTimes() {
-        const wakeUpTime = document.getElementById("wakeUpTime").value;
-        const cycles = parseInt(document.getElementById("sleepCycles").value, 10);
-
+        const wakeUpTime = document.getElementById('wakeUpTime').value;
+        const cycles = parseInt(document.getElementById('sleepCycles').value);
+        
         if (!wakeUpTime || isNaN(cycles) || cycles < 1 || cycles > 6) {
-            alert("Please enter valid wake-up time and sleep cycles (1-6).");
+            alert('Please enter valid wake-up time and sleep cycles (1-6)');
             return;
         }
-
-        const [hours, minutes] = wakeUpTime.split(":").map(Number);
+        
+        const [hours, minutes] = wakeUpTime.split(':').map(Number);
         const wakeUpDate = new Date();
         wakeUpDate.setHours(hours, minutes, 0, 0);
-
+        
         const cycleDuration = 90; // minutes per sleep cycle
         const results = [];
-
+        
         for (let i = 1; i <= cycles; i++) {
             const bedtime = new Date(wakeUpDate.getTime() - i * cycleDuration * 60000);
             results.push({
-                time: bedtime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-                cycles: i,
+                time: bedtime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                cycles: i
             });
         }
-
+        
         this.displaySleepResults(results, wakeUpTime);
     },
 
     displaySleepResults(results, wakeUpTime) {
-        const resultsContainer = document.getElementById("sleepResults");
+        const resultsContainer = document.getElementById('sleepResults');
+        if (!resultsContainer) return;
+        
         resultsContainer.innerHTML = `
-            <div class="sleep-results-header">
-                <h5>Optimal Bedtimes for ${wakeUpTime} Wake-Up</h5>
-                <p class="text-muted">Based on 90-minute sleep cycles.</p>
-            </div>
-            <div class="sleep-cycles-container">
-                ${results
-                    .map(
-                        (item) => `
-                    <div class="sleep-cycle-card">
-                        <div class="sleep-cycle-time">${item.time}</div>
-                        <div class="sleep-cycle-badge">${item.cycles} cycle${item.cycles > 1 ? "s" : ""}</div>
-                    </div>
-                `
-                    )
-                    .join("")}
-            </div>
+            <h5>Optimal Bedtimes for ${wakeUpTime} wake-up:</h5>
+            <ul class="list-group mt-3">
+                ${results.map(item => `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${item.time}
+                        <span class="badge bg-primary rounded-pill">${item.cycles} cycle${item.cycles > 1 ? 's' : ''}</span>
+                    </li>
+                `).join('')}
+            </ul>
         `;
     },
 
     saveSleepPreferences() {
-        userData.wellbeing.wakeUpTime = document.getElementById("wakeUpTime").value;
-        userData.wellbeing.sleepCycles = parseInt(document.getElementById("sleepCycles").value, 10);
+        userData.wellbeing.wakeUpTime = document.getElementById('wakeUpTime').value;
+        userData.wellbeing.sleepCycles = parseInt(document.getElementById('sleepCycles').value);
         saveUserData();
-
-        const toast = new bootstrap.Toast(document.getElementById("preferencesToast"));
-        document.getElementById("toastMessage").textContent = "Sleep preferences saved successfully!";
-        toast.show();
-    },
+        
+        // Show toast notification
+        const toastHTML = `
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Preferences Saved</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        Your sleep preferences have been updated.
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Remove existing toast if any
+        const existingToast = document.querySelector('.position-fixed.bottom-0.end-0');
+        if (existingToast) existingToast.remove();
+        
+        document.body.insertAdjacentHTML('beforeend', toastHTML);
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            const toast = document.querySelector('.toast.show');
+            if (toast) {
+                bootstrap.Toast.getInstance(toast)?.hide();
+            }
+        }, 3000);
+    }
 };
+function addTopicInput(initialValue = '') {
+    const topicsContainer = document.getElementById('topicsContainer');
+    const topicId = `topic-${Date.now()}`;
+    
+    const topicDiv = document.createElement('div');
+    topicDiv.className = 'input-group mb-2';
+    topicDiv.innerHTML = `
+        <input type="text" class="form-control topic-input" value="${initialValue}" 
+               placeholder="Enter topic name" id="${topicId}">
+        <button class="btn btn-outline-danger remove-topic" type="button">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+    
+    topicsContainer.appendChild(topicDiv);
+    
+    // Add event listener for remove button
+    topicDiv.querySelector('.remove-topic').addEventListener('click', function() {
+        topicsContainer.removeChild(topicDiv);
+    });
+}
+// Add to your script.js
+function initMusicPlayer() {
+    // Switch streams in mini-player (Wellbeing)
+    document.querySelectorAll('.yt-stream-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const ytId = this.dataset.ytid;
+        document.getElementById('ytMiniPlayer').src = 
+          `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
+        
+        // Update active button
+        document.querySelectorAll('.yt-stream-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  
+    // Switch streams in main player (Music tab)
+    document.querySelectorAll('.playlist-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const ytId = this.dataset.ytid;
+        document.getElementById('ytMainPlayer').src = 
+          `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
+      });
+    });
+  }
+  
+  // Call this in your init() function
 
-// Initialize the Wellbeing Module
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     WellbeingManager.init();
-});// Initialize the timing tools when the page loads
+});
 document.addEventListener('DOMContentLoaded', initTimingTools);
 document.addEventListener('DOMContentLoaded', init);

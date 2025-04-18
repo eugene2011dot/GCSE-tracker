@@ -34,6 +34,12 @@ body {
 
 /* Side Navigation */
 .sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 1000;
     width: var(--sidebar-width);
     background: white;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
@@ -126,10 +132,12 @@ body {
 
 /* Main Content */
 .main-content {
+    margin-left: var(--sidebar-width);
     flex-grow: 1;
     padding: 2rem;
     background-color: #f5f7fb;
     overflow-y: auto;
+    position: relative;
 }
 
 .content-section {
@@ -1983,5 +1991,249 @@ body {
     
     .wellbeing-section h3 {
       font-size: 1.25rem;
+    }
+  }
+  /* Add to styles.css */
+.topic-input {
+    flex-grow: 1;
+}
+
+.remove-topic {
+    width: auto;
+}
+
+#topicsContainer {
+    margin-bottom: 10px;
+}
+
+.subject-info-item {
+    margin-bottom: 8px;
+}
+
+.subject-info-label {
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.topics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.topics-header h4 {
+    margin: 0;
+}
+
+.topics-header button {
+    margin-left: 10px;
+}
+
+.topic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.topic-item:last-child {
+    border-bottom: none;
+}
+
+.form-check {
+    margin-right: 10px;
+}
+/* Topic management styles */
+.topic-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.topic-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.topic-item:last-child {
+    border-bottom: none;
+}
+
+.add-topic-form {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.topic-item .form-check {
+    margin-right: 10px;
+    flex-grow: 1;
+}
+
+.topics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.topics-header h4 {
+    margin: 0;
+}
+.youtube-mini-player {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .player-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .yt-stream-btn.active {
+    font-weight: bold;
+    transform: scale(1.05);
+  }
+  
+  /* Main Player (Music Tab) */
+  .youtube-main-player {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .playlist-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .playlist-card:hover {
+    transform: translateY(-5px);
+    background: #f8f9fa;
+  }
+  
+  .playlist-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  
+  .playlist-card h5 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  /* Exam Dates Styles */
+/* Exam Dates Styles */
+#dates {
+    background-color: #f8fafc;
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  .exam-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .exam-actions .form-select {
+    width: auto;
+    min-width: 180px;
+  }
+  
+  .exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .home-exam-grid {
+    display: flex;
+    width: 100vw;
+    overflow-x: auto;
+  }
+  
+  .exam-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s;
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  .exam-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subject-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .subject-name {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+  }
+  
+  .exam-name {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .exam-datetime {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+  }
+  
+  .progress-container {
+    margin: 1rem 0;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  
+  .time-plenty { background-color: var(--success-color); }
+  .time-medium { background-color: var(--warning-color); }
+  .time-low { background-color: #FF9800; }
+  .time-critical { background-color: var(--danger-color); }
+  
+  .countdown {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .exam-actions {
+      flex-wrap: wrap;
+    }
+    
+    .exam-grid {
+      grid-template-columns: 1fr;
     }
   }

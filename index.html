@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="app-container">
     <!-- Side Navigation -->
@@ -34,25 +36,33 @@
           <span>Subjects</span>
         </li>
         <li class="nav-item" data-target="work">
-            <i class="bi bi-file-earmark-text"></i>
-            <span>School</span>
-          </li>
-          <li class="nav-item" data-target="timetable">
-            <i class="bi bi-calendar-week"></i>
-            <span>Timetable</span>
-          </li>
-            <li class="nav-item" data-target="timing">
-                <i class="bi bi-clock"></i>
-                <span>Timing</span>
-            </li>
-          <li class="nav-item" data-target="resources">
-            <i class="bi bi-collection"></i>
-            <span>Resources</span>
-          </li>
-          <li class="nav-item" data-target="wellbeing">
-            <i class="bi bi-person-hearts"></i>
-            <span>Wellbeing</span>
-          </li>
+          <i class="bi bi-file-earmark-text"></i>
+          <span>School</span>
+        </li>
+        <li class="nav-item" data-target="timetable">
+          <i class="bi bi-calendar-week"></i>
+          <span>Timetable</span>
+        </li>
+        <li class="nav-item" data-target="timing">
+          <i class="bi bi-clock"></i>
+          <span>Timing</span>
+        </li>
+        <li class="nav-item" data-target="resources">
+          <i class="bi bi-collection"></i>
+          <span>Resources</span>
+        </li>
+        <li class="nav-item" data-target="dates">
+          <i class="bi bi-clipboard"></i>
+          <span>Exam Dates</span>
+        </li>
+        <li class="nav-item" data-target="wellbeing">
+          <i class="bi bi-person-hearts"></i>
+          <span>Wellbeing</span>
+        </li>
+        <li class="nav-item" data-target="music">
+          <i class="bi bi-music-note-list"></i>
+          <span>Focus Music</span>
+        </li>
       </ul>
       <div class="user-profile">
         <div class="avatar">JS</div>
@@ -63,517 +73,561 @@
       </div>
     </nav>
     <!-- User Profile Modal -->
-<div class="modal fade" id="userProfileModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="userProfileForm">
-            <div class="mb-3 text-center">
-              <div class="avatar-upload mb-3">
-                <div class="avatar-preview" id="avatarPreview">
-                  <div id="avatarInitials" class="avatar-initials">JS</div>
-                  <img id="avatarImage" src="" alt="Profile Image" class="d-none">
+    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="userProfileForm">
+              <div class="mb-3 text-center">
+                <div class="avatar-upload mb-3">
+                  <div class="avatar-preview" id="avatarPreview">
+                    <div id="avatarInitials" class="avatar-initials">JS</div>
+                    <img id="avatarImage" src="" alt="Profile Image" class="d-none">
+                  </div>
+                  <input type="file" id="avatarInput" accept="image/*" class="d-none">
+                  <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="uploadAvatarBtn">
+                    <i class="bi bi-upload"></i> Upload Photo
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="generateAvatarBtn">
+                    <i class="bi bi-person-badge"></i> Generate Avatar
+                  </button>
                 </div>
-                <input type="file" id="avatarInput" accept="image/*" class="d-none">
-                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="uploadAvatarBtn">
-                  <i class="bi bi-upload"></i> Upload Photo
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="generateAvatarBtn">
-                  <i class="bi bi-person-badge"></i> Generate Avatar
-                </button>
               </div>
-            </div>
-            
-            <div class="mb-3">
-              <label for="userName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="userName" required>
-            </div>
-            
-            <div class="mb-3">
-              <label for="gcseDate" class="form-label">GCSE Completion Date</label>
-              <input type="date" class="form-control" id="gcseDate" required>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+
+              <div class="mb-3">
+                <label for="userName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="userName" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="gcseDate" class="form-label">GCSE Completion Date</label>
+                <input type="date" class="form-control" id="gcseDate" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
     <!-- Main Content -->
     <main class="main-content">
-        <section id="work" class="content-section">
-            <div id="beehive">
-                <iframe src="https://beehive.lionhearttrust.org.uk/#/main/assignments" frameborder="0"></iframe>
-            </div>
-        </section>
-<!-- Updated Resources Tab HTML -->
-<section id="resources" class="content-section">
-    <div class="section-header">
-      <h2>Study Resources</h2>
-      <div class="resource-actions">
-        <button class="btn btn-outline-primary" id="addResourceBtn">
-          <i class="bi bi-globe"></i> Add Resource
-        </button>
-        <button class="btn btn-outline-primary" id="openAllResources">
-          <i class="bi bi-box-arrow-up-right"></i> Open All in New Tabs
-        </button>
-      </div>
-    </div>
-<!-- Add this modal to your HTML -->
-<div class="modal fade" id="resourceModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Resource</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="resourceForm">
-                    <div class="mb-3">
-                        <label for="resourceName" class="form-label">Resource Name</label>
-                        <input type="text" class="form-control" id="resourceName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resourceUrl" class="form-label">URL</label>
-                        <input type="url" class="form-control" id="resourceUrl" required placeholder="https://example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="resourceCategory" class="form-label">Category</label>
-                        <select class="form-select" id="resourceCategory" required>
-                            <option value="websites">Website</option>
-                            <option value="documents">Document</option>
-                            <option value="videos">Video</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="resourceDescription" class="form-label">Description (Optional)</label>
-                        <textarea class="form-control" id="resourceDescription" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveResourceBtn">Save Resource</button>
-            </div>
+      <section id="work" class="content-section">
+        <div id="beehive">
+          <iframe src="https://beehive.lionhearttrust.org.uk/#/main/assignments" frameborder="0"></iframe>
         </div>
-    </div>
-</div> 
-    <div class="resources-container">
-      <div class="resource-categories">
-        <div class="category active" data-category="ai-tools">AI Tools</div>
-        <div class="category" data-category="math">Math</div>
-        <div class="category" data-category="science">Science</div>
-        <div class="category" data-category="languages">Languages</div>
-        <div class="category" data-category="general">General</div>
-        <h5>Your Resources</h5>
-        <div class="category" data-category="websitesResources">Websites</div>
-        <div class="category" data-category="documentsResources">Documents</div>
-        <div class="category" data-category="videosResources">Videos</div>
-        <div class="category" data-category="otherResources">Other Resources</div>    
-      </div>
-      <div class="resources-grid">
-        <!-- AI Tools -->
-        <div class="resource-category active" id="ai-tools">
-          <a href="https://chat.openai.com" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" onerror="this.src='https://via.placeholder.com/60?text=ChatGPT'">
-            </div>
-            <div class="resource-info">
-              <h3>ChatGPT</h3>
-              <p>AI assistant for general study help</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-          
-          <a href="https://www.deepseek.com" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://www.deepseek.com/favicon.ico" alt="DeepSeek" onerror="this.src='https://via.placeholder.com/60?text=DeepSeek'">
-            </div>
-            <div class="resource-info">
-              <h3>DeepSeek</h3>
-              <p>Advanced AI research assistant</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-  
-          <a href="https://gemini.google.com/app" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://www.pngall.com/wp-content/uploads/16/Google-Gemini-Logo-Transparent.png" alt="Gemini" onerror="this.src='https://via.placeholder.com/60?text=Gemini'">
-            </div>
-            <div class="resource-info">
-              <h3>Google Gemini</h3>
-              <p>Advanced AI research assistant</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-        </div>
-        
-        <!-- Math -->
-        <div class="resource-category" id="math">
-          <a href="https://www.khanacademy.org" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://yt3.googleusercontent.com/ytc/AIdro_l3GggKOWViCBpDs9APIsK6MHB2Mu-ECo5dUEU-Vay2gg=s900-c-k-c0x00ffffff-no-rj" alt="Khan Academy" onerror="this.src='https://via.placeholder.com/60?text=Khan'">
-            </div>
-            <div class="resource-info">
-              <h3>Khan Academy</h3>
-              <p>Free math tutorials and exercises</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-          <a href="https://corbettmaths.com/" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://i0.wp.com/corbettmaths.com/wp-content/uploads/2018/04/cropped-Snip20180413_27-1.png?fit=192%2C192&ssl=1" alt="Khan Academy" onerror="this.src='https://via.placeholder.com/60?text=Khan'">
-            </div>
-            <div class="resource-info">
-              <h3>Corbett Maths</h3>
-              <p>Free math tutorials and exercises</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-
-        </div>
-        
-        <!-- Languages -->
-        <div class="resource-category" id="languages">
-          <a href="https://www.languagesonline.org.uk/Hotpotatoes/frenchindex.html" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://www.languagesonline.org.uk/Hotpotatoes/images/logo.png" alt="LanguagesOnline" onerror="this.src='https://via.placeholder.com/60?text=LO'">
-            </div>
-            <div class="resource-info">
-              <h3>LanguagesOnline</h3>
-              <p>Free grammar and listening help</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="resource-category" id="science">
-            <a href="https://www.physicsandmathstutor.com/" class="resource-card" target="_blank" rel="noopener">
-              <div class="resource-logo">
-                <img src="https://www.physicsandmathstutor.com/wp-content/uploads/favicon-pmt-200x200.png" alt="PMT" onerror="this.src='https://via.placeholder.com/60?text=PMT'">
-              </div>
-              <div class="resource-info">
-                <h3>Physics and Math Tutor</h3>
-                <p>Revise GCSEs! Past papers, exam questions by topic, revision notes, worksheets and solution banks.</p>
-                <div class="resource-link">
-                  <i class="bi bi-box-arrow-up-right"></i> Open
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="resource-category" id="websitesResources">
-            <h4 class="category-header">Websites</h4>
-            <!-- Cards will be inserted here by JavaScript -->
-        </div>
-        
-        <div class="resource-category" id="documentsResources">
-            <h4 class="category-header">Documents</h4>
-            <!-- Cards will be inserted here by JavaScript -->
-        </div>
-        
-        <div class="resource-category" id="videosResources">
-            <h4 class="category-header">Videos</h4>
-            <!-- Cards will be inserted here by JavaScript -->
-        </div>
-        
-        <div class="resource-category" id="otherResources">
-            <h4 class="category-header">Other Resources</h4>
-            <!-- Cards will be inserted here by JavaScript -->
-        </div>
-    
-        <!-- General Resources -->
-        <div class="resource-category" id="general">
-          <!-- Add your general resource links here -->
-          <!-- Example template (copy and paste to add more): -->
-          <a href="https://www.bbc.co.uk/bitesize" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="data:image/png;base64,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" alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
-            </div>
-            <div class="resource-info">
-              <h3>BBC Bitesize</h3>
-              <p>Use BBC Bitesize to help with your homework, revision and learning for GCSE. Find free videos, step-by-step guides, activities and quizzes.</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-          <a href="https://www.gcsepod.com/" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvn3MHLFAMk9y_-_VETQ8jit4jLsT7tbl2A&s" alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
-            </div>
-            <div class="resource-info">
-              <h3>GCSEPod</h3>
-              <p>Provides high quality, focused learning in a unique ‘Pod’ format multiple GCSE subjects, and filtered by exam boards.</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-          <a href="https://revisionworld.com/gcse-revision" class="resource-card" target="_blank" rel="noopener">
-            <div class="resource-logo">
-              <img src="https://revisionworld.com/profiles/custom/revision/themes/revboot/images/revision-world-favicon.png" alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
-            </div>
-            <div class="resource-info">
-              <h3>Revision World</h3>
-              <p>Provide free GCSE revision resources for a range of subjects.</p>
-              <div class="resource-link">
-                <i class="bi bi-box-arrow-up-right"></i> Open
-              </div>
-            </div>
-          </a>
-          
-        </div>
-      </div>
-      
-      <div class="resource-preview">
-        <div class="preview-content">
-          <i class="bi bi-compass"></i>
-          <h3>External Study Resources</h3>
-          <p>Click on any resource to open it in a new tab</p>
-          <p class="small-text">Some sites may block embedding for security reasons</p>
-        </div>
-      </div>
-    </div>
-  </section>  </section>  
-  <!-- Wellbeing Section -->
-<section id="wellbeing" class="content-section">
-  <div class="wellbeing-container">
-    <!-- Break Reminders Section -->
-    <div class="wellbeing-section">
-      <h3><i class="bi bi-clock-history"></i> Study Break Reminders</h3>
-      <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" id="breakRemindersSwitch" checked>
-        <label class="form-check-label" for="breakRemindersSwitch">Enable reminders every</label>
-        <select class="form-select d-inline-block w-auto ms-2" id="reminderInterval">
-          <option value="30">30</option>
-          <option value="45">45</option>
-          <option value="50" selected>50</option>
-          <option value="60">60</option>
-          <option value="90">90</option>
-        </select>
-        <label class="form-check-label ms-1">minutes</label>
-      </div>
-      <button class="btn btn-outline-primary" id="takeBreakNowBtn">
-        <i class="bi bi-alarm"></i> Take Break Now
-      </button>
-    </div>
-
-    <hr>
-
-    <!-- Mindfulness Timer Section -->
-    <div class="wellbeing-section">
-      <h3><i class="bi bi-cloud-moon"></i> Mindfulness Timer</h3>
-      <div class="mindfulness-timer text-center mb-3">
-        <div id="mindfulnessDisplay" class="display-4">05:00</div>
-        <div class="btn-group mt-2">
-          <button class="btn btn-success" id="startMindfulnessBtn">
-            <i class="bi bi-play-fill"></i> Start
-          </button>
-          <button class="btn btn-danger" id="stopMindfulnessBtn" disabled>
-            <i class="bi bi-stop-fill"></i> Stop
-          </button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="mindfulnessDuration">Duration (minutes):</label>
-        <select class="form-select" id="mindfulnessDuration">
-          <option value="1">1</option>
-          <option value="3">3</option>
-          <option value="5" selected>5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-        </select>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- Sleep Calculator Section -->
-    <div class="wellbeing-section">
-      <h3><i class="bi bi-moon-stars"></i> Sleep Calculator</h3>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group mb-3">
-            <label for="wakeUpTime">I want to wake up at:</label>
-            <input type="time" class="form-control" id="wakeUpTime" value="07:00">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group mb-3">
-            <label for="sleepCycles">Target sleep cycles (90min each):</label>
-            <select class="form-select" id="sleepCycles">
-              <option value="4">4 (6 hours)</option>
-              <option value="5" selected>5 (7.5 hours)</option>
-              <option value="6">6 (9 hours)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex gap-2 mb-3">
-        <button class="btn btn-primary flex-grow-1" id="calculateSleepBtn">
-          <i class="bi bi-calculator"></i> Calculate Bedtimes
-        </button>
-        <button class="btn btn-outline-secondary" id="saveSleepPrefsBtn">
-          <i class="bi bi-save"></i> Save
-        </button>
-      </div>
-      <div id="sleepResults" class="mt-3"></div>
-    </div>
-  </div>
-</section>
-
-<!-- Break Reminder Modal -->
-<div class="modal fade" id="breakReminderModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="breakReminderTitle">Time for a Break!</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <i class="bi bi-alarm" style="font-size: 3rem;"></i>
-        <p class="mt-3" id="breakReminderMessage"></p>
-        <div class="alert alert-info mt-3">
-          <strong id="breakReminderExercise"></strong>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-          I've Taken My Break
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Mindfulness Complete Modal -->
-<div class="modal fade" id="mindfulnessCompleteModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title">Mindfulness Session Complete</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <i class="bi bi-emoji-smile" style="font-size: 3rem;"></i>
-        <h4 class="my-3">Great job taking a mindful break!</h4>
-        <p>Try this breathing exercise to continue relaxing:</p>
-        <div class="alert alert-success">
-          <strong id="mindfulnessBreathExercise"></strong>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-          Return to Studying
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Preferences Toast -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="preferencesToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header bg-primary text-white">
-      <strong class="me-auto">Success</strong>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      <p id="toastMessage">Preferences saved successfully!</p>
-    </div>
-  </div>
-</div>
-<section id="timing" class="content-section">
-    <div class="section-header">
-      <h2>Timing Tools</h2>
-    </div>
-    
-    <div class="timing-container">
-      <!-- Stopwatch Card -->
-      <div class="timing-card">
-        <h3>Stopwatch</h3>
-        <div class="timer-display" id="stopwatchDisplay">00:00:00.00</div>
-        <div class="timer-controls">
-          <button class="btn btn-primary" id="stopwatchStart">
-            <i class="bi bi-play-fill"></i> Start
-          </button>
-          <button class="btn btn-warning" id="stopwatchPause" disabled>
-            <i class="bi bi-pause-fill"></i> Pause
-          </button>
-          <button class="btn btn-danger" id="stopwatchReset">
-            <i class="bi bi-arrow-counterclockwise"></i> Reset
-          </button>
-          <button class="btn btn-success" id="stopwatchLap">
-            <i class="bi bi-flag-fill"></i> Lap
-          </button>
-        </div>
-        <div class="lap-times" id="stopwatchLaps">
-          <h4>Lap Times</h4>
-          <ul id="stopwatchLapList"></ul>
-        </div>
-      </div>
-      
-      <!-- Countdown Timer Card -->
-      <div class="timing-card">
-        <h3>Countdown Timer</h3>
-        <div class="timer-input">
-          <input type="number" id="hoursInput" min="0" max="23" placeholder="HH">
-          <span>:</span>
-          <input type="number" id="minutesInput" min="0" max="59" placeholder="MM">
-          <span>:</span>
-          <input type="number" id="secondsInput" min="0" max="59" placeholder="SS">
-        </div>
-        <div class="timer-display" id="countdownDisplay">00:00:00</div>
-        <div class="timer-controls">
-          <button class="btn btn-primary" id="countdownStart">
-            <i class="bi bi-play-fill"></i> Start
-          </button>
-          <button class="btn btn-warning" id="countdownPause" disabled>
-            <i class="bi bi-pause-fill"></i> Pause
-          </button>
-          <button class="btn btn-danger" id="countdownReset">
-            <i class="bi bi-arrow-counterclockwise"></i> Reset
-          </button>
-        </div>
-        <!-- Alarm Display -->
-        <div class="timer-alarm" id="countdownAlarm">
-          <div class="alarm-content">
-            <i class="bi bi-alarm"></i>
-            <span>TIME'S UP!</span>
-            <button class="btn btn-sm btn-danger" id="stopAlarmButton">
-              <i class="bi bi-stop-fill"></i> Stop Alarm
+      </section>
+      <!-- Updated Resources Tab HTML -->
+      <section id="resources" class="content-section">
+        <div class="section-header">
+          <h2>Study Resources</h2>
+          <div class="resource-actions">
+            <button class="btn btn-outline-primary" id="addResourceBtn">
+              <i class="bi bi-globe"></i> Add Resource
+            </button>
+            <button class="btn btn-outline-primary" id="openAllResources">
+              <i class="bi bi-box-arrow-up-right"></i> Open All in New Tabs
             </button>
           </div>
         </div>
+        <!-- Add this modal to your HTML -->
+        <div class="modal fade" id="resourceModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add New Resource</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="resourceForm">
+                  <div class="mb-3">
+                    <label for="resourceName" class="form-label">Resource Name</label>
+                    <input type="text" class="form-control" id="resourceName" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="resourceUrl" class="form-label">URL</label>
+                    <input type="url" class="form-control" id="resourceUrl" required placeholder="https://example.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="resourceCategory" class="form-label">Category</label>
+                    <select class="form-select" id="resourceCategory" required>
+                      <option value="websites">Website</option>
+                      <option value="documents">Document</option>
+                      <option value="videos">Video</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="resourceDescription" class="form-label">Description (Optional)</label>
+                    <textarea class="form-control" id="resourceDescription" rows="3"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveResourceBtn">Save Resource</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="resources-container">
+          <div class="resource-categories">
+            <div class="category active" data-category="ai-tools">AI Tools</div>
+            <div class="category" data-category="math">Math</div>
+            <div class="category" data-category="science">Science</div>
+            <div class="category" data-category="languages">Languages</div>
+            <div class="category" data-category="general">General</div>
+            <h5>Your Resources</h5>
+            <div class="category" data-category="websitesResources">Websites</div>
+            <div class="category" data-category="documentsResources">Documents</div>
+            <div class="category" data-category="videosResources">Videos</div>
+            <div class="category" data-category="otherResources">Other Resources</div>
+          </div>
+          <div class="resources-grid">
+            <!-- AI Tools -->
+            <div class="resource-category active" id="ai-tools">
+              <a href="https://chat.openai.com" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"
+                    onerror="this.src='https://via.placeholder.com/60?text=ChatGPT'">
+                </div>
+                <div class="resource-info">
+                  <h3>ChatGPT</h3>
+                  <p>AI assistant for general study help</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+
+              <a href="https://www.deepseek.com" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img src="https://www.deepseek.com/favicon.ico" alt="DeepSeek">
+                </div>
+                <div class="resource-info">
+                  <h3>DeepSeek</h3>
+                  <p>Advanced AI research assistant</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+
+              <a href="https://gemini.google.com/app" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img src="https://www.pngall.com/wp-content/uploads/16/Google-Gemini-Logo-Transparent.png"
+                    alt="Gemini" onerror="this.src='https://via.placeholder.com/60?text=Gemini'">
+                </div>
+                <div class="resource-info">
+                  <h3>Google Gemini</h3>
+                  <p>Advanced AI research assistant</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Math -->
+            <div class="resource-category" id="math">
+              <a href="https://www.khanacademy.org" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img
+                    src="https://yt3.googleusercontent.com/ytc/AIdro_l3GggKOWViCBpDs9APIsK6MHB2Mu-ECo5dUEU-Vay2gg=s900-c-k-c0x00ffffff-no-rj"
+                    alt="Khan Academy" onerror="this.src='https://via.placeholder.com/60?text=Khan'">
+                </div>
+                <div class="resource-info">
+                  <h3>Khan Academy</h3>
+                  <p>Free math tutorials and exercises</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+              <a href="https://corbettmaths.com/" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img
+                    src="https://i0.wp.com/corbettmaths.com/wp-content/uploads/2018/04/cropped-Snip20180413_27-1.png?fit=192%2C192&ssl=1"
+                    alt="Khan Academy" onerror="this.src='https://via.placeholder.com/60?text=Khan'">
+                </div>
+                <div class="resource-info">
+                  <h3>Corbett Maths</h3>
+                  <p>Free math tutorials and exercises</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+
+            </div>
+
+            <!-- Languages -->
+            <div class="resource-category" id="languages">
+              <a href="https://www.languagesonline.org.uk/Hotpotatoes/frenchindex.html" class="resource-card"
+                target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img src="https://www.languagesonline.org.uk/Hotpotatoes/images/logo.png" alt="LanguagesOnline"
+                    onerror="this.src='https://via.placeholder.com/60?text=LO'">
+                </div>
+                <div class="resource-info">
+                  <h3>LanguagesOnline</h3>
+                  <p>Free grammar and listening help</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="resource-category" id="science">
+              <a href="https://www.physicsandmathstutor.com/" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img src="https://www.physicsandmathstutor.com/wp-content/uploads/favicon-pmt-200x200.png" alt="PMT"
+                    onerror="this.src='https://via.placeholder.com/60?text=PMT'">
+                </div>
+                <div class="resource-info">
+                  <h3>Physics and Math Tutor</h3>
+                  <p>Revise GCSEs! Past papers, exam questions by topic, revision notes, worksheets and solution banks.
+                  </p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="resource-category" id="websitesResources">
+              <h4 class="category-header">Websites</h4>
+              <!-- Cards will be inserted here by JavaScript -->
+            </div>
+
+            <div class="resource-category" id="documentsResources">
+              <h4 class="category-header">Documents</h4>
+              <!-- Cards will be inserted here by JavaScript -->
+            </div>
+
+            <div class="resource-category" id="videosResources">
+              <h4 class="category-header">Videos</h4>
+              <!-- Cards will be inserted here by JavaScript -->
+            </div>
+
+            <div class="resource-category" id="otherResources">
+              <h4 class="category-header">Other Resources</h4>
+              <!-- Cards will be inserted here by JavaScript -->
+            </div>
+
+            <!-- General Resources -->
+            <div class="resource-category" id="general">
+              <!-- Add your general resource links here -->
+              <!-- Example template (copy and paste to add more): -->
+              <a href="https://www.bbc.co.uk/bitesize" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img
+                    src="data:image/png;base64,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"
+                    alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
+                </div>
+                <div class="resource-info">
+                  <h3>BBC Bitesize</h3>
+                  <p>Use BBC Bitesize to help with your homework, revision and learning for GCSE. Find free videos,
+                    step-by-step guides, activities and quizzes.</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+              <a href="https://www.gcsepod.com/" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvn3MHLFAMk9y_-_VETQ8jit4jLsT7tbl2A&s"
+                    alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
+                </div>
+                <div class="resource-info">
+                  <h3>GCSEPod</h3>
+                  <p>Provides high quality, focused learning in a unique ‘Pod’ format multiple GCSE subjects, and
+                    filtered by exam boards.</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+              <a href="https://revisionworld.com/gcse-revision" class="resource-card" target="_blank" rel="noopener">
+                <div class="resource-logo">
+                  <img
+                    src="https://revisionworld.com/profiles/custom/revision/themes/revboot/images/revision-world-favicon.png"
+                    alt="Bitesize" onerror="this.src='https://via.placeholder.com/60?text=BBC'">
+                </div>
+                <div class="resource-info">
+                  <h3>Revision World</h3>
+                  <p>Provide free GCSE revision resources for a range of subjects.</p>
+                  <div class="resource-link">
+                    <i class="bi bi-box-arrow-up-right"></i> Open
+                  </div>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="resource-preview">
+            <div class="preview-content">
+              <i class="bi bi-compass"></i>
+              <h3>External Study Resources</h3>
+              <p>Click on any resource to open it in a new tab</p>
+              <p class="small-text">Some sites may block embedding for security reasons</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      </section>
+      <!-- Wellbeing Section -->
+      <section id="wellbeing" class="content-section">
+        <div class="wellbeing-container">
+          <!-- Break Reminders Section -->
+          <div class="wellbeing-section">
+            <h3><i class="bi bi-clock-history"></i> Study Break Reminders</h3>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input" type="checkbox" id="breakRemindersSwitch" checked>
+              <label class="form-check-label" for="breakRemindersSwitch">Enable reminders every</label>
+              <select class="form-select d-inline-block w-auto ms-2" id="reminderInterval">
+                <option value="30">30</option>
+                <option value="45">45</option>
+                <option value="50" selected>50</option>
+                <option value="60">60</option>
+                <option value="90">90</option>
+              </select>
+              <label class="form-check-label ms-1">minutes</label>
+            </div>
+            <button class="btn btn-outline-primary" id="takeBreakNowBtn">
+              <i class="bi bi-alarm"></i> Take Break Now
+            </button>
+          </div>
+
+          <hr>
+
+          <!-- Mindfulness Timer Section -->
+          <div class="wellbeing-section">
+            <h3><i class="bi bi-cloud-moon"></i> Mindfulness Timer</h3>
+            <div class="mindfulness-timer text-center mb-3">
+              <div id="mindfulnessDisplay" class="display-4">05:00</div>
+              <div class="btn-group mt-2">
+                <button class="btn btn-success" id="startMindfulnessBtn">
+                  <i class="bi bi-play-fill"></i> Start
+                </button>
+                <button class="btn btn-danger" id="stopMindfulnessBtn" disabled>
+                  <i class="bi bi-stop-fill"></i> Stop
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="mindfulnessDuration">Duration (minutes):</label>
+              <select class="form-select" id="mindfulnessDuration">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+              </select>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Sleep Calculator Section -->
+          <div class="wellbeing-section">
+            <h3><i class="bi bi-moon-stars"></i> Sleep Calculator</h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="wakeUpTime">I want to wake up at:</label>
+                  <input type="time" class="form-control" id="wakeUpTime" value="07:00">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="sleepCycles">Target sleep cycles (90min each):</label>
+                  <select class="form-select" id="sleepCycles">
+                    <option value="4">4 (6 hours)</option>
+                    <option value="5" selected>5 (7.5 hours)</option>
+                    <option value="6">6 (9 hours)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-2 mb-3">
+              <button class="btn btn-primary flex-grow-1" id="calculateSleepBtn">
+                <i class="bi bi-calculator"></i> Calculate Bedtimes
+              </button>
+              <button class="btn btn-outline-secondary" id="saveSleepPrefsBtn">
+                <i class="bi bi-save"></i> Save
+              </button>
+            </div>
+            <div id="sleepResults" class="mt-3"></div>
+          </div>
+        </div>
+        <!-- Add this to your wellbeing section in index.html -->
+        <div class="wellbeing-section">
+          <h3><i class="bi bi-music-note-beamed"></i> Focus Music</h3>
+          <div class="youtube-mini-player">
+            <!-- Default: Lofi Girl stream -->
+            <iframe id="ytMiniPlayer" width="100%" height="200"
+              src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&controls=1&modestbranding=1" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              loading="lazy"></iframe>
+
+            <div class="player-actions mt-2">
+              <button class="btn btn-sm btn-outline-danger yt-stream-btn active" data-ytid="5qap5aO4i9A">
+                <i class="bi bi-moon-stars"></i> Lo-Fi
+              </button>
+              <button class="btn btn-sm btn-outline-primary yt-stream-btn" data-ytid="1ZYbU82GVz4">
+                <i class="bi bi-music-note"></i> Classical
+              </button>
+              <button class="btn btn-sm btn-outline-success yt-stream-btn" data-ytid="y8eQD3O6N6Q">
+                <i class="bi bi-tree"></i> Nature
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Break Reminder Modal -->
+      <div class="modal fade" id="breakReminderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="breakReminderTitle">Time for a Break!</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <i class="bi bi-alarm" style="font-size: 3rem;"></i>
+              <p class="mt-3" id="breakReminderMessage"></p>
+              <div class="alert alert-info mt-3">
+                <strong id="breakReminderExercise"></strong>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                I've Taken My Break
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-       <!-- Dashboard Section -->
+
+      <!-- Mindfulness Complete Modal -->
+      <div class="modal fade" id="mindfulnessCompleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title">Mindfulness Session Complete</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <i class="bi bi-emoji-smile" style="font-size: 3rem;"></i>
+              <h4 class="my-3">Great job taking a mindful break!</h4>
+              <p>Try this breathing exercise to continue relaxing:</p>
+              <div class="alert alert-success">
+                <strong id="mindfulnessBreathExercise"></strong>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                Return to Studying
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preferences Toast -->
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="preferencesToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header bg-primary text-white">
+            <strong class="me-auto">Success</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            <p id="toastMessage">Preferences saved successfully!</p>
+          </div>
+        </div>
+      </div>
+      <section id="timing" class="content-section">
+        <div class="section-header">
+          <h2>Timing Tools</h2>
+        </div>
+
+        <div class="timing-container">
+          <!-- Stopwatch Card -->
+          <div class="timing-card">
+            <h3>Stopwatch</h3>
+            <div class="timer-display" id="stopwatchDisplay">00:00:00.00</div>
+            <div class="timer-controls">
+              <button class="btn btn-primary" id="stopwatchStart">
+                <i class="bi bi-play-fill"></i> Start
+              </button>
+              <button class="btn btn-warning" id="stopwatchPause" disabled>
+                <i class="bi bi-pause-fill"></i> Pause
+              </button>
+              <button class="btn btn-danger" id="stopwatchReset">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+              <button class="btn btn-success" id="stopwatchLap">
+                <i class="bi bi-flag-fill"></i> Lap
+              </button>
+            </div>
+            <div class="lap-times" id="stopwatchLaps">
+              <h4>Lap Times</h4>
+              <ul id="stopwatchLapList"></ul>
+            </div>
+          </div>
+
+          <!-- Countdown Timer Card -->
+          <div class="timing-card">
+            <h3>Countdown Timer</h3>
+            <div class="timer-input">
+              <input type="number" id="hoursInput" min="0" max="23" placeholder="HH">
+              <span>:</span>
+              <input type="number" id="minutesInput" min="0" max="59" placeholder="MM">
+              <span>:</span>
+              <input type="number" id="secondsInput" min="0" max="59" placeholder="SS">
+            </div>
+            <div class="timer-display" id="countdownDisplay">00:00:00</div>
+            <div class="timer-controls">
+              <button class="btn btn-primary" id="countdownStart">
+                <i class="bi bi-play-fill"></i> Start
+              </button>
+              <button class="btn btn-warning" id="countdownPause" disabled>
+                <i class="bi bi-pause-fill"></i> Pause
+              </button>
+              <button class="btn btn-danger" id="countdownReset">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+            </div>
+            <!-- Alarm Display -->
+            <div class="timer-alarm" id="countdownAlarm">
+              <div class="alarm-content">
+                <i class="bi bi-alarm"></i>
+                <span>TIME'S UP!</span>
+                <button class="btn btn-sm btn-danger" id="stopAlarmButton">
+                  <i class="bi bi-stop-fill"></i> Stop Alarm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Dashboard Section -->
       <section id="dashboard" class="content-section active">
         <div class="section-header">
           <h2>Study Dashboard</h2>
           <div class="date-display" id="currentDate"></div>
         </div>
-        
+
         <div class="stats-grid">
           <div class="stat-card primary">
             <div class="stat-value" id="weeklyHours">0</div>
@@ -582,7 +636,7 @@
               <i class="bi bi-dash"></i> No data
             </div>
           </div>
-          
+
           <div class="stat-card success">
             <div class="stat-value" id="completionRate">0%</div>
             <div class="stat-label">Topics Completed</div>
@@ -590,34 +644,1369 @@
               <div class="progress-fill" id="completionBar" style="width: 0%"></div>
             </div>
           </div>
-          
+
           <div class="stat-card warning">
             <div class="stat-value" id="behindSubjects">0</div>
             <div class="stat-label">Subjects Behind</div>
             <div class="stat-subtext" id="behindSubjectsText">All caught up</div>
           </div>
-          
+
           <div class="stat-card info">
             <div class="stat-value" id="totalSessions">0</div>
             <div class="stat-label">Total Sessions</div>
             <div class="stat-subtext">This month</div>
           </div>
         </div>
-        
+        <div id="exam-dates-section">
+          <div class="section-header">
+            <h2>Exam Dates</h2>
+          </div>
+
+          <div class="exam-dates-container" id="exam-dates-container">
+            <!-- Exam cards will be inserted here by JavaScript -->
+          </div>
+          <style>
+            /* Exam Dates Styles */
+            .exam-dates-container {
+              display: flex;
+              width: 100%;
+              gap: 1.5rem;
+              padding: 1rem 0;
+              /* Vertical padding only */
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              scrollbar-width: thin;
+              /* For Firefox */
+              scrollbar-color: var(--primary-color) var(--light-color);
+              /* For Firefox */
+            }
+
+            .exam-dates-container::-webkit-scrollbar {
+              height: 8px;
+            }
+
+            .exam-card {
+              flex: 0 0 300px;
+              /* Fixed width (no growth/shrink) */
+              height: 250px;
+              background: white;
+              border-radius: 10px;
+              padding: 1.5rem;
+              box-shadow: var(--card-shadow);
+              border-left: 4px solid var(--primary-color);
+              scroll-snap-align: start;
+              /* Ensures snapping */
+              transition: transform 0.2s;
+            }
+
+            .exam-card:hover {
+              transform: translateY(-3px);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .exam-card-icon {
+              font-size: 1.5rem;
+              color: var(--primary-color);
+              margin-bottom: 1rem;
+            }
+
+            .exam-card-subject {
+              font-weight: 600;
+              color: var(--dark-color);
+              margin-bottom: 0.25rem;
+            }
+
+            .exam-card-name {
+              font-size: 0.9rem;
+              color: var(--gray-color);
+              margin-bottom: 0.5rem;
+            }
+
+            .exam-card-time {
+              font-size: 0.85rem;
+              color: var(--gray-color);
+              margin-bottom: 1rem;
+            }
+
+            .exam-progress-container {
+              margin: 1rem 0;
+            }
+
+            .exam-progress-bar {
+              height: 6px;
+              background-color: var(--border-color);
+              border-radius: 3px;
+              overflow: hidden;
+            }
+
+            .exam-progress-fill {
+              height: 100%;
+              transition: width 0.3s ease;
+            }
+
+            .exam-card-countdown {
+              font-family: 'Courier New', monospace;
+              font-size: 0.9rem;
+              color: var(--dark-color);
+            }
+
+            /* Progress bar colors */
+            .exam-time-plenty {
+              background-color: var(--success-color);
+            }
+
+            .exam-time-medium {
+              background-color: var(--warning-color);
+            }
+
+            .exam-time-low {
+              background-color: #FF9800;
+            }
+
+            .exam-time-critical {
+              background-color: var(--danger-color);
+            }
+          </style>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const examData = {
+                "AQA": {
+                  "name": "AQA",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-12T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-20T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Paper 1 (Non-Calculator)",
+                          "datetime": "2025-05-15T09:30:00"
+                        },
+                        {
+                          "name": "Paper 2 (Calculator)",
+                          "datetime": "2025-06-04T09:30:00"
+                        },
+                        {
+                          "name": "Paper 3 (Calculator)",
+                          "datetime": "2025-06-11T09:30:00"
+                        },
+                        {
+                          "name": "Further Maths - Paper 1",
+                          "datetime": "2025-06-12T13:30:00"
+                        },
+                        {
+                          "name": "Further Maths - Paper 2",
+                          "datetime": "2025-06-18T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1 - Fiction and Creative Writing",
+                          "datetime": "2025-05-15T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2 - Non-Fiction",
+                          "datetime": "2025-05-18T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology Paper 1",
+                          "datetime": "2025-05-13T13:20:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 1",
+                          "datetime": "2025-05-19T09:20:00"
+                        },
+                        {
+                          "name": "Physics Paper 1",
+                          "datetime": "2025-05-22T13:20:00"
+                        },
+                        {
+                          "name": "Biology Paper 2",
+                          "datetime": "2025-06-09T09:30:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 2",
+                          "datetime": "2025-06-13T09:30:00"
+                        },
+                        {
+                          "name": "Physics Paper 2",
+                          "datetime": "2025-06-16T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-14T09:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-06T13:20:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-12T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PE",
+                      "icon": "activity",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-19T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-09T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Languages",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Speaking",
+                          "datetime": "2025-03-31T08:30:00"
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-17T09:30:00"
+                        },
+                        {
+                          "name": "Listening and Reading",
+                          "datetime": "2025-06-10T09:20:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Design and Technology",
+                      "icon": "hammer",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-06-18T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Business Studies",
+                      "icon": "briefcase",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-09T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-05T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Computer Science",
+                      "icon": "cpu",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-12T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-07T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "History",
+                      "icon": "clock-history",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-14T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-03T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-10T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Psychology",
+                      "icon": "brain",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-16T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-06T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-13T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-23T09:00:00"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "Edexcel": {
+                  "name": "Edexcel",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-13T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-21T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Paper 1 (Non-Calculator)",
+                          "datetime": "2025-05-15T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2 (Calculator)",
+                          "datetime": "2025-06-03T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3 (Calculator)",
+                          "datetime": "2025-06-10T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-23T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-05T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology Paper 1",
+                          "datetime": "2025-05-14T09:00:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 1",
+                          "datetime": "2025-05-20T09:00:00"
+                        },
+                        {
+                          "name": "Physics Paper 1",
+                          "datetime": "2025-05-22T09:00:00"
+                        },
+                        {
+                          "name": "Biology Paper 2",
+                          "datetime": "2025-06-10T09:00:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 2",
+                          "datetime": "2025-06-13T09:00:00"
+                        },
+                        {
+                          "name": "Physics Paper 2",
+                          "datetime": "2025-06-16T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography A",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-15T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-06T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-11T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography B",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-16T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-09T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-12T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PE",
+                      "icon": "activity",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-20T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-11T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "French",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Listening",
+                          "datetime": "2025-05-19T09:00:00"
+                        },
+                        {
+                          "name": "Reading",
+                          "datetime": "2025-05-19T10:00:00"
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-13T09:00:00"
+                        },
+                        {
+                          "name": "Speaking",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Design and Technology",
+                      "icon": "hammer",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-06-19T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Business Studies",
+                      "icon": "briefcase",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-12T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-09T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Computer Science",
+                      "icon": "cpu",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-16T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-10T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "History",
+                      "icon": "clock-history",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-13T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-22T13:30:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-04T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Psychology",
+                      "icon": "brain",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-19T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-12T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies A",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-16T09:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-23T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies B",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-14T13:30:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-03T13:30:00"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "OCR": {
+                  "name": "OCR",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-14T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-22T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Paper 1 (Non-Calculator)",
+                          "datetime": "2025-05-16T09:30:00"
+                        },
+                        {
+                          "name": "Paper 2 (Calculator)",
+                          "datetime": "2025-06-05T09:30:00"
+                        },
+                        {
+                          "name": "Paper 3 (Calculator)",
+                          "datetime": "2025-06-12T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-20T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-06T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science A",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology Paper 1",
+                          "datetime": "2025-05-15T13:30:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 1",
+                          "datetime": "2025-05-21T13:30:00"
+                        },
+                        {
+                          "name": "Physics Paper 1",
+                          "datetime": "2025-05-23T13:30:00"
+                        },
+                        {
+                          "name": "Biology Paper 2",
+                          "datetime": "2025-06-11T13:30:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 2",
+                          "datetime": "2025-06-16T13:30:00"
+                        },
+                        {
+                          "name": "Physics Paper 2",
+                          "datetime": "2025-06-18T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science B (Twenty First Century Science)",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology Paper 1",
+                          "datetime": "2025-05-16T13:30:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 1",
+                          "datetime": "2025-05-22T13:30:00"
+                        },
+                        {
+                          "name": "Physics Paper 1",
+                          "datetime": "2025-05-27T09:00:00"
+                        },
+                        {
+                          "name": "Biology Paper 2",
+                          "datetime": "2025-06-12T13:30:00"
+                        },
+                        {
+                          "name": "Chemistry Paper 2",
+                          "datetime": "2025-06-17T13:30:00"
+                        },
+                        {
+                          "name": "Physics Paper 2",
+                          "datetime": "2025-06-19T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography A",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-16T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-09T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-12T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography B (Schools for the Future)",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-19T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-06-10T09:00:00"
+                        },
+                        {
+                          "name": "Paper 3",
+                          "datetime": "2025-06-13T09:00:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "French",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Listening",
+                          "datetime": "2025-05-20T09:30:00"
+                        },
+                        {
+                          "name": "Reading",
+                          "datetime": "2025-05-20T10:15:00"
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-16T09:30:00"
+                        },
+                        {
+                          "name": "Speaking",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Paper 1",
+                          "datetime": "2025-05-15T09:00:00"
+                        },
+                        {
+                          "name": "Paper 2",
+                          "datetime": "2025-05-22T09:00:00"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "CCEA": {
+                  "name": "CCEA",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Unit 1: The Novel and Drama",
+                          "datetime": "2025-05-12T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Poetry and Prose",
+                          "datetime": "2025-05-20T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Unit M5: Paper 1 (Non-Calculator)",
+                          "datetime": "2025-05-15T09:30:00"
+                        },
+                        {
+                          "name": "Unit M6: Paper 2 (Calculator)",
+                          "datetime": "2025-06-03T13:30:00"
+                        },
+                        {
+                          "name": "Unit M7: Paper 3 (Calculator)",
+                          "datetime": "2025-06-10T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Personal Writing and Reading Non-Fiction",
+                          "datetime": "2025-05-23T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Functional Writing and Reading Media",
+                          "datetime": "2025-06-06T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Biology and Chemistry",
+                          "datetime": "2025-05-14T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Physics",
+                          "datetime": "2025-05-21T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Our Natural World",
+                          "datetime": "2025-05-14T13:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Our Changing World",
+                          "datetime": "2025-06-06T13:30:00"
+                        },
+                        {
+                          "name": "Unit 3: Fieldwork (Terminal Paper)",
+                          "datetime": "2025-06-11T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "PE",
+                      "icon": "activity",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Factors Underpinning Health, Well-being and Performance",
+                          "datetime": "2025-05-19T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "French",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Listening",
+                          "datetime": "2025-05-21T13:30:00"
+                        },
+                        {
+                          "name": "Reading",
+                          "datetime": "2025-05-21T14:15:00"
+                        },
+                        {
+                          "name": "Speaking (Task 1)",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        },
+                        {
+                          "name": "Speaking (Task 2)",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-05T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Business Studies",
+                      "icon": "briefcase",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Starting a Business",
+                          "datetime": "2025-05-09T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Developing a Business",
+                          "datetime": "2025-05-16T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "History",
+                      "icon": "clock-history",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Modern World History",
+                          "datetime": "2025-05-16T13:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Outline Study",
+                          "datetime": "2025-05-23T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Introduction to Christian Ethics",
+                          "datetime": "2025-05-21T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Introduction to Aspects of Christian Belief",
+                          "datetime": "2025-06-03T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Learning for Life and Work",
+                      "icon": "briefcase",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Local and Global Citizenship",
+                          "datetime": "2025-05-09T13:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Personal Development",
+                          "datetime": "2025-05-16T13:30:00"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "Eduqas": {
+                  "name": "Eduqas",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Component 1: Shakespeare and Poetry",
+                          "datetime": "2025-05-13T09:15:00"
+                        },
+                        {
+                          "name": "Component 2: Prose",
+                          "datetime": "2025-05-21T09:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Component 1: Non-Calculator Mathematics",
+                          "datetime": "2025-05-16T09:15:00"
+                        },
+                        {
+                          "name": "Component 2: Calculator-Allowed Mathematics",
+                          "datetime": "2025-06-04T09:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing",
+                          "datetime": "2025-05-20T09:15:00"
+                        },
+                        {
+                          "name": "Component 2: Reading Fiction and Creative Writing",
+                          "datetime": "2025-06-06T09:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science (Double Award)",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology 1",
+                          "datetime": "2025-05-14T13:15:00"
+                        },
+                        {
+                          "name": "Chemistry 1",
+                          "datetime": "2025-05-22T09:15:00"
+                        },
+                        {
+                          "name": "Physics 1",
+                          "datetime": "2025-05-27T13:15:00"
+                        },
+                        {
+                          "name": "Biology 2",
+                          "datetime": "2025-06-10T09:15:00"
+                        },
+                        {
+                          "name": "Chemistry 2",
+                          "datetime": "2025-06-17T09:15:00"
+                        },
+                        {
+                          "name": "Physics 2",
+                          "datetime": "2025-06-19T09:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography A",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Component 1: Changing Places and Our Changing Climate",
+                          "datetime": "2025-05-15T09:15:00"
+                        },
+                        {
+                          "name": "Component 2: Distinctive Landscapes and Global Development",
+                          "datetime": "2025-06-09T09:15:00"
+                        },
+                        {
+                          "name": "Component 3: Investigating Geographical Issues (Terminal Paper)",
+                          "datetime": "2025-06-12T13:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography B",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Component 1: Living with the Physical Environment",
+                          "datetime": "2025-05-16T09:15:00"
+                        },
+                        {
+                          "name": "Component 2: Understanding Our Changing World",
+                          "datetime": "2025-06-10T09:15:00"
+                        },
+                        {
+                          "name": "Component 3: Environmental and Development Issues (Terminal Paper)",
+                          "datetime": "2025-06-13T13:15:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "French",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Listening",
+                          "datetime": "2025-05-22T13:15:00"
+                        },
+                        {
+                          "name": "Reading",
+                          "datetime": "2025-05-22T14:00:00"
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-17T13:15:00"
+                        },
+                        {
+                          "name": "Speaking",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Component 1: Religious, Philosophical and Ethical Studies in the Modern World",
+                          "datetime": "2025-05-16T13:15:00"
+                        },
+                        {
+                          "name": "Component 2: Study of a World Religion",
+                          "datetime": "2025-05-23T13:15:00"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "WJEC": {
+                  "name": "WJEC",
+                  "subjects": [
+                    {
+                      "name": "English Literature",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Shakespeare and Poetry",
+                          "datetime": "2025-05-13T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Prose, Drama and Unseen Poetry",
+                          "datetime": "2025-05-21T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Mathematics",
+                      "icon": "calculator",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Non-Calculator Mathematics",
+                          "datetime": "2025-05-16T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Calculator-Allowed Mathematics",
+                          "datetime": "2025-06-04T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "English Language",
+                      "icon": "book",
+                      "exams": [
+                        {
+                          "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing",
+                          "datetime": "2025-05-20T09:30:00"
+                        },
+                        {
+                          "name": "Component 2: Reading Fiction and Creative Writing",
+                          "datetime": "2025-06-06T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Science (Double Award)",
+                      "icon": "beaker",
+                      "exams": [
+                        {
+                          "name": "Biology 1",
+                          "datetime": "2025-05-14T13:30:00"
+                        },
+                        {
+                          "name": "Chemistry 1",
+                          "datetime": "2025-05-22T09:30:00"
+                        },
+                        {
+                          "name": "Physics 1",
+                          "datetime": "2025-05-27T13:30:00"
+                        },
+                        {
+                          "name": "Biology 2",
+                          "datetime": "2025-06-10T09:30:00"
+                        },
+                        {
+                          "name": "Chemistry 2",
+                          "datetime": "2025-06-17T09:30:00"
+                        },
+                        {
+                          "name": "Physics 2",
+                          "datetime": "2025-06-19T09:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Geography",
+                      "icon": "globe",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Changing Places and Our Changing Climate",
+                          "datetime": "2025-05-15T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Distinctive Landscapes and Global Development",
+                          "datetime": "2025-06-09T09:30:00"
+                        },
+                        {
+                          "name": "Unit 3: Investigating Geographical Issues (Terminal Paper)",
+                          "datetime": "2025-06-12T13:30:00"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "French",
+                      "icon": "translate",
+                      "exams": [
+                        {
+                          "name": "Listening",
+                          "datetime": "2025-05-23T09:30:00"
+                        },
+                        {
+                          "name": "Reading",
+                          "datetime": "2025-05-23T10:15:00"
+                        },
+                        {
+                          "name": "Writing",
+                          "datetime": "2025-06-18T09:30:00"
+                        },
+                        {
+                          "name": "Speaking",
+                          "datetime": "2025-04-28T09:00:00" // Window starts
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Religious Studies",
+                      "icon": "book-half",
+                      "exams": [
+                        {
+                          "name": "Unit 1: Religion and Ethics",
+                          "datetime": "2025-05-16T09:30:00"
+                        },
+                        {
+                          "name": "Unit 2: Study of a World Religion",
+                          "datetime": "2025-05-23T09:30:00"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              };
+              renderExamCards(examData);
+            });
+            function renderExamCards(examData) {
+              const container = document.getElementById('exam-dates-container');
+              const allExams = [];
+
+              for (const board in examData) {
+                examData[board].subjects.forEach(subject => {
+                  subject.exams.forEach(exam => {
+                    allExams.push({
+                      boardName: examData[board].name,
+                      subjectName: subject.name,
+                      subjectIcon: subject.icon,
+                      examName: exam.name,
+                      datetime: new Date(exam.datetime)
+                    });
+                  });
+                });
+              }
+
+              allExams.sort((a, b) => a.datetime - b.datetime);
+
+              allExams.forEach(exam => {
+                const card = createExamCard(exam);
+                container.appendChild(card);
+                updateExamCard(card, exam);
+              });
+
+              setInterval(() => {
+                document.querySelectorAll('.exam-card').forEach(card => {
+                  const exam = {
+                    datetime: new Date(card.dataset.datetime)
+                  };
+                  updateExamCard(card, exam);
+                });
+              }, 1000);
+            }
+
+            function createExamCard(exam) {
+              const card = document.createElement('div');
+              card.className = 'exam-card';
+              card.dataset.datetime = exam.datetime.toISOString();
+              card.innerHTML = `
+                <div class="exam-card-icon">
+                  <i class="bi bi-${exam.subjectIcon}"></i>
+                </div>
+                <div class="exam-card-content">
+                  <div class="exam-card-subject">${exam.subjectName} (${exam.boardName})</div>
+                  <div class="exam-card-name">${exam.examName}</div>
+                  <div class="exam-card-time">
+                    ${exam.datetime.toLocaleDateString('en-GB', { weekday: 'long' })},
+                    ${exam.datetime.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    at ${exam.datetime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })}
+                  </div>
+                  <div class="exam-progress-container">
+                    <div class="exam-progress-bar">
+                      <div class="exam-progress-fill"></div>
+                    </div>
+                  </div>
+                  <div class="exam-card-countdown"></div>
+                </div>
+                `;
+              return card;
+            }
+            function updateExamCard(card, exam) {
+      const timeRemaining = calculateTimeRemaining(exam.datetime);
+      const countdownEl = card.querySelector('.exam-card-countdown');
+      const progressFill = card.querySelector('.exam-progress-fill');
+
+      if (timeRemaining.expired) {
+        countdownEl.textContent = 'Exam has passed';
+        progressFill.style.width = '0%';
+        card.style.opacity = '0.7';
+        return;
+      }
+
+      countdownEl.textContent = `${timeRemaining.days}d ${timeRemaining.hours}h ${timeRemaining.minutes}m`;
+      progressFill.style.width = `${timeRemaining.percentage}%`;
+      progressFill.className = `exam-progress-fill exam-${getTimeClass(timeRemaining.percentage)}`;
+    }
+
+    function calculateTimeRemaining(examDate) {
+      const now = new Date();
+      const timeDiff = examDate - now;
+
+      if (timeDiff <= 0) {
+        return { expired: true };
+      }
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+      return {
+        expired: false,
+        days,
+        hours,
+        minutes,
+        percentage: Math.min(100, (timeDiff / (1000 * 60 * 60 * 24 * 90)) * 100)
+      };
+    }
+
+    function getTimeClass(percentage) {
+      if (percentage > 75) return 'time-plenty';
+      if (percentage > 50) return 'time-medium';
+      if (percentage > 25) return 'time-low';
+      return 'time-critical';
+    }
+          </script>
+        </div>
         <div class="chart-container">
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3>Weekly Study Time</h3>
-                </div>
-                <canvas id="weeklyTimeChart" height="300"></canvas>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Weekly Study Time</h3>
             </div>
-            
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3>Subject Progress</h3>
-                </div>
-                <canvas id="subjectProgressChart" height="300"></canvas>
+            <canvas id="weeklyTimeChart" height="300"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Subject Progress</h3>
             </div>
+            <canvas id="subjectProgressChart" height="300"></canvas>
+          </div>
         </div>
       </section>
 
@@ -626,7 +2015,7 @@
         <div class="section-header">
           <h2>Study Session Tracker</h2>
         </div>
-        
+
         <div class="tracker-container">
           <div class="tracker-card">
             <form id="studySessionForm">
@@ -636,14 +2025,14 @@
                   <option value="" disabled selected>Select subject</option>
                 </select>
               </div>
-              
+
               <div class="form-group">
                 <label for="topicSelect">Topic (optional)</label>
                 <select id="topicSelect" class="form-control" disabled>
                   <option value="" selected>All topics</option>
                 </select>
               </div>
-              
+
               <div class="timer-container">
                 <div class="timer-display" id="timerDisplay">00:00:00</div>
                 <div class="timer-controls">
@@ -655,13 +2044,13 @@
                   </button>
                 </div>
               </div>
-              
+
               <button type="submit" class="btn btn-save">
                 <i class="bi bi-save"></i> Save Session
               </button>
             </form>
           </div>
-          
+
           <div class="current-session">
             <h3>Current Session</h3>
             <div class="session-info">
@@ -687,7 +2076,7 @@
         <div class="section-header">
           <h2>Progress Overview</h2>
         </div>
-        
+
         <div class="progress-grid">
           <div class="progress-card large">
             <div class="card-header">
@@ -695,21 +2084,21 @@
             </div>
             <canvas id="subjectTimeChart"></canvas>
           </div>
-          
+
           <div class="progress-card">
             <div class="card-header">
               <h3>Weekly Progress</h3>
             </div>
             <canvas id="weeklyProgressChart"></canvas>
           </div>
-          
+
           <div class="progress-card">
             <div class="card-header">
               <h3>Topic Completion</h3>
             </div>
             <canvas id="topicCompletionChart"></canvas>
           </div>
-          
+
           <div class="progress-card table-card">
             <div class="card-header">
               <h3>Recent Sessions</h3>
@@ -732,53 +2121,53 @@
             </div>
           </div>
         </div>
-          <!-- Add this to your progress section -->
-  <div class="session-actions">
-    <button class="btn btn-delete-session" id="deleteSessionBtn">
-      <i class="bi bi-trash"></i> Delete Selected Session
-    </button>
-    <button class="btn btn-delete-all" id="deleteAllSessionsBtn">
-      <i class="bi bi-trash-fill"></i> Delete All Sessions
-    </button>
-  </div>
-    <!-- Delete Session Modal -->
-    <div class="modal fade" id="deleteSessionModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Confirm Deletion</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete this session? This action cannot be undone.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-danger" id="confirmDeleteSession">Delete Session</button>
+        <!-- Add this to your progress section -->
+        <div class="session-actions">
+          <button class="btn btn-delete-session" id="deleteSessionBtn">
+            <i class="bi bi-trash"></i> Delete Selected Session
+          </button>
+          <button class="btn btn-delete-all" id="deleteAllSessionsBtn">
+            <i class="bi bi-trash-fill"></i> Delete All Sessions
+          </button>
+        </div>
+        <!-- Delete Session Modal -->
+        <div class="modal fade" id="deleteSessionModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this session? This action cannot be undone.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteSession">Delete Session</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Delete All Sessions Modal -->
-      <div class="modal fade" id="deleteAllSessionsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Confirm Deletion</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete ALL study sessions? This action cannot be undone.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-danger" id="confirmDeleteAllSessions">Delete All</button>
+
+        <!-- Delete All Sessions Modal -->
+        <div class="modal fade" id="deleteAllSessionsModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete ALL study sessions? This action cannot be undone.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAllSessions">Delete All</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    
+
       </section>
 
       <!-- Subjects Section -->
@@ -789,7 +2178,7 @@
             <i class="bi bi-plus-lg"></i> Add Subject
           </button>
         </div>
-        
+
         <div class="subjects-container">
           <div class="subjects-list" id="subjectAccordion">
             <div class="empty-state">
@@ -798,7 +2187,7 @@
               <p>Add your first subject to get started</p>
             </div>
           </div>
-          
+
           <div class="subject-details">
             <div class="empty-state">
               <i class="bi bi-journal-bookmark"></i>
@@ -808,55 +2197,933 @@
           </div>
         </div>
         <!-- Add this to your subjects section -->
-<div class="subject-actions">
-    <button class="btn btn-delete-subject" id="deleteSubjectBtn">
-      <i class="bi bi-trash"></i> Delete Selected Subject
-    </button>
-    <button class="btn btn-delete-all" id="deleteAllSubjectsBtn">
-      <i class="bi bi-trash-fill"></i> Delete All Subjects
-    </button>
-  </div>
-  
+        <div class="subject-actions">
+          <button class="btn btn-delete-subject" id="deleteSubjectBtn">
+            <i class="bi bi-trash"></i> Delete Selected Subject
+          </button>
+          <button class="btn btn-delete-all" id="deleteAllSubjectsBtn">
+            <i class="bi bi-trash-fill"></i> Delete All Subjects
+          </button>
+        </div>
 
-  <!-- Add confirmation modals -->
-  <!-- Delete Subject Modal -->
-  <div class="modal fade" id="deleteSubjectModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Deletion</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <!-- Add confirmation modals -->
+        <!-- Delete Subject Modal -->
+        <div class="modal fade" id="deleteSubjectModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this subject? This action cannot be undone.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteSubject">Delete Subject</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this subject? This action cannot be undone.</p>
+
+        <!-- Delete All Subjects Modal -->
+        <div class="modal fade" id="deleteAllSubjectsModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete ALL subjects? This action cannot be undone.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAllSubjects">Delete All</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteSubject">Delete Subject</button>
+
+      </section>
+      <section id="music" class="content-section">
+        <div class="section-header">
+          <h2>Focus Music Player</h2>
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Delete All Subjects Modal -->
-  <div class="modal fade" id="deleteAllSubjectsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Deletion</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <div class="youtube-main-player">
+          <iframe id="ytMainPlayer" width="100%" height="400"
+            src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&controls=1&modestbranding=1" frameborder="0"
+            allowfullscreen></iframe>
         </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete ALL subjects? This action cannot be undone.</p>
+
+        <div class="playlist-container mt-4">
+          <h4>Recommended Streams</h4>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="playlist-card" data-ytid="5qap5aO4i9A">
+                <img src="https://i.ytimg.com/vi/5qap5aO4i9A/hqdefault.jpg" alt="Lo-Fi">
+                <h5>Lo-Fi Beats</h5>
+                <p>24/7 chill study music</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="playlist-card" data-ytid="1ZYbU82GVz4">
+                <img src="https://i.ytimg.com/vi/1ZYbU82GVz4/hqdefault.jpg" alt="Classical">
+                <h5>Classical Focus</h5>
+                <p>Piano & orchestra</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="playlist-card" data-ytid="y8eQD3O6N6Q">
+                <img src="https://i.ytimg.com/vi/y8eQD3O6N6Q/hqdefault.jpg" alt="Nature">
+                <h5>Nature Sounds</h5>
+                <p>Forest & rain</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteAllSubjects">Delete All</button>
+      </section>
+      <!-- Add this to your index.html file in the Exam Dates section -->
+      <section id="dates" class="content-section">
+        <div class="section-header">
+          <h2>Exam Dates</h2>
+          <div class="exam-actions">
+            <button class="btn btn-outline-primary" id="exam-dates-view-toggle">
+              <i class="bi bi-list"></i> <span>Grid View</span>
+            </button>
+            <button class="btn btn-outline-secondary" id="exam-dates-seconds-toggle">
+              <i class="bi bi-clock"></i> <span>Hide Seconds</span>
+            </button>
+            <select class="form-select" id="exam-dates-subject-filter">
+              <option value="all">All Subjects</option>
+            </select>
+            <select class="form-select" id="exam-dates-board-filter">
+              <option value="all">All Boards</option>
+          </select>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  
+
+        <div class="exam-grid" id="exam-dates-grid">
+        </div>
+        <script>
+          (function () {
+            // Exam Dates functionality
+            document.addEventListener('DOMContentLoaded', function () {
+                const examData = {
+                    "AQA": {
+                        "name": "AQA",
+                        "subjects": [
+                            {
+                                "name": "English Literature",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-12T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-20T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Mathematics",
+                                "icon": "calculator",
+                                "exams": [
+                                    { "name": "Paper 1 (Non-Calculator)", "datetime": "2025-05-15T09:30:00" },
+                                    { "name": "Paper 2 (Calculator)", "datetime": "2025-06-04T09:30:00" },
+                                    { "name": "Paper 3 (Calculator)", "datetime": "2025-06-11T09:30:00" },
+                                    { "name": "Further Maths - Paper 1", "datetime": "2025-06-12T13:30:00" },
+                                    { "name": "Further Maths - Paper 2", "datetime": "2025-06-18T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "English Language",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1 - Fiction and Creative Writing", "datetime": "2025-05-15T13:30:00" },
+                                    { "name": "Paper 2 - Non-Fiction", "datetime": "2025-05-18T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Biology Paper 1", "datetime": "2025-05-13T13:20:00" },
+                                    { "name": "Chemistry Paper 1", "datetime": "2025-05-19T09:20:00" },
+                                    { "name": "Physics Paper 1", "datetime": "2025-05-22T13:20:00" },
+                                    { "name": "Biology Paper 2", "datetime": "2025-06-09T09:30:00" },
+                                    { "name": "Chemistry Paper 2", "datetime": "2025-06-13T09:30:00" },
+                                    { "name": "Physics Paper 2", "datetime": "2025-06-16T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-14T09:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-06T13:20:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-12T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "PE",
+                                "icon": "activity",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-19T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-09T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Languages",
+                                "icon": "translate",
+                                "exams": [
+                                    { "name": "Speaking", "datetime": "2025-03-31T08:30:00" },
+                                    { "name": "Writing", "datetime": "2025-06-17T09:30:00" },
+                                    { "name": "Listening and Reading", "datetime": "2025-06-10T09:20:00" }
+                                ]
+                            },
+                            {
+                                "name": "Design and Technology",
+                                "icon": "hammer",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-06-18T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Business Studies",
+                                "icon": "briefcase",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-09T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-05T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Computer Science",
+                                "icon": "cpu",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-12T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-07T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "History",
+                                "icon": "clock-history",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-14T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-03T09:00:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-10T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Psychology",
+                                "icon": "brain",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-16T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-06T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Religious Studies",
+                                "icon": "book-half",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-13T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-23T09:00:00" }
+                                ]
+                            }
+                        ]
+                    },
+                    "Edexcel": {
+                        "name": "Edexcel",
+                        "subjects": [
+                            {
+                                "name": "English Literature",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-13T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-21T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Mathematics",
+                                "icon": "calculator",
+                                "exams": [
+                                    { "name": "Paper 1 (Non-Calculator)", "datetime": "2025-05-15T09:00:00" },
+                                    { "name": "Paper 2 (Calculator)", "datetime": "2025-06-03T09:00:00" },
+                                    { "name": "Paper 3 (Calculator)", "datetime": "2025-06-10T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "English Language",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-23T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-05T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Biology Paper 1", "datetime": "2025-05-14T09:00:00" },
+                                    { "name": "Chemistry Paper 1", "datetime": "2025-05-20T09:00:00" },
+                                    { "name": "Physics Paper 1", "datetime": "2025-05-22T09:00:00" },
+                                    { "name": "Biology Paper 2", "datetime": "2025-06-10T09:00:00" },
+                                    { "name": "Chemistry Paper 2", "datetime": "2025-06-13T09:00:00" },
+                                    { "name": "Physics Paper 2", "datetime": "2025-06-16T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography A",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-15T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-06T09:00:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-11T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography B",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-16T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-09T09:00:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-12T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "PE",
+                                "icon": "activity",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-20T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-11T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Languages",
+                                "icon": "translate",
+                                "exams": [
+                                    { "name": "Listening", "datetime": "2025-05-19T09:00:00" },
+                                    { "name": "Reading", "datetime": "2025-05-19T10:00:00" },
+                                    { "name": "Writing", "datetime": "2025-06-13T09:00:00" },
+                                    { "name": "Speaking", "datetime": "2025-04-28T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Design and Technology",
+                                "icon": "hammer",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-06-19T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Business Studies",
+                                "icon": "briefcase",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-12T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-09T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Computer Science",
+                                "icon": "cpu",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-16T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-10T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "History",
+                                "icon": "clock-history",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-13T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-22T13:30:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-04T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Psychology",
+                                "icon": "brain",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-19T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-12T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Religious Studies A",
+                                "icon": "book-half",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-16T09:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-23T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Religious Studies B",
+                                "icon": "book-half",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-14T13:30:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-03T13:30:00" }
+                                ]
+                            }
+                        ]
+                    },
+                    "OCR": {
+                        "name": "OCR",
+                        "subjects": [
+                            {
+                                "name": "English Literature",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-14T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-22T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Mathematics",
+                                "icon": "calculator",
+                                "exams": [
+                                    { "name": "Paper 1 (Non-Calculator)", "datetime": "2025-05-16T09:30:00" },
+                                    { "name": "Paper 2 (Calculator)", "datetime": "2025-06-05T09:30:00" },
+                                    { "name": "Paper 3 (Calculator)", "datetime": "2025-06-12T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "English Language",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-20T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-06T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science A",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Biology Paper 1", "datetime": "2025-05-15T13:30:00" },
+                                    { "name": "Chemistry Paper 1", "datetime": "2025-05-21T13:30:00" },
+                                    { "name": "Physics Paper 1", "datetime": "2025-05-23T13:30:00" },
+                                    { "name": "Biology Paper 2", "datetime": "2025-06-11T13:30:00" },
+                                    { "name": "Chemistry Paper 2", "datetime": "2025-06-16T13:30:00" },
+                                    { "name": "Physics Paper 2", "datetime": "2025-06-18T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science B (Twenty First Century Science)",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Biology Paper 1", "datetime": "2025-05-16T13:30:00" },
+                                    { "name": "Chemistry Paper 1", "datetime": "2025-05-22T13:30:00" },
+                                    { "name": "Physics Paper 1", "datetime": "2025-05-27T09:00:00" },
+                                    { "name": "Biology Paper 2", "datetime": "2025-06-12T13:30:00" },
+                                    { "name": "Chemistry Paper 2", "datetime": "2025-06-17T13:30:00" },
+                                    { "name": "Physics Paper 2", "datetime": "2025-06-19T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography A",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-16T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-09T09:00:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-12T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography B (Schools for the Future)",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-19T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-06-10T09:00:00" },
+                                    { "name": "Paper 3", "datetime": "2025-06-13T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Languages",
+                                "icon": "translate",
+                                "exams": [
+                                    { "name": "Listening", "datetime": "2025-05-20T09:30:00" },
+                                    { "name": "Reading", "datetime": "2025-05-20T10:15:00" },
+                                    { "name": "Writing", "datetime": "2025-06-16T09:30:00" },
+                                    { "name": "Speaking", "datetime": "2025-04-28T09:00:00" }
+                                ]
+                            },
+                            {
+                                "name": "Religious Studies",
+                                "icon": "book-half",
+                                "exams": [
+                                    { "name": "Paper 1", "datetime": "2025-05-15T09:00:00" },
+                                    { "name": "Paper 2", "datetime": "2025-05-22T09:00:00" }
+                                ]
+                            }
+                        ]
+                    },
+                    "CCEA": {
+                        "name": "CCEA",
+                        "subjects": [
+                            {
+                                "name": "English Literature",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Unit 1: The Novel and Drama", "datetime": "2025-05-12T09:30:00" },
+                                    { "name": "Unit 2: Poetry and Prose", "datetime": "2025-05-20T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Mathematics",
+                                "icon": "calculator",
+                                "exams": [
+                                    { "name": "Unit M5: Paper 1 (Non-Calculator)", "datetime": "2025-05-15T09:30:00" },
+                                    { "name": "Unit M6: Paper 2 (Calculator)", "datetime": "2025-06-03T13:30:00" },
+                                    { "name": "Unit M7: Paper 3 (Calculator)", "datetime": "2025-06-10T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "English Language",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Unit 1: Personal Writing and Reading Non-Fiction", "datetime": "2025-05-23T09:30:00" },
+                                    { "name": "Unit 2: Functional Writing and Reading Media", "datetime": "2025-06-06T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Unit 1: Biology and Chemistry", "datetime": "2025-05-14T09:30:00" },
+                                    { "name": "Unit 2: Physics", "datetime": "2025-05-21T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Geography",
+                                "icon": "globe",
+                                "exams": [
+                                    { "name": "Unit 1: Our Natural World", "datetime": "2025-05-14T13:30:00" },
+                                    { "name": "Unit 2: Our Changing World", "datetime": "2025-06-06T13:30:00" },
+                                    { "name": "Unit 3: Fieldwork (Terminal Paper)", "datetime": "2025-06-11T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "PE",
+                                "icon": "activity",
+                                "exams": [
+                                    { "name": "Unit 1: Factors Underpinning Health, Well-being and Performance", "datetime": "2025-05-19T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Languages",
+                                "icon": "translate",
+                                "exams": [
+                                    { "name": "Listening", "datetime": "2025-05-21T13:30:00" },
+                                    { "name": "Reading", "datetime": "2025-05-21T14:15:00" },
+                                    { "name": "Speaking (Task 1)", "datetime": "2025-04-28T09:00:00" },
+                                    { "name": "Speaking (Task 2)", "datetime": "2025-04-28T09:00:00" },
+                                    { "name": "Writing", "datetime": "2025-06-05T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Business Studies",
+                                "icon": "briefcase",
+                                "exams": [
+                                    { "name": "Unit 1: Starting a Business", "datetime": "2025-05-09T09:30:00" },
+                                    { "name": "Unit 2: Developing a Business", "datetime": "2025-05-16T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "History",
+                                "icon": "clock-history",
+                                "exams": [
+                                    { "name": "Unit 1: Modern World History", "datetime": "2025-05-16T13:30:00" },
+                                    { "name": "Unit 2: Outline Study", "datetime": "2025-05-23T13:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Religious Studies",
+                                "icon": "book-half",
+                                "exams": [
+                                    { "name": "Unit 1: Introduction to Christian Ethics", "datetime": "2025-05-21T09:30:00" },
+                                    { "name": "Unit 2: Introduction to Aspects of Christian Belief", "datetime": "2025-06-03T09:30:00" }
+                                ]
+                            },
+                            {
+                                "name": "Learning for Life and Work",
+                                "icon": "briefcase",
+                                "exams": [
+                                    { "name": "Unit 1: Local and Global Citizenship", "datetime": "2025-05-09T13:30:00" },
+                                    { "name": "Unit 2: Personal Development", "datetime": "2025-05-16T13:30:00" }
+                                ]
+                            }
+                        ]
+                    },
+                    "Eduqas": {
+                        "name": "Eduqas",
+                        "subjects": [
+                            {
+                                "name": "English Literature",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Component 1: Shakespeare and Poetry", "datetime": "2025-05-13T09:15:00" },
+                                    { "name": "Component 2: Prose", "datetime": "2025-05-21T09:15:00" }
+                                ]
+                            },
+                            {
+                                "name": "Mathematics",
+                                "icon": "calculator",
+                                "exams": [
+                                    { "name": "Component 1: Non-Calculator Mathematics", "datetime": "2025-05-16T09:15:00" },
+                                    { "name": "Component 2: Calculator-Allowed Mathematics", "datetime": "2025-06-04T09:15:00" }
+                                ]
+                            },
+                            {
+                                "name": "English Language",
+                                "icon": "book",
+                                "exams": [
+                                    { "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing", "datetime": "2025-05-20T09:15:00" },
+                                    { "name": "Component 2: Reading Fiction and Creative Writing", "datetime": "2025-06-06T09:15:00" }
+                                ]
+                            },
+                            {
+                                "name": "Science (Double Award)",
+                                "icon": "beaker",
+                                "exams": [
+                                    { "name": "Biology 1", "datetime": "2025-05-14T13:15:00" },
+                                    { "name": "Chemistry 1", "datetime": "2025-05-22T09:15:00" },
+{ "name": "Physics 1", "datetime": "2025-05-27T13:15:00" },
+{ "name": "Biology 2", "datetime": "2025-06-10T09:15:00" },
+{ "name": "Chemistry 2", "datetime": "2025-06-17T09:15:00" },
+{ "name": "Physics 2", "datetime": "2025-06-19T09:15:00" }
+]
+},
+{
+"name": "Geography A",
+"icon": "globe",
+"exams": [
+{ "name": "Component 1: Changing Places and Our Changing Climate", "datetime": "2025-05-15T09:15:00" },
+{ "name": "Component 2: Distinctive Landscapes and Global Development", "datetime": "2025-06-09T09:15:00" },
+{ "name": "Component 3: Investigating Geographical Issues (Terminal Paper)", "datetime": "2025-06-12T13:15:00" }
+]
+},
+{
+"name": "Geography B",
+"icon": "globe",
+"exams": [
+{ "name": "Component 1: Living with the Physical Environment", "datetime": "2025-05-16T09:15:00" },
+{ "name": "Component 2: Understanding Our Changing World", "datetime": "2025-06-10T09:15:00" },
+{ "name": "Component 3: Environmental and Development Issues (Terminal Paper)", "datetime": "2025-06-13T13:15:00" }
+]
+},
+{
+"name": "Languages",
+"icon": "translate",
+"exams": [
+{ "name": "Listening", "datetime": "2025-05-22T13:15:00" },
+{ "name": "Reading", "datetime": "2025-05-22T14:00:00" },
+{ "name": "Writing", "datetime": "2025-06-17T13:15:00" },
+{ "name": "Speaking", "datetime": "2025-04-28T09:00:00" }
+]
+},
+{
+"name": "Religious Studies",
+"icon": "book-half",
+"exams": [
+{ "name": "Component 1: Religious, Philosophical and Ethical Studies in the Modern World", "datetime": "2025-05-16T13:15:00" },
+{ "name": "Component 2: Study of a World Religion", "datetime": "2025-05-23T13:15:00" }
+]
+}
+]
+},
+"WJEC": {
+"name": "WJEC",
+"subjects": [
+{
+"name": "English Literature",
+"icon": "book",
+"exams": [
+{ "name": "Unit 1: Shakespeare and Poetry", "datetime": "2025-05-13T09:30:00" },
+{ "name": "Unit 2: Prose, Drama and Unseen Poetry", "datetime": "2025-05-21T09:30:00" }
+]
+},
+{
+"name": "Mathematics",
+"icon": "calculator",
+"exams": [
+{ "name": "Unit 1: Non-Calculator Mathematics", "datetime": "2025-05-16T09:30:00" },
+{ "name": "Unit 2: Calculator-Allowed Mathematics", "datetime": "2025-06-04T09:30:00" }
+]
+},
+{
+"name": "English Language",
+"icon": "book",
+"exams": [
+{ "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing", "datetime": "2025-05-20T09:30:00" },
+{ "name": "Component 2: Reading Fiction and Creative Writing", "datetime": "2025-06-06T09:30:00" }
+]
+},
+{
+"name": "Science (Double Award)",
+"icon": "beaker",
+"exams": [
+{ "name": "Biology 1", "datetime": "2025-05-14T13:30:00" },
+{ "name": "Chemistry 1", "datetime": "2025-05-22T09:30:00" },
+{ "name": "Physics 1", "datetime": "2025-05-27T13:30:00" },
+{ "name": "Biology 2", "datetime": "2025-06-10T09:30:00" },
+{ "name": "Chemistry 2", "datetime": "2025-06-17T09:30:00" },
+{ "name": "Physics 2", "datetime": "2025-06-19T09:30:00" }
+]
+},
+{
+"name": "Geography",
+"icon": "globe",
+"exams": [
+{ "name": "Unit 1: Changing Places and Our Changing Climate", "datetime": "2025-05-15T09:30:00" },
+{ "name": "Unit 2: Distinctive Landscapes and Global Development", "datetime": "2025-06-09T09:30:00" },
+{ "name": "Unit 3: Investigating Geographical Issues (Terminal Paper)", "datetime": "2025-06-12T13:30:00" }
+]
+},
+{
+"name": "Languages",
+"icon": "translate",
+"exams": [
+{ "name": "Listening", "datetime": "2025-05-23T09:30:00" },
+{ "name": "Reading", "datetime": "2025-05-23T10:15:00" },
+{ "name": "Writing", "datetime": "2025-06-18T09:30:00" },
+{ "name": "Speaking", "datetime": "2025-04-28T09:00:00" }
+]
+},
+{
+"name": "Religious Studies",
+"icon": "book-half",
+"exams": [
+{ "name": "Unit 1: Religion and Ethics", "datetime": "2025-05-16T09:30:00" },
+{ "name": "Unit 2: Study of a World Religion", "datetime": "2025-05-23T09:30:00" }
+]
+}
+]
+}
+};
+
+            initExamDates(examData);
+        });
+        function initExamDates(examData) {
+      const examGrid = document.getElementById('exam-dates-grid');
+      const viewToggle = document.getElementById('exam-dates-view-toggle');
+      const secondsToggle = document.getElementById('exam-dates-seconds-toggle');
+      const subjectFilter = document.getElementById('exam-dates-subject-filter');
+      const boardFilter = document.getElementById('exam-dates-board-filter');
+
+      let isListView = false;
+      let showSeconds = true;
+      let currentSubject = 'all';
+      let currentBoard = 'all';
+      let cards = []; // Store card elements
+
+      const exams = processExamData(examData);
+      setupSubjectFilter();
+      setupBoardFilter(examData);
+      
+      viewToggle.addEventListener('click', toggleView);
+      secondsToggle.addEventListener('click', toggleSeconds);
+      subjectFilter.addEventListener('change', function () {
+        currentSubject = this.value;
+        renderExams();
+      });
+      
+      boardFilter.addEventListener('change', function() {
+        currentBoard = this.value;
+        renderExams();
+      });
+
+      renderExams(); // Initial rendering of exams
+      startCountdown();
+
+      function processExamData(data) {
+        const allExams = [];
+        for (const board in data) {
+          data[board].subjects.forEach(subject => {
+            subject.exams.forEach(exam => {
+              allExams.push({
+                boardName: data[board].name,
+                boardKey: board, // Add board key for filtering
+                subjectName: subject.name,
+                subjectIcon: subject.icon,
+                examName: exam.name,
+                datetime: new Date(exam.datetime)
+              });
+            });
+          });
+        }
+        return allExams.sort((a, b) => a.datetime - b.datetime);
+      }
+
+      function setupSubjectFilter() {
+        const allSubjects = new Set();
+        for (const board in examData) {
+          examData[board].subjects.forEach(subject => {
+            allSubjects.add(subject.name);
+          });
+        }
+        const sortedSubjects = [...allSubjects].sort();
+        sortedSubjects.forEach(subject => {
+          const option = document.createElement('option');
+          option.value = subject;
+          option.textContent = subject;
+          subjectFilter.appendChild(option);
+        });
+      }
+
+      function setupBoardFilter(data) {
+        const boards = Object.keys(data).sort();
+        boards.forEach(board => {
+          const option = document.createElement('option');
+          option.value = board;
+          option.textContent = data[board].name;
+          boardFilter.appendChild(option);
+        });
+      }
+
+      function toggleView() {
+        isListView = !isListView;
+        examGrid.classList.toggle('list-view', isListView);
+        const span = viewToggle.querySelector('span');
+        span.textContent = isListView ? 'Grid View' : 'List View';
+        const icon = viewToggle.querySelector('i');
+        icon.className = isListView ? 'bi bi-grid' : 'bi bi-list';
+        renderExams();
+      }
+
+      function toggleSeconds() {
+        showSeconds = !showSeconds;
+        const span = secondsToggle.querySelector('span');
+        span.textContent = showSeconds ? 'Hide Seconds' : 'Show Seconds';
+        updateAllCards();
+      }
+
+      function getFilteredExams() {
+        let filtered = exams;
+        
+        if (currentSubject !== 'all') {
+          filtered = filtered.filter(exam => exam.subjectName === currentSubject);
+        }
+        
+        if (currentBoard !== 'all') {
+          filtered = filtered.filter(exam => exam.boardKey === currentBoard);
+        }
+        
+        return filtered;
+      }
+
+      function calculateTimeRemaining(examDate) {
+        const now = new Date();
+        const timeDiff = examDate - now;
+
+        if (timeDiff <= 0) {
+          return { expired: true };
+        }
+
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        return {
+          expired: false,
+          days,
+          hours,
+          minutes,
+          seconds,
+          totalMilliseconds: timeDiff,
+          percentage: calculatePercentage(timeDiff)
+        };
+      }
+
+      function calculatePercentage(timeRemaining) {
+        const threeMonths = 1000 * 60 * 60 * 24 * 90;
+        return Math.min(100, (timeRemaining / threeMonths) * 100);
+      }
+
+      function getTimeClass(percentage) {
+        if (percentage > 75) return 'time-plenty';
+        if (percentage > 50) return 'time-medium';
+        if (percentage > 25) return 'time-low';
+        return 'time-critical';
+      }
+
+      function createExamCard(exam) {
+        const card = document.createElement('div');
+        card.className = 'exam-card';
+        card.innerHTML = `
+          <div class="subject-icon">
+            <i class="bi bi-${exam.subjectIcon}"></i>
+          </div>
+          <div class="card-content">
+            <div class="subject-name">${exam.subjectName} (${exam.boardName})</div>
+            <div class="exam-name">${exam.examName}</div>
+            <div class="exam-datetime">
+              ${exam.datetime.toLocaleDateString('en-GB', { weekday: 'long' })},
+              ${exam.datetime.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              at ${exam.datetime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })}
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar">
+                <div class="progress-bar-fill"></div>
+              </div>
+            </div>
+            <div class="countdown"></div>
+          </div>
+        `;
+        return card;
+      }
+
+      function updateCard(card, timeRemaining) {
+        if (timeRemaining.expired) {
+          card.querySelector('.countdown').textContent = 'Exam has passed';
+          card.querySelector('.progress-bar-fill').style.width = '0%';
+          card.style.opacity = '0.7';
+          return;
+        }
+
+        const countdownHTML = showSeconds
+          ? `${timeRemaining.days}d ${timeRemaining.hours}h ${timeRemaining.minutes}m ${timeRemaining.seconds}s`
+          : `${timeRemaining.days}d ${timeRemaining.hours}h ${timeRemaining.minutes}m`;
+
+        card.querySelector('.countdown').textContent = countdownHTML;
+
+        const progressBar = card.querySelector('.progress-bar-fill');
+        progressBar.style.width = `${timeRemaining.percentage}%`;
+        progressBar.className = `progress-bar-fill ${getTimeClass(timeRemaining.percentage)}`;
+      }
+
+      function renderExams() {
+        examGrid.innerHTML = ''; // Clear the grid
+        cards = []; // Clear the cards array
+        const filteredExams = getFilteredExams();
+        
+        if (filteredExams.length === 0) {
+          examGrid.innerHTML = '<div class="empty-state"><i class="bi bi-search"></i><p>No exams match your filters</p></div>';
+          return;
+        }
+        
+        filteredExams.forEach(exam => {
+          const card = createExamCard(exam);
+          examGrid.appendChild(card);
+          cards.push({
+            element: card,
+            exam: exam
+          });
+        });
+        updateAllCards();
+      }
+      
+      function updateAllCards() {
+        cards.forEach(({ element, exam }) => {
+          const timeRemaining = calculateTimeRemaining(exam.datetime);
+          updateCard(element, timeRemaining);
+        });
+      }
+
+      function startCountdown() {
+        updateAllCards();
+        setInterval(updateAllCards, 1000);
+      }
+    }
+  })();
+        </script>
       </section>
       <section id="timetable" class="content-section">
         <div class="section-header">
@@ -870,7 +3137,7 @@
             </button>
           </div>
         </div>
-      
+
         <div class="timetable-container">
           <div class="timetable-subjects">
             <h3>Your Subjects</h3>
@@ -882,7 +3149,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="timetable-grid">
             <div class="timetable-header">
               <div class="timetable-cell">Time</div>
@@ -892,7 +3159,7 @@
               <div class="timetable-cell">Thursday</div>
               <div class="timetable-cell">Friday</div>
             </div>
-            
+
             <div class="timetable-body" id="timetableBody">
               <!-- Time slots will be generated by JS -->
             </div>
@@ -947,19 +3214,43 @@
                 <option>Media Studies</option>
                 <option>Statistics</option>
                 <option>Astronomy</option>
-      </select>
+              </select>
             </div>
-            
+
+            <div class="mb-3">
+              <label for="examBoard" class="form-label">Exam Board</label>
+              <select class="form-select" id="examBoard" required>
+                <option value="" selected disabled>Select exam board</option>
+                <option>AQA</option>
+                <option>Edexcel</option>
+                <option>OCR</option>
+                <option>WJEC</option>
+                <option>CCEA</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <!-- Math options (keep existing) -->
             <div class="mb-3 d-none" id="mathOptions">
               <label for="mathSet" class="form-label">Maths Set Number</label>
               <input type="number" id="mathSet" class="form-control" min="1" max="3">
-              
+
               <label for="mathTier" class="form-label mt-3">Maths Tier</label>
               <select id="mathTier" class="form-select">
                 <option value="" selected>Choose tier</option>
                 <option value="Foundation">Foundation</option>
                 <option value="Higher">Higher</option>
               </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Topics</label>
+              <div id="topicsContainer">
+                <!-- Topics will be added here -->
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="addTopicBtn">
+                <i class="bi bi-plus"></i> Add Topic
+              </button>
             </div>
           </form>
         </div>
@@ -975,4 +3266,5 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
