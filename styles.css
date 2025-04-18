@@ -2139,104 +2139,7 @@ body {
     border-radius: 12px;
   }
   
-  .exam-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .exam-actions .form-select {
-    width: auto;
-    min-width: 180px;
-  }
-  
-  .exam-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  .home-exam-grid {
-    display: flex;
-    width: 100vw;
-    overflow-x: auto;
-  }
-  
-  .exam-card {
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: var(--card-shadow);
-    transition: all 0.2s;
-    border-left: 4px solid var(--primary-color);
-  }
-  
-  .exam-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .subject-icon {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-  }
-  
-  .subject-name {
-    font-weight: 600;
-    color: var(--dark-color);
-    margin-bottom: 0.25rem;
-  }
-  
-  .exam-name {
-    font-size: 0.9rem;
-    color: var(--gray-color);
-    margin-bottom: 0.5rem;
-  }
-  
-  .exam-datetime {
-    font-size: 0.85rem;
-    color: var(--gray-color);
-    margin-bottom: 1rem;
-  }
-  
-  .progress-container {
-    margin: 1rem 0;
-  }
-  
-  .progress-bar {
-    height: 6px;
-    background-color: var(--border-color);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  
-  .progress-bar-fill {
-    height: 100%;
-    transition: width 0.3s ease;
-  }
-  
-  .time-plenty { background-color: var(--success-color); }
-  .time-medium { background-color: var(--warning-color); }
-  .time-low { background-color: #FF9800; }
-  .time-critical { background-color: var(--danger-color); }
-  
-  .countdown {
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    color: var(--dark-color);
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .exam-actions {
-      flex-wrap: wrap;
-    }
-    
-    .exam-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+
   .exam-dates-container {
     display: flex;
     width: 100%;
@@ -2335,4 +2238,102 @@ body {
 
   .exam-time-critical {
     background-color: var(--danger-color);
+  }
+  .exam-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .exam-actions .form-select {
+    width: auto;
+    min-width: 180px;
+  }
+  
+  .exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .home-exam-grid {
+    display: flex;
+    width: 100vw;
+    overflow-x: auto;
+  }
+  
+  .exam-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s;
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  .exam-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subject-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .subject-name {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+  }
+  
+  .exam-name {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 0.5rem;
+  }
+  
+  .exam-datetime {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+  }
+  
+  .progress-container {
+    margin: 1rem 0;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  
+  .time-plenty { background-color: var(--success-color); }
+  .time-medium { background-color: var(--warning-color); }
+  .time-low { background-color: #FF9800; }
+  .time-critical { background-color: var(--danger-color); }
+  
+  .countdown {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .exam-actions {
+      flex-wrap: wrap;
+    }
+    
+    .exam-grid {
+      grid-template-columns: 1fr;
+    }
   }
