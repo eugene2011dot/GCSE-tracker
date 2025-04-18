@@ -590,8 +590,11 @@ body {
 
 @media (max-width: 992px) {
     .sidenav {
-        width: 80px;
-        overflow: hidden;
+        position: fixed;
+        top: 0;
+        height: fit-content;
+        z-index: 1000;
+        flex-direction: row;
     }
 
     .app-title,
@@ -644,6 +647,8 @@ body {
 
     .main-content {
         padding: 1rem;
+        margin-left: 0;
+        margin-top: 80px;
     }
 
     .section-header {
