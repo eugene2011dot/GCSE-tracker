@@ -178,12 +178,1127 @@ const gcseSubjects = {
         topics: ["Enterprise", "Marketing", "Finance", "Operations", "Human Resources"]
     }
 };
+const examData = {
+    "AQA": {
+        "name": "AQA",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-12T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-20T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Paper 1 (Non-Calculator)",
+                        "datetime": "2025-05-15T09:30:00"
+                    },
+                    {
+                        "name": "Paper 2 (Calculator)",
+                        "datetime": "2025-06-04T09:30:00"
+                    },
+                    {
+                        "name": "Paper 3 (Calculator)",
+                        "datetime": "2025-06-11T09:30:00"
+                    },
+                    {
+                        "name": "Further Maths - Paper 1",
+                        "datetime": "2025-06-12T13:30:00"
+                    },
+                    {
+                        "name": "Further Maths - Paper 2",
+                        "datetime": "2025-06-18T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1 - Fiction and Creative Writing",
+                        "datetime": "2025-05-15T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2 - Non-Fiction",
+                        "datetime": "2025-05-18T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology Paper 1",
+                        "datetime": "2025-05-13T13:20:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 1",
+                        "datetime": "2025-05-19T09:20:00"
+                    },
+                    {
+                        "name": "Physics Paper 1",
+                        "datetime": "2025-05-22T13:20:00"
+                    },
+                    {
+                        "name": "Biology Paper 2",
+                        "datetime": "2025-06-09T09:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 2",
+                        "datetime": "2025-06-13T09:30:00"
+                    },
+                    {
+                        "name": "Physics Paper 2",
+                        "datetime": "2025-06-16T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-14T09:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-06T13:20:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-12T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "PE",
+                "icon": "activity",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-19T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-09T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Languages",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Speaking",
+                        "datetime": "2025-03-31T08:30:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-17T09:30:00"
+                    },
+                    {
+                        "name": "Listening and Reading",
+                        "datetime": "2025-06-10T09:20:00"
+                    }
+                ]
+            },
+            {
+                "name": "Design and Technology",
+                "icon": "hammer",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-06-18T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Business Studies",
+                "icon": "briefcase",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-09T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Computer Science",
+                "icon": "cpu",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-12T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-07T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "History",
+                "icon": "clock-history",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-14T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-03T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-10T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Psychology",
+                "icon": "brain",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-16T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-06T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-13T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-23T09:00:00"
+                    }
+                ]
+            }
+        ]
+    },
+    "Edexcel": {
+        "name": "Edexcel",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-13T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-21T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Paper 1 (Non-Calculator)",
+                        "datetime": "2025-05-15T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2 (Calculator)",
+                        "datetime": "2025-06-03T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3 (Calculator)",
+                        "datetime": "2025-06-10T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-23T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology Paper 1",
+                        "datetime": "2025-05-14T09:00:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 1",
+                        "datetime": "2025-05-20T09:00:00"
+                    },
+                    {
+                        "name": "Physics Paper 1",
+                        "datetime": "2025-05-22T09:00:00"
+                    },
+                    {
+                        "name": "Biology Paper 2",
+                        "datetime": "2025-06-10T09:00:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 2",
+                        "datetime": "2025-06-13T09:00:00"
+                    },
+                    {
+                        "name": "Physics Paper 2",
+                        "datetime": "2025-06-16T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography A",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-15T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-06T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-11T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography B",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-16T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-09T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-12T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "PE",
+                "icon": "activity",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-20T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-11T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2025-05-19T09:00:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2025-05-19T10:00:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-13T09:00:00"
+                    },
+                    {
+                        "name": "Speaking",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    }
+                ]
+            },
+            {
+                "name": "Design and Technology",
+                "icon": "hammer",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-06-19T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Business Studies",
+                "icon": "briefcase",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-12T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-09T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Computer Science",
+                "icon": "cpu",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-16T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-10T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "History",
+                "icon": "clock-history",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-13T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-22T13:30:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-04T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Psychology",
+                "icon": "brain",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-19T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-12T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies A",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-16T09:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-23T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies B",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-14T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-03T13:30:00"
+                    }
+                ]
+            }
+        ]
+    },
+    "OCR": {
+        "name": "OCR",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-14T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-22T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Paper 1 (Non-Calculator)",
+                        "datetime": "2025-05-16T09:30:00"
+                    },
+                    {
+                        "name": "Paper 2 (Calculator)",
+                        "datetime": "2025-06-05T09:30:00"
+                    },
+                    {
+                        "name": "Paper 3 (Calculator)",
+                        "datetime": "2025-06-12T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-20T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-06T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science A",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology Paper 1",
+                        "datetime": "2025-05-15T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 1",
+                        "datetime": "2025-05-21T13:30:00"
+                    },
+                    {
+                        "name": "Physics Paper 1",
+                        "datetime": "2025-05-23T13:30:00"
+                    },
+                    {
+                        "name": "Biology Paper 2",
+                        "datetime": "2025-06-11T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 2",
+                        "datetime": "2025-06-16T13:30:00"
+                    },
+                    {
+                        "name": "Physics Paper 2",
+                        "datetime": "2025-06-18T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science B (Twenty First Century Science)",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology Paper 1",
+                        "datetime": "2025-05-16T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 1",
+                        "datetime": "2025-05-22T13:30:00"
+                    },
+                    {
+                        "name": "Physics Paper 1",
+                        "datetime": "2025-05-27T09:00:00"
+                    },
+                    {
+                        "name": "Biology Paper 2",
+                        "datetime": "2025-06-12T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 2",
+                        "datetime": "2025-06-17T13:30:00"
+                    },
+                    {
+                        "name": "Physics Paper 2",
+                        "datetime": "2025-06-19T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography A",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-16T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-09T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-12T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography B (Schools for the Future)",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-19T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-06-10T09:00:00"
+                    },
+                    {
+                        "name": "Paper 3",
+                        "datetime": "2025-06-13T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2025-05-20T09:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2025-05-20T10:15:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-16T09:30:00"
+                    },
+                    {
+                        "name": "Speaking",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2025-05-15T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2025-05-22T09:00:00"
+                    }
+                ]
+            }
+        ]
+    },
+    "CCEA": {
+        "name": "CCEA",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Unit 1: The Novel and Drama",
+                        "datetime": "2025-05-12T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Poetry and Prose",
+                        "datetime": "2025-05-20T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Unit M5: Paper 1 (Non-Calculator)",
+                        "datetime": "2025-05-15T09:30:00"
+                    },
+                    {
+                        "name": "Unit M6: Paper 2 (Calculator)",
+                        "datetime": "2025-06-03T13:30:00"
+                    },
+                    {
+                        "name": "Unit M7: Paper 3 (Calculator)",
+                        "datetime": "2025-06-10T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Unit 1: Personal Writing and Reading Non-Fiction",
+                        "datetime": "2025-05-23T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Functional Writing and Reading Media",
+                        "datetime": "2025-06-06T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Unit 1: Biology and Chemistry",
+                        "datetime": "2025-05-14T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Physics",
+                        "datetime": "2025-05-21T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Unit 1: Our Natural World",
+                        "datetime": "2025-05-14T13:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Our Changing World",
+                        "datetime": "2025-06-06T13:30:00"
+                    },
+                    {
+                        "name": "Unit 3: Fieldwork (Terminal Paper)",
+                        "datetime": "2025-06-11T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "PE",
+                "icon": "activity",
+                "exams": [
+                    {
+                        "name": "Unit 1: Factors Underpinning Health, Well-being and Performance",
+                        "datetime": "2025-05-19T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2025-05-21T13:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2025-05-21T14:15:00"
+                    },
+                    {
+                        "name": "Speaking (Task 1)",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    },
+                    {
+                        "name": "Speaking (Task 2)",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-05T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Business Studies",
+                "icon": "briefcase",
+                "exams": [
+                    {
+                        "name": "Unit 1: Starting a Business",
+                        "datetime": "2025-05-09T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Developing a Business",
+                        "datetime": "2025-05-16T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "History",
+                "icon": "clock-history",
+                "exams": [
+                    {
+                        "name": "Unit 1: Modern World History",
+                        "datetime": "2025-05-16T13:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Outline Study",
+                        "datetime": "2025-05-23T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Unit 1: Introduction to Christian Ethics",
+                        "datetime": "2025-05-21T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Introduction to Aspects of Christian Belief",
+                        "datetime": "2025-06-03T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Learning for Life and Work",
+                "icon": "briefcase",
+                "exams": [
+                    {
+                        "name": "Unit 1: Local and Global Citizenship",
+                        "datetime": "2025-05-09T13:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Personal Development",
+                        "datetime": "2025-05-16T13:30:00"
+                    }
+                ]
+            }
+        ]
+    },
+    "Eduqas": {
+        "name": "Eduqas",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Component 1: Shakespeare and Poetry",
+                        "datetime": "2025-05-13T09:15:00"
+                    },
+                    {
+                        "name": "Component 2: Prose",
+                        "datetime": "2025-05-21T09:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Component 1: Non-Calculator Mathematics",
+                        "datetime": "2025-05-16T09:15:00"
+                    },
+                    {
+                        "name": "Component 2: Calculator-Allowed Mathematics",
+                        "datetime": "2025-06-04T09:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing",
+                        "datetime": "2025-05-20T09:15:00"
+                    },
+                    {
+                        "name": "Component 2: Reading Fiction and Creative Writing",
+                        "datetime": "2025-06-06T09:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science (Double Award)",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology 1",
+                        "datetime": "2025-05-14T13:15:00"
+                    },
+                    {
+                        "name": "Chemistry 1",
+                        "datetime": "2025-05-22T09:15:00"
+                    },
+                    {
+                        "name": "Physics 1",
+                        "datetime": "2025-05-27T13:15:00"
+                    },
+                    {
+                        "name": "Biology 2",
+                        "datetime": "2025-06-10T09:15:00"
+                    },
+                    {
+                        "name": "Chemistry 2",
+                        "datetime": "2025-06-17T09:15:00"
+                    },
+                    {
+                        "name": "Physics 2",
+                        "datetime": "2025-06-19T09:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography A",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Component 1: Changing Places and Our Changing Climate",
+                        "datetime": "2025-05-15T09:15:00"
+                    },
+                    {
+                        "name": "Component 2: Distinctive Landscapes and Global Development",
+                        "datetime": "2025-06-09T09:15:00"
+                    },
+                    {
+                        "name": "Component 3: Investigating Geographical Issues (Terminal Paper)",
+                        "datetime": "2025-06-12T13:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography B",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Component 1: Living with the Physical Environment",
+                        "datetime": "2025-05-16T09:15:00"
+                    },
+                    {
+                        "name": "Component 2: Understanding Our Changing World",
+                        "datetime": "2025-06-10T09:15:00"
+                    },
+                    {
+                        "name": "Component 3: Environmental and Development Issues (Terminal Paper)",
+                        "datetime": "2025-06-13T13:15:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2025-05-22T13:15:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2025-05-22T14:00:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-17T13:15:00"
+                    },
+                    {
+                        "name": "Speaking",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Component 1: Religious, Philosophical and Ethical Studies in the Modern World",
+                        "datetime": "2025-05-16T13:15:00"
+                    },
+                    {
+                        "name": "Component 2: Study of a World Religion",
+                        "datetime": "2025-05-23T13:15:00"
+                    }
+                ]
+            }
+        ]
+    },
+    "WJEC": {
+        "name": "WJEC",
+        "subjects": [
+            {
+                "name": "English Literature",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Unit 1: Shakespeare and Poetry",
+                        "datetime": "2025-05-13T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Prose, Drama and Unseen Poetry",
+                        "datetime": "2025-05-21T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Mathematics",
+                "icon": "calculator",
+                "exams": [
+                    {
+                        "name": "Unit 1: Non-Calculator Mathematics",
+                        "datetime": "2025-05-16T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Calculator-Allowed Mathematics",
+                        "datetime": "2025-06-04T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Component 1: Reading Non-Fiction and Transactional/Persuasive Writing",
+                        "datetime": "2025-05-20T09:30:00"
+                    },
+                    {
+                        "name": "Component 2: Reading Fiction and Creative Writing",
+                        "datetime": "2025-06-06T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Science (Double Award)",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology 1",
+                        "datetime": "2025-05-14T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry 1",
+                        "datetime": "2025-05-22T09:30:00"
+                    },
+                    {
+                        "name": "Physics 1",
+                        "datetime": "2025-05-27T13:30:00"
+                    },
+                    {
+                        "name": "Biology 2",
+                        "datetime": "2025-06-10T09:30:00"
+                    },
+                    {
+                        "name": "Chemistry 2",
+                        "datetime": "2025-06-17T09:30:00"
+                    },
+                    {
+                        "name": "Physics 2",
+                        "datetime": "2025-06-19T09:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Unit 1: Changing Places and Our Changing Climate",
+                        "datetime": "2025-05-15T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Distinctive Landscapes and Global Development",
+                        "datetime": "2025-06-09T09:30:00"
+                    },
+                    {
+                        "name": "Unit 3: Investigating Geographical Issues (Terminal Paper)",
+                        "datetime": "2025-06-12T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2025-05-23T09:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2025-05-23T10:15:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2025-06-18T09:30:00"
+                    },
+                    {
+                        "name": "Speaking",
+                        "datetime": "2025-04-28T09:00:00" // Window starts
+                    }
+                ]
+            },
+            {
+                "name": "Religious Studies",
+                "icon": "book-half",
+                "exams": [
+                    {
+                        "name": "Unit 1: Religion and Ethics",
+                        "datetime": "2025-05-16T09:30:00"
+                    },
+                    {
+                        "name": "Unit 2: Study of a World Religion",
+                        "datetime": "2025-05-23T09:30:00"
+                    }
+                ]
+            }
+        ]
+    }
+};
 
 // Initialize the app
 function init() {
     loadUserData();
     setupNavigation();
     setupEventListeners();
+    populateSubjectSelects();
     updateCurrentDate();
     renderSubjects();
     renderRecentSessions();
@@ -196,20 +1311,35 @@ function init() {
     updateUserProfileDisplay();
     initMusicPlayer();
     initTracker();
-    populateSubjectSelects();
 }
 
 // Load user data from localStorage
 function loadUserData() {
     const savedData = localStorage.getItem('gcseStudyTrackerData');
     if (savedData) {
-        userData = JSON.parse(savedData);
+        const parsedData = JSON.parse(savedData);
+        userData = parsedData;
+
+        // Restore selections if they exist
+        if (parsedData.currentSubject) {
+            subjectSelect.value = parsedData.currentSubject;
+            updateTopicSelect(parsedData.currentSubject);
+        }
+        if (parsedData.currentTopic) {
+            topicSelect.value = parsedData.currentTopic;
+        }
     }
+    console.log("Loaded userData:", userData);
 }
 
 // Save user data to localStorage
 function saveUserData() {
-    localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
+    const dataToSave = {
+        ...userData,
+        currentSubject: subjectSelect.value,  // Only save the selected subject
+        currentTopic: topicSelect.value      // Only save the selected topic
+    };
+    localStorage.setItem('gcseStudyTrackerData', JSON.stringify(dataToSave));
 }
 
 // Update current date display
@@ -239,15 +1369,23 @@ function setupNavigation() {
 
 // Setup all event listeners
 function setupEventListeners() {
+    // Subject selection
     subjectSelect.addEventListener('change', (e) => {
         updateTopicSelect(e.target.value);
         currentSession.subject = e.target.value;
+        saveUserData();  // Save on change
     });
 
-    // Topic selection in tracker
+    // Topic selection
     topicSelect.addEventListener('change', (e) => {
         currentSession.topic = e.target.value || 'General study';
+        saveUserData();  // Save on change
     });
+
+    // Keep all your existing timer and form handlers exactly as they were
+    startTimerBtn.addEventListener('click', startTimer);
+    stopTimerBtn.addEventListener('click', stopTimer);
+    studySessionForm.addEventListener('submit', logStudySession);
 
     // Timer controls
     startTimerBtn.addEventListener('click', startTimer);
@@ -362,21 +1500,21 @@ function setupEventListeners() {
     document.getElementById('countdownReset')?.addEventListener('click', resetCountdown);
 
     document.getElementById('addTopicBtn')?.addEventListener('click', addTopicInput);
-    
+
     // Subject selection change
-    subjectInput.addEventListener('change', function() {
+    subjectInput.addEventListener('change', function () {
         const subjectName = this.value;
-        
+
         // Show/hide math options
         if (subjectName === "Mathematics") {
             mathOptions.classList.remove('d-none');
         } else {
             mathOptions.classList.add('d-none');
         }
-        
+
         // Clear topics container
         document.getElementById('topicsContainer').innerHTML = '';
-        
+
         // Add default topics if available
         if (gcseSubjects[subjectName]?.topics) {
             gcseSubjects[subjectName].topics.forEach(topic => {
@@ -404,7 +1542,7 @@ function startTimer() {
 
     // Reset seconds counter
     seconds = 0;
-    
+
     currentSession.startTime = new Date();
     currentSession.subject = subjectSelect.value;
     currentSession.topic = topicSelect.value || 'General study';
@@ -498,7 +1636,6 @@ function populateSubjectSelects() {
         subjectSelect.appendChild(option);
     });
 }
-
 // Update topic select based on subject
 function updateTopicSelect(subjectName) {
     topicSelect.innerHTML = '<option value="" selected>All topics</option>';
@@ -520,7 +1657,7 @@ function updateTopicSelect(subjectName) {
 function addSubject() {
     const subjectName = subjectInput.value.trim();
     const examBoard = document.getElementById('examBoard').value;
-    
+
     if (!subjectName || !examBoard) {
         alert('Please select both a subject and exam board');
         return;
@@ -553,7 +1690,7 @@ function addSubject() {
             subjectDetails.tier = tier;
         }
     }
-    
+
     // Get custom topics
     const topicInputs = document.querySelectorAll('.topic-input');
     topicInputs.forEach(input => {
@@ -575,6 +1712,7 @@ function addSubject() {
     mathOptions.classList.add('d-none');
     document.getElementById('topicsContainer').innerHTML = '';
     addSubjectModal.hide();
+    document.dispatchEvent(new Event('subjectsUpdated'));
 }
 // Delete selected subject
 function deleteSelectedSubject() {
@@ -746,7 +1884,7 @@ function showSubjectDetails(subjectName) {
 
     // Add topics with checkboxes - combine predefined and custom topics
     const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
-    
+
     if (allTopics.length > 0) {
         const topicsList = document.getElementById('topicsList');
         allTopics.forEach(topic => {
@@ -825,19 +1963,19 @@ function showSubjectDetails(subjectName) {
 
         // Add event listener for "Delete Topic" buttons (only for custom topics)
         document.querySelectorAll('.delete-topic-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const topic = this.dataset.topic;
                 if (confirm(`Are you sure you want to delete the topic "${topic}"?`)) {
                     // Remove from custom topics
                     subject.customTopics = subject.customTopics.filter(t => t !== topic);
-                    
+
                     // Remove any study sessions for this topic
                     userData.studySessions = userData.studySessions.filter(
                         session => !(session.subject === subjectName && session.topic === topic)
                     );
-                    
+
                     saveUserData();
-                    
+
                     // Refresh the view
                     showSubjectDetails(subjectName);
                 }
@@ -861,44 +1999,44 @@ function showSubjectDetails(subjectName) {
             }
         });
         saveUserData();
-        
+
         // Update UI
         updateCompletionDisplay(subjectName);
     });
 
     // Add event listeners for topic management
-    document.getElementById('addCustomTopic')?.addEventListener('click', function() {
+    document.getElementById('addCustomTopic')?.addEventListener('click', function () {
         document.getElementById('addTopicForm').classList.remove('d-none');
         document.getElementById('newTopicName').focus();
     });
 
-    document.getElementById('cancelAddTopic')?.addEventListener('click', function() {
+    document.getElementById('cancelAddTopic')?.addEventListener('click', function () {
         document.getElementById('addTopicForm').classList.add('d-none');
         document.getElementById('newTopicName').value = '';
     });
 
-    document.getElementById('saveNewTopic')?.addEventListener('click', function() {
+    document.getElementById('saveNewTopic')?.addEventListener('click', function () {
         const topicName = document.getElementById('newTopicName').value.trim();
         if (topicName) {
             // Add to custom topics
             if (!subject.customTopics) {
                 subject.customTopics = [];
             }
-            
+
             // Check if topic already exists
             const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
             if (allTopics.includes(topicName)) {
                 alert('This topic already exists!');
                 return;
             }
-            
+
             subject.customTopics.push(topicName);
             saveUserData();
-            
+
             // Reset and hide the form
             document.getElementById('newTopicName').value = '';
             document.getElementById('addTopicForm').classList.add('d-none');
-            
+
             // Refresh the view
             showSubjectDetails(subjectName);
         }
@@ -933,12 +2071,12 @@ function updateCompletionDisplay(subjectName) {
     if (completionPercentageElement) {
         completionPercentageElement.textContent = `${completion}%`;
     }
-    
+
     // Update all checkboxes
     const subject = userData.subjects.find(s => s.name === subjectName);
     const subjectData = gcseSubjects[subjectName] || {};
     const allTopics = [...(subjectData.topics || []), ...(subject.customTopics || [])];
-    
+
     document.querySelectorAll('.topic-checkbox').forEach(checkbox => {
         const topic = checkbox.dataset.topic;
         checkbox.checked = userData.studySessions.some(
@@ -2139,7 +3277,7 @@ const WellbeingManager = {
         }
         this.updateUIFromPreferences();
         this.setupEventListeners();
-        
+
         // Start break reminders if enabled
         if (userData.wellbeing.breakReminders) {
             this.startBreakReminder();
@@ -2236,7 +3374,7 @@ const WellbeingManager = {
         this.breakInterval = setInterval(() => {
             const now = new Date();
             const lastBreak = userData.wellbeing.lastBreakTime ? new Date(userData.wellbeing.lastBreakTime) : null;
-            
+
             if (!lastBreak || (now - lastBreak) >= userData.wellbeing.reminderInterval * 60 * 1000) {
                 this.showBreakReminder();
                 userData.wellbeing.lastBreakTime = now.toISOString();
@@ -2265,13 +3403,13 @@ const WellbeingManager = {
             "Eye Rest: Look away from screen and focus on distant object for 30 seconds",
             "Wrist Circles: Rotate wrists 10 times each direction"
         ];
-        
+
         const exercise = stretches[Math.floor(Math.random() * stretches.length)];
         const title = manual ? "Recommended Break" : "Time for a Break!";
-        const message = manual ? 
-            "Here's a good exercise to refresh yourself:" : 
+        const message = manual ?
+            "Here's a good exercise to refresh yourself:" :
             `You've been studying for ${userData.wellbeing.reminderInterval} minutes. Try this exercise:`;
-        
+
         // Create modal if it doesn't exist
         if (!document.getElementById('breakReminderModal')) {
             const modalHTML = `
@@ -2312,15 +3450,15 @@ const WellbeingManager = {
     startMindfulnessTimer() {
         this.stopMindfulnessTimer();
         this.mindfulnessTimeLeft = userData.wellbeing.mindfulnessDuration * 60;
-        
+
         this.updateMindfulnessDisplay();
         document.getElementById('startMindfulnessBtn').disabled = true;
         document.getElementById('stopMindfulnessBtn').disabled = false;
-        
+
         this.mindfulnessInterval = setInterval(() => {
             this.mindfulnessTimeLeft--;
             this.updateMindfulnessDisplay();
-            
+
             if (this.mindfulnessTimeLeft <= 0) {
                 this.stopMindfulnessTimer();
                 this.showMindfulnessComplete();
@@ -2354,9 +3492,9 @@ const WellbeingManager = {
             "Box Breathing: Inhale 4s, hold 4s, exhale 4s, hold 4s",
             "4-7-8 Breathing: Inhale 4s, hold 7s, exhale 8s"
         ];
-        
+
         const exercise = breaths[Math.floor(Math.random() * breaths.length)];
-        
+
         // Create modal if it doesn't exist
         if (!document.getElementById('mindfulnessCompleteModal')) {
             const modalHTML = `
@@ -2393,19 +3531,19 @@ const WellbeingManager = {
     calculateOptimalSleepTimes() {
         const wakeUpTime = document.getElementById('wakeUpTime').value;
         const cycles = parseInt(document.getElementById('sleepCycles').value);
-        
+
         if (!wakeUpTime || isNaN(cycles) || cycles < 1 || cycles > 6) {
             alert('Please enter valid wake-up time and sleep cycles (1-6)');
             return;
         }
-        
+
         const [hours, minutes] = wakeUpTime.split(':').map(Number);
         const wakeUpDate = new Date();
         wakeUpDate.setHours(hours, minutes, 0, 0);
-        
+
         const cycleDuration = 90; // minutes per sleep cycle
         const results = [];
-        
+
         for (let i = 1; i <= cycles; i++) {
             const bedtime = new Date(wakeUpDate.getTime() - i * cycleDuration * 60000);
             results.push({
@@ -2413,14 +3551,14 @@ const WellbeingManager = {
                 cycles: i
             });
         }
-        
+
         this.displaySleepResults(results, wakeUpTime);
     },
 
     displaySleepResults(results, wakeUpTime) {
         const resultsContainer = document.getElementById('sleepResults');
         if (!resultsContainer) return;
-        
+
         resultsContainer.innerHTML = `
             <h5>Optimal Bedtimes for ${wakeUpTime} wake-up:</h5>
             <ul class="list-group mt-3">
@@ -2438,7 +3576,7 @@ const WellbeingManager = {
         userData.wellbeing.wakeUpTime = document.getElementById('wakeUpTime').value;
         userData.wellbeing.sleepCycles = parseInt(document.getElementById('sleepCycles').value);
         saveUserData();
-        
+
         // Show toast notification
         const toastHTML = `
             <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -2453,13 +3591,13 @@ const WellbeingManager = {
                 </div>
             </div>
         `;
-        
+
         // Remove existing toast if any
         const existingToast = document.querySelector('.position-fixed.bottom-0.end-0');
         if (existingToast) existingToast.remove();
-        
+
         document.body.insertAdjacentHTML('beforeend', toastHTML);
-        
+
         // Auto-hide after 3 seconds
         setTimeout(() => {
             const toast = document.querySelector('.toast.show');
@@ -2472,7 +3610,7 @@ const WellbeingManager = {
 function addTopicInput(initialValue = '') {
     const topicsContainer = document.getElementById('topicsContainer');
     const topicId = `topic-${Date.now()}`;
-    
+
     const topicDiv = document.createElement('div');
     topicDiv.className = 'input-group mb-2';
     topicDiv.innerHTML = `
@@ -2482,11 +3620,11 @@ function addTopicInput(initialValue = '') {
             <i class="bi bi-trash"></i>
         </button>
     `;
-    
+
     topicsContainer.appendChild(topicDiv);
-    
+
     // Add event listener for remove button
-    topicDiv.querySelector('.remove-topic').addEventListener('click', function() {
+    topicDiv.querySelector('.remove-topic').addEventListener('click', function () {
         topicsContainer.removeChild(topicDiv);
     });
 }
@@ -2494,31 +3632,401 @@ function addTopicInput(initialValue = '') {
 function initMusicPlayer() {
     // Switch streams in mini-player (Wellbeing)
     document.querySelectorAll('.yt-stream-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const ytId = this.dataset.ytid;
-        document.getElementById('ytMiniPlayer').src = 
-          `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
-        
-        // Update active button
-        document.querySelectorAll('.yt-stream-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-      });
+        btn.addEventListener('click', function () {
+            const ytId = this.dataset.ytid;
+            document.getElementById('ytMiniPlayer').src =
+                `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
+
+            // Update active button
+            document.querySelectorAll('.yt-stream-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
-  
+
     // Switch streams in main player (Music tab)
     document.querySelectorAll('.playlist-card').forEach(card => {
-      card.addEventListener('click', function() {
-        const ytId = this.dataset.ytid;
-        document.getElementById('ytMainPlayer').src = 
-          `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
-      });
+        card.addEventListener('click', function () {
+            const ytId = this.dataset.ytid;
+            document.getElementById('ytMainPlayer').src =
+                `https://www.youtube.com/embed/${ytId}?autoplay=1&controls=1`;
+        });
     });
-  }
-  
-  // Call this in your init() function
+}
+function updateCountdown(card, examDate) {
+    const now = new Date();
+    const timeDiff = examDate - now;
+    
+    if (timeDiff <= 0) {
+        card.querySelector('.exam-card-countdown').textContent = 'Exam has passed';
+        card.querySelector('.exam-progress-fill').style.width = '0%';
+        card.style.opacity = '0.7';
+        return;
+    }
+
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    // Update the countdown display
+    card.querySelector('.exam-card-countdown').textContent = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    
+    // Update progress bar (90 days = 100%)
+    const percentage = Math.min(100, (timeDiff / (1000 * 60 * 60 * 24 * 90)) * 100);
+    const progressBar = card.querySelector('.exam-progress-fill');
+    progressBar.style.width = `${percentage}%`;
+    
+    // Update color based on urgency
+    progressBar.className = 'exam-progress-fill ' + 
+        (percentage > 75 ? 'time-plenty' :
+         percentage > 50 ? 'time-medium' :
+         percentage > 25 ? 'time-low' : 'time-critical');
+}
+function createExamCard(exam) {
+    if (!exam || !exam.datetime) {
+        console.error("Invalid exam data:", exam);
+        return document.createElement('div'); // Return empty div as fallback
+    }
+
+    const card = document.createElement('div');
+    card.className = 'exam-card';
+    card.dataset.datetime = exam.datetime.toISOString();
+
+    // Debug card creation
+    console.log("Creating card for:", exam.subjectName, exam.examName);
+
+    card.innerHTML = `
+      <div class="exam-card-icon">
+        <i class="bi bi-${exam.subjectIcon}"></i>
+      </div>
+      <div class="exam-card-content">
+        <div class="exam-card-subject">${exam.subjectName} (${exam.boardName})</div>
+        <div class="exam-card-name">${exam.examName}</div>
+        <div class="exam-card-time">
+          ${exam.datetime.toLocaleDateString('en-GB', { weekday: 'long' })},
+          ${exam.datetime.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+          at ${exam.datetime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })}
+        </div>
+        <div class="exam-progress-container">
+          <div class="exam-progress-bar">
+            <div class="exam-progress-fill"></div>
+          </div>
+        </div>
+        <div class="exam-card-countdown"></div>
+      </div>
+    `;
+
+    return card;
+}
+
+function initUserExamDates() {
+    console.log("--- Debugging initUserExamDates ---");
+    
+    // 1. First get the container element
+    const container = document.getElementById('exam-dates-container');
+    if (!container) {
+        console.error("Error: exam-dates-container element not found!");
+        return;
+    }
+
+    // 2. Check subjects
+    if (!userData.subjects || userData.subjects.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="bi bi-book"></i>
+                <h3>No Subjects Selected</h3>
+                <p>Please add subjects in your profile settings</p>
+            </div>
+        `;
+        return;
+    }
+    
+    console.log("userData.subjects:", userData.subjects);
+
+    const scienceKeywords = ['biology', 'physics', 'chemistry'];
+    const filteredExams = [];
+
+    userData.subjects.forEach(userSubject => {
+        const baseName = userSubject.name
+            .toLowerCase()
+            .replace(/-\s*set\s*\d+/i, '')
+            .replace(/\(.*\)/g, '')
+            .trim();
+
+        const isScience = scienceKeywords.some(keyword => baseName.includes(keyword));
+        const userBoard = userSubject.examBoard?.toLowerCase();
+
+        for (const boardKey in examData) {
+            const boardName = examData[boardKey].name.toLowerCase();
+            if (userBoard && !boardName.includes(userBoard)) continue;
+
+            examData[boardKey].subjects.forEach(examSubject => {
+                const examName = examSubject.name.toLowerCase();
+
+                // Match logic:
+                if (examName.includes(baseName) ||
+                    baseName.includes(examName) ||
+                    (isScience && examName.includes('science'))) {
+
+                    examSubject.exams.forEach(exam => {
+                        const examDate = new Date(exam.datetime);
+                        if (isNaN(examDate.getTime())) {
+                            console.error("Invalid date:", exam.datetime);
+                        }
+                        filteredExams.push({
+                            boardName: examData[boardKey].name,
+                            subjectName: isScience ? 'Science' : userSubject.name,
+                            subjectIcon: isScience ? 'beaker' : examSubject.icon,
+                            examName: exam.name,
+                            datetime: new Date(exam.datetime)
+                        });
+                    });
+                }
+            });
+        }
+    });
+    // After the filtration loop ends, before rendering
+    console.log("Filtered exams before sorting:", filteredExams);
+    console.log("Exam data structure check:", {
+        AQA: examData.AQA?.subjects?.map(s => s.name),
+        Edexcel: examData.Edexcel?.subjects?.map(s => s.name)
+    });
+    // Render exams
+    container.innerHTML = filteredExams.length ? '' : `
+      <div class="empty-state">
+        <i class="bi bi-book"></i>
+        <h3>No Exams Found</h3>
+        <p>No matching exams for: ${userData.subjects.map(s => s.name).join(', ')}</p>
+      </div>
+    `;
+
+    filteredExams.sort((a, b) => a.datetime - b.datetime)
+        .forEach(exam => {
+            container.appendChild(createExamCard(exam));
+        });
+
+        setInterval(() => {
+            document.querySelectorAll('.exam-card').forEach(card => {
+                const examDate = new Date(card.dataset.datetime);
+                updateCountdown(card, examDate);
+            });
+        }, 1000);
+}
+
+// 3. Initialize when DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadUserData();
+    
+    // Temporary test - force some subjects if empty
+    if (userData.subjects.length === 0) {
+      userData.subjects = [
+        { name: "Mathematics", examBoard: "AQA" },
+        { name: "Physics", examBoard: "AQA" }
+      ];
+      console.warn("Using test subjects:", userData.subjects);
+    }
+    
+    initUserExamDates();
+});
+
+
+function initExamDatesTab(examData) {
+    const examGrid = document.getElementById('exam-dates-grid');
+    const viewToggle = document.getElementById('exam-dates-view-toggle');
+    const secondsToggle = document.getElementById('exam-dates-seconds-toggle');
+    const subjectFilter = document.getElementById('exam-dates-subject-filter');
+    const boardFilter = document.getElementById('exam-dates-board-filter');
+
+    let isListView = false;
+    let showSeconds = true;
+    let currentSubject = 'all';
+    let currentBoard = 'all';
+    let examCards = []; // Store card elements
+
+    const allExams = processExamData(examData);
+    setupSubjectFilter();
+    setupBoardFilter(examData);
+
+    viewToggle.addEventListener('click', toggleView);
+    secondsToggle.addEventListener('click', toggleSeconds);
+    subjectFilter.addEventListener('change', function () {
+        currentSubject = this.value;
+        renderExams();
+    });
+
+    boardFilter.addEventListener('change', function () {
+        currentBoard = this.value;
+        renderExams();
+    });
+
+    renderExams(); // Initial rendering of exams
+    startCountdown();
+
+    function processExamData(data) {
+        const exams = [];
+        for (const board in data) {
+            data[board].subjects.forEach(subject => {
+                subject.exams.forEach(exam => {
+                    exams.push({
+                        boardName: data[board].name,
+                        boardKey: board,
+                        subjectName: subject.name,
+                        subjectIcon: subject.icon,
+                        examName: exam.name,
+                        datetime: new Date(exam.datetime)
+                    });
+                });
+            });
+        }
+        return exams.sort((a, b) => a.datetime - b.datetime);
+    }
+
+    function setupSubjectFilter() {
+        const allSubjects = new Set();
+        for (const board in examData) {
+            examData[board].subjects.forEach(subject => {
+                allSubjects.add(subject.name);
+            });
+        }
+        const sortedSubjects = [...allSubjects].sort();
+        sortedSubjects.forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject;
+            option.textContent = subject;
+            subjectFilter.appendChild(option);
+        });
+    }
+
+    function setupBoardFilter(data) {
+        const boards = Object.keys(data).sort();
+        boards.forEach(board => {
+            const option = document.createElement('option');
+            option.value = board;
+            option.textContent = data[board].name;
+            boardFilter.appendChild(option);
+        });
+    }
+
+    function toggleView() {
+        isListView = !isListView;
+        examGrid.classList.toggle('list-view', isListView);
+        const span = viewToggle.querySelector('span');
+        span.textContent = isListView ? 'Grid View' : 'List View';
+        const icon = viewToggle.querySelector('i');
+        icon.className = isListView ? 'bi bi-grid' : 'bi bi-list';
+        renderExams();
+    }
+
+    function toggleSeconds() {
+        showSeconds = !showSeconds;
+        const span = secondsToggle.querySelector('span');
+        span.textContent = showSeconds ? 'Hide Seconds' : 'Show Seconds';
+        updateAllCards();
+    }
+
+    function getFilteredExams() {
+        let filtered = allExams;
+
+        if (currentSubject !== 'all') {
+            filtered = filtered.filter(exam => exam.subjectName === currentSubject);
+        }
+
+        if (currentBoard !== 'all') {
+            filtered = filtered.filter(exam => exam.boardKey === currentBoard);
+        }
+
+        return filtered;
+    }
+
+    function updateCard(card, timeRemaining) {
+        if (timeRemaining.expired) {
+            card.querySelector('.exam-card-countdown').textContent = 'Exam has passed';
+            card.querySelector('.exam-progress-fill').style.width = '0%';
+            card.style.opacity = '0.7';
+            return;
+        }
+
+        const countdownHTML = showSeconds
+            ? `${timeRemaining.days}d ${timeRemaining.hours}h ${timeRemaining.minutes}m ${timeRemaining.seconds}s`
+            : `${timeRemaining.days}d ${timeRemaining.hours}h ${timeRemaining.minutes}m`;
+
+        card.querySelector('.exam-card-countdown').textContent = countdownHTML;
+
+        const progressBar = card.querySelector('.exam-progress-fill');
+        progressBar.style.width = `${timeRemaining.percentage}%`;
+        progressBar.className = `exam-progress-fill ${getTimeClass(timeRemaining.percentage)}`;
+    }
+
+    function renderExams() {
+        examGrid.innerHTML = ''; // Clear the grid
+        examCards = []; // Clear the cards array
+        const filteredExams = getFilteredExams();
+
+        if (filteredExams.length === 0) {
+            examGrid.innerHTML = '<div class="empty-state"><i class="bi bi-search"></i><p>No exams match your filters</p></div>';
+            return;
+        }
+
+        filteredExams.forEach(exam => {
+            const card = createExamCard(exam);
+            examGrid.appendChild(card);
+            examCards.push({
+                element: card,
+                exam: exam
+            });
+        });
+        updateAllCards();
+    }
+
+    function updateAllCards() {
+        examCards.forEach(({ element, exam }) => {
+            const timeRemaining = calculateTimeRemaining(exam.datetime);
+            updateCard(element, timeRemaining);
+        });
+    }
+
+    function startCountdown() {
+        updateAllCards();
+        setInterval(updateAllCards, 1000);
+    }
+}
+
+function calculateTimeRemaining(examDate) {
+    const now = new Date();
+    const timeDiff = examDate - now;
+
+    if (timeDiff <= 0) {
+        return { expired: true };
+    }
+
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    return {
+        expired: false,
+        days,
+        hours,
+        minutes,
+        seconds,
+        percentage: Math.min(100, (timeDiff / (1000 * 60 * 60 * 24 * 90)) * 100)
+    };
+}
+
+function getTimeClass(percentage) {
+    if (percentage > 75) return 'time-plenty';
+    if (percentage > 50) return 'time-medium';
+    if (percentage > 25) return 'time-low';
+    return 'time-critical';
+}
+
+// Call this in your init() function
 
 document.addEventListener('DOMContentLoaded', () => {
     WellbeingManager.init();
+    initExamDatesTab(examData);
 });
 document.addEventListener('DOMContentLoaded', initTimingTools);
 document.addEventListener('DOMContentLoaded', init);
