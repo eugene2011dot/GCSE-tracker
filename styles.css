@@ -596,7 +596,6 @@ body {
         z-index: 1000;
         flex-direction: row;
     }
-
     .app-title,
     .user-info,
     .nav-item span {
@@ -1518,6 +1517,7 @@ body {
     .timetable-subjects {
         width: 100%;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -1530,6 +1530,21 @@ body {
     .timetable-cell {
         min-height: 50px;
         font-size: 0.85rem;
+    }
+    .resource-categories {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: fit-content;
+        overflow-x: auto;
+    }
+    .resources-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .resource-categories h5{
+        display: none;
+        border-left: solid 2px var(--primary-color);
     }
 }
 
