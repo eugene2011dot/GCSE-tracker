@@ -1311,6 +1311,7 @@ function init() {
     updateUserProfileDisplay();
     initMusicPlayer();
     initTracker();
+    setupExamRules();
 }
 
 // Load user data from localStorage
@@ -4022,6 +4023,13 @@ function getTimeClass(percentage) {
     return 'time-critical';
 }
 
+function setupExamRules() {
+    document.getElementById('examRulesLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        const examRulesModal = new bootstrap.Modal(document.getElementById('examRulesModal'));
+        examRulesModal.show();
+    });
+}
 // Call this in your init() function
 
 document.addEventListener('DOMContentLoaded', () => {
