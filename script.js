@@ -1524,107 +1524,202 @@ function setupEventListeners() {
         }
     });
 }
+
 let currentSession = {
     subject: null,
     topic: null,
     startTime: null,
     endTime: null,
-    duration: 0
+    duration: 0,
+    lastUpdated: null  // Added to track last update time
 };
 
 let timerInterval = null;
-let seconds = 0;
-// Start study timer
+
+// Initialize timer from localStorage if available
+function initializeTimer() {
+    const savedSession = localStorage.getItem('currentStudySession');
+    if (savedSession) {
+        const session = JSON.parse(savedSession);
+        currentSession = {
+            ...session,
+            startTime: session.startTime ? new Date(session.startTime) : null,
+            endTime: session.endTime ? new Date(session.endTime) : null,
+            lastUpdated: session.lastUpdated ? new Date(session.lastUpdated) : null
+        };
+        
+        // Calculate time elapsed while page was closed
+        if (currentSession.startTime && !currentSession.endTime) {
+            const now = new Date();
+            const elapsedSeconds = Math.floor((now - currentSession.lastUpdated) / 1000);
+            currentSession.duration += elapsedSeconds;
+            currentSession.lastUpdated = now;
+            
+            // Restart the timer
+            startTimerUI();
+        }
+        
+        updateTimerDisplay();
+        updateSessionInfoDisplay();
+    }
+}
+
+// Start study timer (updated)
 function startTimer() {
     if (!subjectSelect.value) {
         alert('Please select a subject first');
         return;
     }
 
-    // Reset seconds counter
-    seconds = 0;
+    const now = new Date();
+    currentSession = {
+        subject: subjectSelect.value,
+        topic: topicSelect.value || 'General study',
+        startTime: now,
+        endTime: null,
+        duration: 0,
+        lastUpdated: now
+    };
 
-    currentSession.startTime = new Date();
-    currentSession.subject = subjectSelect.value;
-    currentSession.topic = topicSelect.value || 'General study';
+    startTimerUI();
+    saveSessionState();
+}
 
-    // Update current session display
-    currentSubjectDisplay.textContent = currentSession.subject;
-    currentTopicDisplay.textContent = currentSession.topic;
-    sessionStartTime.textContent = formatTime(currentSession.startTime);
-
-    // Start timer
+function startTimerUI() {
+    updateSessionInfoDisplay();
     timerInterval = setInterval(updateTimer, 1000);
     startTimerBtn.disabled = true;
     stopTimerBtn.disabled = false;
 }
-// Stop study timer
+
+// Stop study timer (updated)
 function stopTimer() {
     if (timerInterval) {
         clearInterval(timerInterval);
+        timerInterval = null;
+        
         currentSession.endTime = new Date();
-        currentSession.duration = seconds;
+        currentSession.duration = Math.floor((currentSession.endTime - currentSession.startTime) / 1000);
+        currentSession.lastUpdated = new Date();
+        
         stopTimerBtn.disabled = true;
         startTimerBtn.disabled = false;
+        
+        saveSessionState();
     }
 }
 
-// Update timer display
+// Update timer display (updated)
 function updateTimer() {
-    seconds++;
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
+    const now = new Date();
+    currentSession.duration = Math.floor((now - currentSession.startTime) / 1000);
+    currentSession.lastUpdated = now;
+    
+    updateTimerDisplay();
+    saveSessionState();
+}
+
+function updateTimerDisplay() {
+    const hours = Math.floor(currentSession.duration / 3600);
+    const minutes = Math.floor((currentSession.duration % 3600) / 60);
+    const secs = currentSession.duration % 60;
 
     timerDisplay.textContent =
         `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
+function updateSessionInfoDisplay() {
+    currentSubjectDisplay.textContent = currentSession.subject || 'Not selected';
+    currentTopicDisplay.textContent = currentSession.topic || 'General study';
+    sessionStartTime.textContent = currentSession.startTime ? formatTime(currentSession.startTime) : '--:-- --';
+}
 
 // Format time for display
 function formatTime(date) {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-// Log study session
+// Save session state to localStorage
+function saveSessionState() {
+    localStorage.setItem('currentStudySession', JSON.stringify({
+        ...currentSession,
+        startTime: currentSession.startTime?.getTime(),
+        endTime: currentSession.endTime?.getTime(),
+        lastUpdated: currentSession.lastUpdated?.getTime()
+    }));
+}
+
+// Clear session state
+function clearSessionState() {
+    localStorage.removeItem('currentStudySession');
+}
+
+// Log study session (updated)
 function logStudySession(event) {
     event.preventDefault();
 
-    if (!currentSession.subject) {
-        alert('Please select a subject and start the timer first');
+    if (!currentSession.startTime) {
+        alert('Please start a session first');
         return;
     }
+
+    // Calculate final duration
+    const endTime = currentSession.endTime || new Date();
+    const duration = Math.floor((endTime - currentSession.startTime) / 1000);
 
     const session = {
         date: currentSession.startTime.toISOString(),
         subject: currentSession.subject,
         topic: currentSession.topic,
-        duration: seconds
+        duration: duration
     };
 
     userData.studySessions.push(session);
     saveUserData();
-
-    // Reset timer and form
-    seconds = 0;
-    timerDisplay.textContent = '00:00:00';
-    studySessionForm.reset();
-    topicSelect.disabled = true;
-    currentSubjectDisplay.textContent = 'Not selected';
-    currentTopicDisplay.textContent = 'General study';
-    sessionStartTime.textContent = '--:-- --';
-
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        startTimerBtn.disabled = false;
-    }
-
+    resetTimer();
+    
     // Update UI
     renderRecentSessions();
     updateDashboardStats();
     renderCharts();
     renderSubjects();
 }
+
+function resetTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    
+    currentSession = {
+        subject: null,
+        topic: null,
+        startTime: null,
+        endTime: null,
+        duration: 0,
+        lastUpdated: null
+    };
+    
+    timerDisplay.textContent = '00:00:00';
+    startTimerBtn.disabled = false;
+    stopTimerBtn.disabled = true;
+    currentSubjectDisplay.textContent = 'Not selected';
+    currentTopicDisplay.textContent = 'General study';
+    sessionStartTime.textContent = '--:-- --';
+    
+    clearSessionState();
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initializeTimer);
+
+// Save state before page unloads
+window.addEventListener('beforeunload', () => {
+    if (timerInterval) {
+        saveSessionState();
+    }
+});
+
 function populateSubjectSelects() {
     // Clear existing options
     subjectSelect.innerHTML = '<option value="" disabled selected>Select subject</option>';
@@ -4030,6 +4125,9 @@ function setupExamRules() {
         examRulesModal.show();
     });
 }
+
+
+
 // Call this in your init() function
 
 document.addEventListener('DOMContentLoaded', () => {
