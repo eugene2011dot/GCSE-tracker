@@ -1489,6 +1489,8 @@ function setupEventListeners() {
             selectedSession = row.dataset.sessionId;
         }
     });
+
+    
     // Stopwatch controls
     document.getElementById('stopwatchStart')?.addEventListener('click', startStopwatch);
     document.getElementById('stopwatchPause')?.addEventListener('click', pauseStopwatch);
@@ -1524,7 +1526,103 @@ function setupEventListeners() {
         }
     });
 }
+// ======================
+// DARK MODE SYSTEM (2024)
+// ======================
 
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Elements
+    const darkModeToggle = document.getElementById('darkModeBtn');
+    const html = document.documentElement;
+    
+    // 2. Theme Detection
+    const detectSystemTheme = () => {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+  
+    // 3. Theme Management
+    const getSavedTheme = () => localStorage.getItem('theme');
+    const saveTheme = (theme) => localStorage.setItem('theme', theme);
+  
+    // 4. Apply Theme
+    const applyTheme = (theme) => {
+      // Set HTML attribute (triggers CSS variable changes)
+      html.setAttribute('data-theme', theme);
+      
+      // Update UI elements
+      if (darkModeToggle) {
+        const isDark = theme === 'dark';
+        darkModeToggle.innerHTML = isDark 
+          ? '<i class="bi bi-sun"></i> Light Mode' 
+          : '<i class="bi bi-moon"></i> Dark Mode';
+        darkModeToggle.className = isDark 
+          ? 'btn btn-sm btn-light' 
+          : 'btn btn-sm btn-outline-secondary';
+      }
+    };
+  
+    // 5. Toggle Logic
+    const toggleTheme = () => {
+      const currentTheme = html.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      saveTheme(newTheme);
+    };
+  
+    // 6. Initialize
+    const initTheme = () => {
+      const savedTheme = getSavedTheme();
+      const systemTheme = detectSystemTheme();
+      const initialTheme = savedTheme || systemTheme;
+      
+      applyTheme(initialTheme);
+      
+      // Set up event listeners
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleTheme);
+      }
+  
+      // Watch for system theme changes (if no saved preference)
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!getSavedTheme()) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    };
+  
+    // Start the system
+    initTheme();
+  
+    // Debugging
+    console.log('Dark Mode System initialized', { 
+      currentTheme: html.getAttribute('data-theme'),
+      savedTheme: getSavedTheme(),
+      systemPrefers: detectSystemTheme()
+    });
+  });
+  
+  // ======================
+  // CSS VARIABLE DEBUGGER
+  // ======================
+  function debugCSSVariables() {
+    const styles = getComputedStyle(document.documentElement);
+    const variables = [
+      '--bg-primary',
+      '--bg-secondary',
+      '--text-primary',
+      '--border-color',
+      '--accent-color'
+    ];
+    
+    console.group('CSS Variable Values');
+    variables.forEach(varName => {
+      console.log(`${varName}: ${styles.getPropertyValue(varName).trim()}`);
+    });
+    console.groupEnd();
+  }
+  
+  // Call this if you need to check values
+  // debugCSSVariables();
 let currentSession = {
     subject: null,
     topic: null,

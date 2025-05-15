@@ -12,6 +12,125 @@
     --border-color: #dee2e6;
     --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     --sidebar-width: 280px;
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #8b8c8d;
+    --text-primary: #f8f8f8;
+    --border-color: #444;
+    --accent-color: #4dabf7;
+
+    .sidenav {
+        background: var(--bg-secondary);
+    }
+
+    .nav-item {
+        color: var(--text-primary);
+    }
+
+    .username {
+        color: var(--text-primary);
+    }
+
+    .main-content {
+        background: var(--bg-primary);
+    }
+
+    .section-header h2,
+    .date-display, .resource-categories h5, .category-header {
+        color: var(--text-primary);
+    }
+
+    [class*="card"] {
+        /* Styles for any element with "card" in its class */
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            color: var(--text-primary);
+        }
+    }
+    
+    [class*="timer"] {
+        /* Styles for any element with "timer" in its class */
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            color: var(--text-primary);
+        }
+    }
+
+    .subject-name,
+    .subject-exam-board {
+        color: var(--text-primary);
+    }
+
+    .subject-item:hover,
+    .subject-item:hover .subject-name,
+    .subject-item:hover .subject-exam-board {
+        color: var(--primary-color) !important;
+    }
+    .topic-item{
+        color: var(--text-primary);
+        background: var(--bg-tertiary);
+    }
+    .topic-item:hover>.form-check{
+        color: black;
+    }
+    .topic-actions button{
+        color: white;
+    }
+    #dates, #wellbeing, .wellbeing-section h3{
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    option {
+        background-color: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+    select{
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+    select:active{
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+    .category{
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+    .category:hover{
+        color: var(--primary-color);
+    }
+    .resource-preview{
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+    .selected{
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
 }
 
 * {
@@ -2575,7 +2694,8 @@ body {
 }
 
 .protection-panel.active {
-    max-height: 500px; /* Adjust based on your content */
+    max-height: 500px;
+    /* Adjust based on your content */
 }
 
 .panel-content {
@@ -2642,4 +2762,39 @@ body {
         right: 20px;
         left: 20px;
     }
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.card,
+.accordion,
+.modal-content {
+    background-color: var(--card-bg);
+}
+
+/* Smooth transitions for all elements */
+body,
+.card,
+.accordion,
+.modal-content,
+.btn,
+.list-group-item,
+input,
+textarea,
+select {
+    transition: background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Dark mode link colors */
+.dark-mode a {
+    color: #4dabf7 !important;
+}
+
+.dark-mode a:hover {
+    color: #74c0fc !important;
 }
