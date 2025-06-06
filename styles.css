@@ -1186,7 +1186,51 @@ body {
     gap: 1rem;
     margin-top: 2rem;
 }
+#timerDisplay {
+  font-family: 'Courier New', monospace;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
 
+.timer-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.timer-controls button {
+  min-width: 120px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+}
+/* Add to your stylesheet */
+.session-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.session-info p {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.session-info-label {
+    font-weight: bold;
+    min-width: 80px;
+    display: inline-block;
+}
+
+#sessionStartTime {
+    font-family: 'Courier New', monospace;
+}
 /* Subject Details Styles */
 .subject-details {
     padding: 20px;
@@ -2754,7 +2798,47 @@ body {
 #importBackup {
     display: none;
 }
+/* Multi-select visual styling */
+select.multi-select {
+  height: auto;
+  min-height: 100px;
+  padding: 5px;
+}
 
+select.multi-select option {
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Single select remains normal */
+select:not(.multi-select) {
+  height: auto;
+}
+/* Makes multi-select more user-friendly */
+#topicSelect[multiple] {
+    height: auto;
+    min-height: 120px;
+    padding: 8px;
+}
+
+#topicSelect[multiple] option {
+    padding: 6px 12px;
+    margin: 2px 0;
+    border-radius: 4px;
+    background: #f8f9fa;
+}
+
+#topicSelect[multiple] option:checked {
+    background: #0d6efd;
+    color: white;
+}
+/* Add to your stylesheet */
+#currentTopic {
+    white-space: normal;
+    word-wrap: break-word;
+    max-height: 60px;
+    overflow-y: auto;
+}
 /* Responsive adjustments */
 @media (max-width: 576px) {
     .data-protection-container {

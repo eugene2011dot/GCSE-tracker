@@ -109,6 +109,7 @@ let alarmInterval = null;
 const alarmSound = new Audio('GCSE%20tracker/mixkit-digital-clock-digital-alarm-buzzer-992.wav');
 alarmSound.load();
 // Selection variables
+let multiTopicMode = false;
 let selectedSubject = null;
 let selectedSession = null;
 // GCSE Subjects Data
@@ -1304,6 +1305,7 @@ function init() {
     renderRecentSessions();
     updateDashboardStats();
     renderCharts();
+    initTimer();
     setupResourcesTab();
     setupResourceModal();
     renderTimetableSubjects();
@@ -1490,7 +1492,7 @@ function setupEventListeners() {
         }
     });
 
-    
+
     // Stopwatch controls
     document.getElementById('stopwatchStart')?.addEventListener('click', startStopwatch);
     document.getElementById('stopwatchPause')?.addEventListener('click', pauseStopwatch);
@@ -1525,6 +1527,26 @@ function setupEventListeners() {
             });
         }
     });
+    document.getElementById('multiTopicMode').addEventListener('change', function () {
+        multiTopicMode = this.checked;
+        refreshTopicSelectUI();
+    });
+
+    function refreshTopicSelectUI() {
+        const topicSelect = document.getElementById('topicSelect');
+
+        // Switch between single and multi-select
+        topicSelect.multiple = multiTopicMode;
+
+        // Visual feedback
+        if (multiTopicMode) {
+            topicSelect.size = 4; // Show multiple options
+            topicSelect.classList.add('multi-select');
+        } else {
+            topicSelect.size = 1;
+            topicSelect.classList.remove('multi-select');
+        }
+    }
 }
 // ======================
 // DARK MODE SYSTEM (2024)
@@ -1534,95 +1556,95 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Elements
     const darkModeToggle = document.getElementById('darkModeBtn');
     const html = document.documentElement;
-    
+
     // 2. Theme Detection
     const detectSystemTheme = () => {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
-  
+
     // 3. Theme Management
     const getSavedTheme = () => localStorage.getItem('theme');
     const saveTheme = (theme) => localStorage.setItem('theme', theme);
-  
+
     // 4. Apply Theme
     const applyTheme = (theme) => {
-      // Set HTML attribute (triggers CSS variable changes)
-      html.setAttribute('data-theme', theme);
-      
-      // Update UI elements
-      if (darkModeToggle) {
-        const isDark = theme === 'dark';
-        darkModeToggle.innerHTML = isDark 
-          ? '<i class="bi bi-sun"></i> Light Mode' 
-          : '<i class="bi bi-moon"></i> Dark Mode';
-        darkModeToggle.className = isDark 
-          ? 'btn btn-sm btn-light' 
-          : 'btn btn-sm btn-outline-secondary';
-      }
+        // Set HTML attribute (triggers CSS variable changes)
+        html.setAttribute('data-theme', theme);
+
+        // Update UI elements
+        if (darkModeToggle) {
+            const isDark = theme === 'dark';
+            darkModeToggle.innerHTML = isDark
+                ? '<i class="bi bi-sun"></i> Light Mode'
+                : '<i class="bi bi-moon"></i> Dark Mode';
+            darkModeToggle.className = isDark
+                ? 'btn btn-sm btn-light'
+                : 'btn btn-sm btn-outline-secondary';
+        }
     };
-  
+
     // 5. Toggle Logic
     const toggleTheme = () => {
-      const currentTheme = html.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      saveTheme(newTheme);
+        const currentTheme = html.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        saveTheme(newTheme);
     };
-  
+
     // 6. Initialize
     const initTheme = () => {
-      const savedTheme = getSavedTheme();
-      const systemTheme = detectSystemTheme();
-      const initialTheme = savedTheme || systemTheme;
-      
-      applyTheme(initialTheme);
-      
-      // Set up event listeners
-      if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', toggleTheme);
-      }
-  
-      // Watch for system theme changes (if no saved preference)
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!getSavedTheme()) {
-          applyTheme(e.matches ? 'dark' : 'light');
+        const savedTheme = getSavedTheme();
+        const systemTheme = detectSystemTheme();
+        const initialTheme = savedTheme || systemTheme;
+
+        applyTheme(initialTheme);
+
+        // Set up event listeners
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', toggleTheme);
         }
-      });
+
+        // Watch for system theme changes (if no saved preference)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!getSavedTheme()) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
     };
-  
+
     // Start the system
     initTheme();
-  
+
     // Debugging
-    console.log('Dark Mode System initialized', { 
-      currentTheme: html.getAttribute('data-theme'),
-      savedTheme: getSavedTheme(),
-      systemPrefers: detectSystemTheme()
+    console.log('Dark Mode System initialized', {
+        currentTheme: html.getAttribute('data-theme'),
+        savedTheme: getSavedTheme(),
+        systemPrefers: detectSystemTheme()
     });
-  });
-  
-  // ======================
-  // CSS VARIABLE DEBUGGER
-  // ======================
-  function debugCSSVariables() {
+});
+
+// ======================
+// CSS VARIABLE DEBUGGER
+// ======================
+function debugCSSVariables() {
     const styles = getComputedStyle(document.documentElement);
     const variables = [
-      '--bg-primary',
-      '--bg-secondary',
-      '--text-primary',
-      '--border-color',
-      '--accent-color'
+        '--bg-primary',
+        '--bg-secondary',
+        '--text-primary',
+        '--border-color',
+        '--accent-color'
     ];
-    
+
     console.group('CSS Variable Values');
     variables.forEach(varName => {
-      console.log(`${varName}: ${styles.getPropertyValue(varName).trim()}`);
+        console.log(`${varName}: ${styles.getPropertyValue(varName).trim()}`);
     });
     console.groupEnd();
-  }
-  
-  // Call this if you need to check values
-  // debugCSSVariables();
+}
+
+// Call this if you need to check values
+// debugCSSVariables();
 let currentSession = {
     subject: null,
     topic: null,
@@ -1632,7 +1654,9 @@ let currentSession = {
     lastUpdated: null  // Added to track last update time
 };
 
-let timerInterval = null;
+let timerStartTime = null;
+let timerPausedDuration = 0;
+
 
 // Initialize timer from localStorage if available
 function initializeTimer() {
@@ -1645,108 +1669,205 @@ function initializeTimer() {
             endTime: session.endTime ? new Date(session.endTime) : null,
             lastUpdated: session.lastUpdated ? new Date(session.lastUpdated) : null
         };
-        
+
         // Calculate time elapsed while page was closed
         if (currentSession.startTime && !currentSession.endTime) {
             const now = new Date();
             const elapsedSeconds = Math.floor((now - currentSession.lastUpdated) / 1000);
             currentSession.duration += elapsedSeconds;
             currentSession.lastUpdated = now;
-            
+
             // Restart the timer
             startTimerUI();
         }
-        
+
         updateTimerDisplay();
         updateSessionInfoDisplay();
     }
 }
 
 // Start study timer (updated)
-function startTimer() {
-    if (!subjectSelect.value) {
-        alert('Please select a subject first');
-        return;
+// ======================
+// TIMER SYSTEM (FIXED)
+// ======================
+
+// Global timer variables
+let timer = {
+    interval: null,
+    startTime: null,
+    elapsed: 0, // in seconds
+    running: false,
+    subject: null,
+    topic: null
+};
+
+// Initialize timer when page loads
+function initTimer() {
+    // Load saved session if exists
+    const savedSession = localStorage.getItem('studyTimer');
+    if (savedSession) {
+        const session = JSON.parse(savedSession);
+        if (session.running) {
+            timer = {
+                ...session,
+                startTime: new Date(session.startTime)
+            };
+
+            // Calculate time elapsed while page was closed
+            if (timer.startTime) {
+                const now = new Date();
+                const elapsedSeconds = Math.floor((now - timer.startTime) / 1000);
+                timer.elapsed += elapsedSeconds;
+                timer.startTime = now;
+            }
+
+            startTimerUI();
+        }
     }
 
-    const now = new Date();
-    currentSession = {
-        subject: subjectSelect.value,
-        topic: topicSelect.value || 'General study',
-        startTime: now,
-        endTime: null,
-        duration: 0,
-        lastUpdated: now
-    };
-
-    startTimerUI();
-    saveSessionState();
-}
-
-function startTimerUI() {
     updateSessionInfoDisplay();
-    timerInterval = setInterval(updateTimer, 1000);
-    startTimerBtn.disabled = true;
-    stopTimerBtn.disabled = false;
 }
 
-// Stop study timer (updated)
-function stopTimer() {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        
-        currentSession.endTime = new Date();
-        currentSession.duration = Math.floor((currentSession.endTime - currentSession.startTime) / 1000);
-        currentSession.lastUpdated = new Date();
-        
-        stopTimerBtn.disabled = true;
-        startTimerBtn.disabled = false;
-        
-        saveSessionState();
-    }
+
+// Start timer function
+function startTimer() {
+  if (timer.running) return;
+  
+  if (!subjectSelect.value) {
+    alert('Please select a subject first');
+    return;
+  }
+
+  timer = {
+    interval: null,
+    startTime: new Date(),
+    elapsed: 0,
+    running: true,
+    subject: subjectSelect.value,
+    topic: topicSelect.value
+  };
+
+  // Start updating every second
+  timer.interval = setInterval(updateTimerDisplay, 1000);
+  
+  // Update UI
+  startTimerBtn.disabled = true;
+  stopTimerBtn.disabled = false;
+  updateSessionInfoDisplay();
+  saveTimerState();
 }
 
-// Update timer display (updated)
+// Update timer every second
 function updateTimer() {
+    if (!isTimerRunning) return;
+
     const now = new Date();
-    currentSession.duration = Math.floor((now - currentSession.startTime) / 1000);
+    currentSession.duration = Math.floor((now - sessionStartTimestamp) / 1000) + accumulatedDuration;
     currentSession.lastUpdated = now;
-    
+
     updateTimerDisplay();
     saveSessionState();
 }
 
+// Stop timer function
+function stopTimer() {
+  if (!timer.running) return;
+  
+  clearInterval(timer.interval);
+  timer.running = false;
+  
+  // Update UI
+  stopTimerBtn.disabled = true;
+  startTimerBtn.disabled = false;
+  saveTimerState();
+}
 function updateTimerDisplay() {
-    const hours = Math.floor(currentSession.duration / 3600);
-    const minutes = Math.floor((currentSession.duration % 3600) / 60);
-    const secs = currentSession.duration % 60;
-
-    timerDisplay.textContent =
-        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  if (!timer.running) return;
+  
+  // Calculate elapsed time
+  const now = new Date();
+  timer.elapsed = Math.floor((now - timer.startTime) / 1000);
+  
+  // Format as HH:MM:SS
+  const hours = Math.floor(timer.elapsed / 3600);
+  const minutes = Math.floor((timer.elapsed % 3600) / 60);
+  const seconds = timer.elapsed % 60;
+  
+  timerDisplay.textContent = 
+    `${hours.toString().padStart(2, '0')}:` +
+    `${minutes.toString().padStart(2, '0')}:` +
+    `${seconds.toString().padStart(2, '0')}`;
+    
+  saveTimerState();
 }
 
-function updateSessionInfoDisplay() {
-    currentSubjectDisplay.textContent = currentSession.subject || 'Not selected';
-    currentTopicDisplay.textContent = currentSession.topic || 'General study';
-    sessionStartTime.textContent = currentSession.startTime ? formatTime(currentSession.startTime) : '--:-- --';
+function saveTimerState() {
+  localStorage.setItem('studyTimer', JSON.stringify({
+    ...timer,
+    startTime: timer.startTime.getTime()
+  }));
 }
 
-// Format time for display
-function formatTime(date) {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+// Reset timer completely
+function resetTimer() {
+  clearInterval(timer.interval);
+  timer = {
+    interval: null,
+    startTime: null,
+    elapsed: 0,
+    running: false,
+    subject: null,
+    topic: null
+  };
+  
+  timerDisplay.textContent = '00:00:00';
+  startTimerBtn.disabled = false;
+  stopTimerBtn.disabled = true;
+  updateSessionInfoDisplay();
+  localStorage.removeItem('studyTimer');
 }
 
-// Save session state to localStorage
+// Save session to localStorage
 function saveSessionState() {
-    localStorage.setItem('currentStudySession', JSON.stringify({
-        ...currentSession,
-        startTime: currentSession.startTime?.getTime(),
-        endTime: currentSession.endTime?.getTime(),
-        lastUpdated: currentSession.lastUpdated?.getTime()
-    }));
+    if (currentSession.startTime) {
+        localStorage.setItem('currentStudySession', JSON.stringify({
+            ...currentSession,
+            startTime: currentSession.startTime.getTime(),
+            endTime: currentSession.endTime?.getTime(),
+            lastUpdated: new Date().getTime()
+        }));
+    }
 }
 
+// Clear session from localStorage
+function clearSessionState() {
+    localStorage.removeItem('currentStudySession');
+}
+function updateSessionInfoDisplay() {
+  currentSubjectDisplay.textContent = timer.subject || 'Not selected';
+  
+  // Format topics
+  let topicsText = 'General study';
+  if (timer.topic) {
+    const selectedOptions = topicSelect.selectedOptions;
+    if (selectedOptions.length > 0) {
+      const topics = Array.from(selectedOptions).map(opt => opt.value);
+      if (topics.length === 1) {
+        topicsText = topics[0];
+      } else if (topics.length > 1) {
+        topicsText = topics.slice(0, -1).join(', ') + ' and ' + topics.slice(-1);
+      }
+    } else {
+      topicsText = timer.topic;
+    }
+  }
+
+  currentTopicDisplay.textContent = topicsText;
+  sessionStartTime.textContent = timer.startTime
+    ? formatTime(timer.startTime)
+    : '--:-- --';
+}
 // Clear session state
 function clearSessionState() {
     localStorage.removeItem('currentStudySession');
@@ -1754,41 +1875,54 @@ function clearSessionState() {
 
 // Log study session (updated)
 function logStudySession(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    if (!currentSession.startTime) {
-        alert('Please start a session first');
-        return;
-    }
+  if (!timer.startTime || timer.elapsed === 0) {
+    alert('Please start and complete a session first');
+    return;
+  }
 
-    // Calculate final duration
-    const endTime = currentSession.endTime || new Date();
-    const duration = Math.floor((endTime - currentSession.startTime) / 1000);
+  // Get selected topics (works for both single and multi-select)
+  const selectedOptions = topicSelect.selectedOptions;
+  const selectedTopics = selectedOptions.length > 0
+    ? Array.from(selectedOptions).map(opt => opt.value)
+    : ['General study']; // Default if nothing selected
 
-    const session = {
-        date: currentSession.startTime.toISOString(),
-        subject: currentSession.subject,
-        topic: currentSession.topic,
-        duration: duration
-    };
+  // Create a session for EACH selected topic
+  selectedTopics.forEach(topic => {
+    userData.studySessions.push({
+      date: timer.startTime.toISOString(),
+      subject: timer.subject,
+      topic: topic,
+      duration: timer.elapsed // Duration in seconds
+    });
+  });
 
-    userData.studySessions.push(session);
-    saveUserData();
-    resetTimer();
-    
-    // Update UI
-    renderRecentSessions();
-    updateDashboardStats();
-    renderCharts();
-    renderSubjects();
+  saveUserData();
+  resetTimer();
+
+  // Update UI
+  renderRecentSessions();
+  updateDashboardStats();
+  renderCharts();
+  renderSubjects();
 }
 
+// Helper function to format time
+function formatTime(date) {
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+// Start timer UI
+function startTimerUI() {
+  startTimerBtn.disabled = true;
+  stopTimerBtn.disabled = false;
+  updateSessionInfoDisplay();
+}
 function resetTimer() {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-    
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
+    isTimerRunning = false;
+
     currentSession = {
         subject: null,
         topic: null,
@@ -1797,14 +1931,14 @@ function resetTimer() {
         duration: 0,
         lastUpdated: null
     };
-    
+
     timerDisplay.textContent = '00:00:00';
     startTimerBtn.disabled = false;
     stopTimerBtn.disabled = true;
     currentSubjectDisplay.textContent = 'Not selected';
     currentTopicDisplay.textContent = 'General study';
     sessionStartTime.textContent = '--:-- --';
-    
+
     clearSessionState();
 }
 
@@ -1832,10 +1966,12 @@ function populateSubjectSelects() {
 }
 // Update topic select based on subject
 function updateTopicSelect(subjectName) {
-    topicSelect.innerHTML = '<option value="" selected>All topics</option>';
+    topicSelect.innerHTML = '<option value="" selected>General study</option>';
 
     if (subjectName && gcseSubjects[subjectName]) {
         topicSelect.disabled = false;
+        topicSelect.multiple = true; // Always allow multiple
+
         gcseSubjects[subjectName].topics.forEach(topic => {
             const option = document.createElement('option');
             option.value = topic;
@@ -1844,6 +1980,7 @@ function updateTopicSelect(subjectName) {
         });
     } else {
         topicSelect.disabled = true;
+        topicSelect.multiple = false;
     }
 }
 // Add new subject
@@ -3849,7 +3986,7 @@ function initMusicPlayer() {
 function updateCountdown(card, examDate) {
     const now = new Date();
     const timeDiff = examDate - now;
-    
+
     if (timeDiff <= 0) {
         card.querySelector('.exam-card-countdown').textContent = 'Exam has passed';
         card.querySelector('.exam-progress-fill').style.width = '0%';
@@ -3863,19 +4000,19 @@ function updateCountdown(card, examDate) {
     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
     // Update the countdown display
-    card.querySelector('.exam-card-countdown').textContent = 
+    card.querySelector('.exam-card-countdown').textContent =
         `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    
+
     // Update progress bar (90 days = 100%)
     const percentage = Math.min(100, (timeDiff / (1000 * 60 * 60 * 24 * 90)) * 100);
     const progressBar = card.querySelector('.exam-progress-fill');
     progressBar.style.width = `${percentage}%`;
-    
+
     // Update color based on urgency
-    progressBar.className = 'exam-progress-fill ' + 
+    progressBar.className = 'exam-progress-fill ' +
         (percentage > 75 ? 'time-plenty' :
-         percentage > 50 ? 'time-medium' :
-         percentage > 25 ? 'time-low' : 'time-critical');
+            percentage > 50 ? 'time-medium' :
+                percentage > 25 ? 'time-low' : 'time-critical');
 }
 function createExamCard(exam) {
     if (!exam || !exam.datetime) {
@@ -3916,7 +4053,7 @@ function createExamCard(exam) {
 
 function initUserExamDates() {
     console.log("--- Debugging initUserExamDates ---");
-    
+
     // 1. First get the container element
     const container = document.getElementById('exam-dates-container');
     if (!container) {
@@ -3935,7 +4072,7 @@ function initUserExamDates() {
         `;
         return;
     }
-    
+
     console.log("userData.subjects:", userData.subjects);
 
     const scienceKeywords = ['biology', 'physics', 'chemistry'];
@@ -4000,27 +4137,27 @@ function initUserExamDates() {
             container.appendChild(createExamCard(exam));
         });
 
-        setInterval(() => {
-            document.querySelectorAll('.exam-card').forEach(card => {
-                const examDate = new Date(card.dataset.datetime);
-                updateCountdown(card, examDate);
-            });
-        }, 1000);
+    setInterval(() => {
+        document.querySelectorAll('.exam-card').forEach(card => {
+            const examDate = new Date(card.dataset.datetime);
+            updateCountdown(card, examDate);
+        });
+    }, 1000);
 }
 
 // 3. Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
     loadUserData();
-    
+
     // Temporary test - force some subjects if empty
     if (userData.subjects.length === 0) {
-      userData.subjects = [
-        { name: "Mathematics", examBoard: "AQA" },
-        { name: "Physics", examBoard: "AQA" }
-      ];
-      console.warn("Using test subjects:", userData.subjects);
+        userData.subjects = [
+            { name: "Mathematics", examBoard: "AQA" },
+            { name: "Physics", examBoard: "AQA" }
+        ];
+        console.warn("Using test subjects:", userData.subjects);
     }
-    
+
     initUserExamDates();
 });
 
