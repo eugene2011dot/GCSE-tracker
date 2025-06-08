@@ -7,6 +7,9 @@
   <title>GCSE Study Tracker</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -65,44 +68,6 @@
         </li>
       </ul>
       <!-- Data Protection Accordion -->
-      <div class="data-protection-container">
-        <div class="protection-panel" id="protectionPanel">
-          <div class="panel-content">
-            <!-- Backup Controls -->
-            <button id="exportBtn" class="btn btn-primary data-btn">
-              <i class="bi bi-download"></i> Backup All Data
-            </button>
-
-            <label for="importBackup" class="btn btn-outline-secondary data-btn">
-              <i class="bi bi-upload"></i> Restore Backup
-            </label>
-            <input type="file" id="importBackup" accept=".json">
-
-            <div class="d-flex justify-content-between small text-muted">
-              <span>Last backup:</span>
-              <span id="lastBackupTime" class="fw-monospace">Never</span>
-            </div>
-
-            <!-- Backup History -->
-            <div class="backup-history">
-              <h6>Recent Backups</h6>
-              <ul id="backupList">
-                <!-- Will be populated by JavaScript -->
-                <li>No backups found</li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-
-        <button class="protection-toggle" id="protectionToggle">
-          <span><i class="bi bi-shield-lock"></i> Data Protection</span>
-          <i class="bi bi-chevron-up"></i>
-        </button>
-        <button id="darkModeBtn" class="btn btn-sm btn-outline-secondary">
-          <i class="bi bi-moon"></i> Toggle Dark Mode
-        </button>
-      </div>
       <script>
       </script>
 
@@ -177,6 +142,10 @@
               <i class="bi bi-box-arrow-up-right"></i> Open All in New Tabs
             </button>
           </div>
+        </div>
+        <div class="search-container">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search resources">
         </div>
         <!-- Add this modal to your HTML -->
         <div class="modal fade" id="resourceModal" tabindex="-1" aria-hidden="true">
@@ -1402,6 +1371,45 @@
       </div>
     </div>
   </div>
+        <div class="data-protection-container">
+        <div class="protection-panel" id="protectionPanel">
+          <div class="panel-content">
+            <!-- Backup Controls -->
+            <button id="exportBtn" class="btn btn-primary data-btn">
+              <i class="bi bi-download"></i> Backup All Data
+            </button>
+
+            <label for="importBackup" class="btn btn-outline-secondary data-btn">
+              <i class="bi bi-upload"></i> Restore Backup
+            </label>
+            <input type="file" id="importBackup" accept=".json">
+
+            <div class="d-flex justify-content-between small text-muted">
+              <span>Last backup:</span>
+              <span id="lastBackupTime" class="fw-monospace">Never</span>
+            </div>
+
+            <!-- Backup History -->
+            <div class="backup-history">
+              <h6>Recent Backups</h6>
+              <ul id="backupList">
+                <!-- Will be populated by JavaScript -->
+                <li>No backups found</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="protection-toggle" id="protectionToggle">
+          <span><i class="bi bi-shield-lock"></i> Data Protection</span>
+          <i class="bi bi-chevron-up"></i>
+        </button>
+        <button id="darkModeBtn" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-moon"></i> Toggle Dark Mode
+        </button>
+      </div>
+
   <script>
     // Panel toggle only
     const toggle = document.getElementById('protectionToggle');
