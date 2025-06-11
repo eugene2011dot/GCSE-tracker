@@ -206,6 +206,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -213,15 +214,375 @@ body {
 }
 
 /* Dark Mode Support */
-html[data-theme='dark-mode'] {
-    filter: invert(1) hue-rotate(180deg);
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #8b8c8d;
+    --text-primary: #f8f8f8;
+    --border-color: #404040;
+    --accent-color: #4dabf7;
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-bg: #2d2d2d;
+    --light-color: #1a1a1a;
+
+    .section-header h2 {
+        color: var(--text-primary) !important;
+        background: none !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+    }
+
+    .username,
+    .chart-header h3 {
+        color: var(--text-primary) !important;
+    }
+
+    .main-content {
+        background: var(--bg-primary);
+    }
+
+    .date-display,
+    .resource-categories h5,
+    .category-header {
+        color: var(--text-color);
+    }
+
+    [class*="card"]:not(.exam-card):not([class*="exam-card"]) {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    [class*="card"] * {
+        color: var(--text-primary) !important;
+    }
+
+
+    [class*="timer"] {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            color: var(--text-primary);
+        }
+    }
+
+    .subject-name,
+    .subject-exam-board {
+        color: var(--text-primary);
+    }
+
+    .subject-item:hover,
+    .subject-item:hover .subject-name,
+    .subject-item:hover .subject-exam-board {
+        color: var(--primary-color) !important;
+    }
+
+    .topic-item {
+        color: var(--text-primary);
+        background: var(--bg-tertiary);
+    }
+
+    .topic-item:hover>.form-check {
+        color: black;
+    }
+
+    .topic-actions button {
+        color: white;
+    }
+
+    #dates,
+    #wellbeing,
+    .wellbeing-section h3 {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+
+    option {
+        background-color: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+
+    select {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    select:active {
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .category {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+
+    .category:hover {
+        color: var(--primary-color);
+    }
+
+    .resource-preview {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .selected {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    .modal-content {
+    background: rgba(30, 30, 40, 0.85) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+}
+.modal-header {
+    background: rgba(40, 40, 50, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);    
+}
+.modal-title {
+    color: #ffffff;
+    font-weight: 600;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+}
+.modal-body {
+    background: transparent !important;
+    padding: 1.5rem 2rem;
+}
+.modal-footer {
+    background: rgba(40, 40, 50, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.close {
+    color: #aaaaaa;
+    text-shadow: none;
+}
+.close:hover {
+    color: #ffffff;
+}
+.modal-content .form-control,
+.modal-content .form-select {
+    background: rgba(20, 20, 30, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+.modal-content .form-control:focus,
+.modal-content .form-select:focus {
+    background: rgba(25, 25, 35, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+.modal-footer .btn-primary {
+    background: rgba(67, 97, 238, 0.8);
+    border-color: rgba(67, 97, 238, 0.5);
 }
 
+.modal-footer .btn-secondary {
+    background: rgba(80, 80, 90, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer .btn-primary:hover {
+    background: rgba(67, 97, 238, 1);
+}
+
+.modal-footer .btn-secondary:hover {
+    background: rgba(90, 90, 100, 0.9);
+}
+/* Resources Dark Mode */
+.resources-wrapper {
+    background: transparent;
+}
+
+.search-container input {
+    background: rgba(40, 40, 50, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+.search-container input:focus {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+.search-container i {
+    color: #aaaaaa;
+}
+
+.resources-container {
+    background: rgba(30, 30, 40, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.resource-categories {
+    background: rgba(35, 35, 45, 0.8);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.category {
+    color: #d0d0d0;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.category:hover, .category.active {
+    background: rgba(50, 50, 60, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.category.active {
+    background: rgba(67, 97, 238, 0.2);
+    border-left: 3px solid var(--primary-color);
+}
+
+.resource-card {
+    background: rgba(40, 40, 50, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+    background: rgba(50, 50, 60, 0.7);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.resource-card h5 {
+    color: #ffffff;
+}
+
+.resource-description {
+    color: #b0b0b0;
+}
+
+.resource-link {
+    color: var(--primary-light);
+    background: rgba(67, 97, 238, 0.1);
+}
+
+.resource-link:hover {
+    background: rgba(67, 97, 238, 0.2);
+    color: #ffffff;
+}
+
+.resource-preview {
+    background: rgba(35, 35, 45, 0.7);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.preview-content i {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.preview-content h3 {
+    color: #ffffff;
+}
+
+#openAllResources {
+    background: rgba(67, 97, 238, 0.8);
+    color: white;
+}
+
+#openAllResources:hover {
+    background: rgba(67, 97, 238, 1);
+}
+}
+/* Dark Mode Accordion Styles - Clean Grey Version */
+[data-theme="dark"] .accordion {
+    background: rgba(30, 30, 30, 0.95); /* Solid dark grey */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Very subtle border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .accordion-button {
+    background: rgba(40, 40, 40, 0.95); /* Dark grey header */
+    color: #f0f0f0; /* Bright text for readability */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background: rgba(50, 50, 50, 0.95); /* Slightly lighter when expanded */
+    color: #ffffff; /* Pure white when active */
+    box-shadow: none; /* Remove shadow */
+}
+
+[data-theme="dark"] .accordion-button:hover {
+    background: rgba(45, 45, 45, 0.95); /* Subtle hover state */
+}
+
+[data-theme="dark"] .accordion-body {
+    background: rgba(30, 30, 30, 0.95); /* Match parent background */
+    color: #e0e0e0; /* Light grey text */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+}
+
+[data-theme="dark"] .accordion-body li {
+    background: transparent !important; /* Remove list item backgrounds */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    padding: 0.5rem 0; /* Adjust padding */
+    margin-bottom: 0.5rem;
+}
+
+/* Remove background from last child */
+[data-theme="dark"] .accordion-body ol > li:last-child,
+[data-theme="dark"] .accordion-body ul > li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Exam Rules Boards - Clean Grey Version */
+[data-theme="dark"] .exam-rules-boards {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .exam-board {
+    background: rgba(40, 40, 40, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .exam-board h3 {
+    color: #ffffff; /* Solid white instead of gradient */
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+[data-theme="dark"] .exam-board:hover {
+    background: rgba(45, 45, 45, 0.95);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .exam-board-logo {
+    background: rgba(30, 30, 30, 0.8);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) grayscale(20%);
+}
 /* Base Layout & Typography */
 .user-info {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right, var(--primary-light), rgba(238, 242, 255, 0.3));
 }
 
 .username {
@@ -298,10 +659,21 @@ html[data-theme='dark-mode'] {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.03);
 }
 
-.stat-card.primary { border-left: 4px solid var(--primary-color); }
-.stat-card.success { border-left: 4px solid var(--success-color); }
-.stat-card.warning { border-left: 4px solid var(--warning-color); }
-.stat-card.info { border-left: 4px solid var(--info-color); }
+.stat-card.primary {
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card.success {
+    border-left: 4px solid var(--success-color);
+}
+
+.stat-card.warning {
+    border-left: 4px solid var(--warning-color);
+}
+
+.stat-card.info {
+    border-left: 4px solid var(--info-color);
+}
 
 .stat-value {
     font-size: 2rem;
@@ -721,6 +1093,7 @@ html[data-theme='dark-mode'] {
     background: linear-gradient(135deg, var(--danger-color), #ff6b6b);
     color: white;
 }
+
 /* Responsive Styles */
 
 
@@ -1140,7 +1513,7 @@ html[data-theme='dark-mode'] {
     text-align: center;
     margin: 20px 0;
     padding: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-light), rgba(238, 242, 255, 0.3));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
@@ -1272,11 +1645,13 @@ html[data-theme='dark-mode'] {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 /* Add to your styles.css */
 .empty-state {
     display: flex;
@@ -1549,6 +1924,7 @@ html[data-theme='dark-mode'] {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1567,7 +1943,7 @@ html[data-theme='dark-mode'] {
     .resources-container {
         grid-template-columns: 1fr;
     }
-    
+
     .resource-categories {
         position: static;
         display: flex;
@@ -1576,7 +1952,7 @@ html[data-theme='dark-mode'] {
         padding: 1rem;
         gap: 0.5rem;
     }
-    
+
     .category {
         white-space: nowrap;
         margin-bottom: 0;
@@ -1587,11 +1963,11 @@ html[data-theme='dark-mode'] {
     .resources-wrapper {
         padding: 1rem;
     }
-    
+
     .resources-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .resource-card {
         padding: 1.25rem;
     }
@@ -1921,6 +2297,7 @@ html[data-theme='dark-mode'] {
 }
 
 @media (max-width: 768px) {
+
     .timetable-header,
     .timetable-body {
         grid-template-columns: 60px repeat(5, 1fr);
@@ -2279,6 +2656,7 @@ html[data-theme='dark-mode'] {
         font-size: 1.25rem;
     }
 }
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     #wellbeing {
@@ -2592,8 +2970,13 @@ html[data-theme='dark-mode'] {
 }
 
 @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .exam-card-countdown {
@@ -2819,7 +3202,7 @@ html[data-theme='dark-mode'] {
     content: '';
     position: absolute;
     top: -50%;
-    left: -50%;  
+    left: -50%;
     width: 200%;
     height: 200%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
@@ -3211,1186 +3594,245 @@ select:not(.multi-select) {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-:root {
-  /* Base Colors & Typography */
-  --primary-color: #4361ee;
-  --primary-light: #eef2ff;
-  --secondary-color: #3f37c9;
-  --success-color: #4cc9f0;
-  --warning-color: #f8961e;
-  --danger-color: #f94144;
-  --info-color: #4895ef;
-  --dark-color: #212529;
-  --light-color: #f8f9fa;
-  --gray-color: #6c757d;
-  --border-color: #dee2e6;
-
-  /* General Layout */
-  --sidebar-width: 280px;
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --card-bg: #f8f9fa;
-  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Original shadow for elements without glassmorphism */
-
-  /* Glassmorphism base properties (light mode defaults) */
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-}
-
-/* Universal box-sizing for consistent layout */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Base Body Styles */
-body {
-  font-family: 'Manrope', sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* ===================================== */
-/* Default (Desktop) Styles - Min-width: 1025px and up */
-/* These styles apply by default and are overridden by media queries */
-/* ===================================== */
-
-.app-container {
-  display: grid; /* Grid layout for sidebar and main content */
-  grid-template-columns: var(--sidebar-width) 1fr; /* Sidebar width and content area */
-  min-height: 100vh; /* Full viewport height */
-  transition: all 0.3s ease; /* Smooth transitions for layout changes */
-}
-
-/* Sidenav (Desktop Sidebar) */
-.sidenav {
-  width: var(--sidebar-width);
-  background: var(--bg-color); /* Matches body background by default */
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid var(--border-color);
-  position: sticky; /* Keeps sidebar in view */
-  top: 0;
-  height: 100vh; /* Full height */
-  overflow-y: auto; /* Enable scrolling for long content */
-
-  /* Apply Glassmorphism to the sidebar on desktop */
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: 0; /* Remove border-radius on desktop sidebar */
-}
-
-.sidenav-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.app-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-top: 0.5rem;
-  text-align: center;
-}
-
-.user-profile {
-  display: flex;
-  flex-direction: column; /* Stack avatar and info */
-  align-items: center;
-  text-align: center;
-  padding: 1rem 0;
-  margin-bottom: 1rem;
-  background: var(--card-bg); /* Use card background for user profile */
-  border-radius: 12px;
-  box-shadow: var(--card-shadow); /* Use original shadow for user profile on desktop */
-  transition: all 0.3s ease;
-}
-
-.user-profile .avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  flex-shrink: 0;
-}
-
-.user-profile .user-info h3 {
-  font-size: 1rem;
-  margin-bottom: 0.2rem;
-  color: var(--text-color);
-}
-
-.user-profile .user-info p {
-  font-size: 0.8rem;
-  color: var(--gray-color);
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  flex-grow: 1; /* Allows nav links to take available space */
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  gap: 1rem;
-}
-
-.nav-item i {
-  font-size: 1.2rem;
-  color: var(--gray-color);
-  transition: color 0.2s ease;
-}
-
-.nav-item:hover {
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-}
-
-.nav-item.active {
-  background-color: var(--primary-color);
-  color: var(--light-color);
-}
-
-.nav-item.active i {
-  color: var(--light-color);
-}
-
-/* Main Content Area */
-.main-content {
-  padding: 2rem;
-  margin-left: 0; /* Handled by grid-template-columns */
-  background: var(--bg-color);
-  min-height: 100vh;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.section-header h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.date-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.date-controls button {
-  background: var(--primary-color);
-  color: var(--light-color);
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.date-controls button:hover {
-  background-color: var(--secondary-color);
-}
-
-#currentDate {
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-/* General Card Styles for Desktop (Glassmorphism applied by default) */
-.card,
-.stat-card,
-.chart-card,
-.tracker-card,
-.current-session,
-.progress-card,
-.subjects-list,
-.subject-details,
-.empty-state,
-#addSubjectModal .modal-content,
-.timetable-slot,
-.subject-card,
-.resource-categories,
-.resource-card,
-.form-control, /* Apply to form controls */
-.form-select /* Apply to select inputs */
- {
-  background: var(--glass-bg); /* Translucent background */
-  backdrop-filter: blur(10px); /* Blur effect */
-  -webkit-backdrop-filter: blur(10px); /* Webkit support */
-  border: var(--glass-border); /* Border */
-  box-shadow: var(--glass-shadow); /* Shadow */
-  border-radius: 12px; /* Consistent rounded corners */
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Ensure main content background is not blurred, or blurred differently */
-.main-content {
-  background: var(--bg-color); /* Maintain default body background for main content area */
-  backdrop-filter: none; /* Remove blur from main content itself */
-  -webkit-backdrop-filter: none;
-}
-
-/* Specific Card Layouts */
-.stats-grid,
-.chart-container,
-.tracker-container,
-.progress-grid,
-.subjects-container {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
-}
-
-.stat-card {
-  text-align: center;
-}
-
-.stat-icon {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.stat-value {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: var(--gray-color);
-}
-
-.progress-card.large {
-  grid-column: span 2; /* Occupy 2 columns */
-}
-
-.progress-card.table-card {
-  grid-column: span 2; /* Occupy 2 columns */
-}
-
-/* Recent Sessions Table */
-.sessions-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  /* Apply glassmorphism integration for table */
-  background: none; /* Inherit parent's glassmorphism */
-  border-radius: 8px; /* Consistent rounding */
-  box-shadow: none; /* Remove explicit shadow here */
-}
-
-.sessions-table th,
-.sessions-table td {
-  padding: 0.8rem 1rem;
-  text-align: left;
-  border: 1px solid rgba(255, 255, 255, 0.4); /* More defined borders for cells */
-  background: none; /* Ensure cell backgrounds are transparent */
-  color: var(--text-color); /* Ensure text color is readable */
-}
-
-.sessions-table th {
-  background: rgba(255, 255, 255, 0.2); /* Slightly more distinct background for headers */
-  font-weight: 600;
-}
-
-/* Timetable */
-.timetable-container {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-}
-
-.timetable-subjects {
-  flex-shrink: 0;
-  width: 250px; /* Fixed width for subjects list */
-}
-
-.timetable-grid {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 80px repeat(5, 1fr); /* Time column + 5 days */
-  gap: 1px; /* Small gap for grid lines */
-  background-color: var(--border-color); /* Grid lines */
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  overflow-x: auto; /* Allow horizontal scroll if content overflows */
-}
-
-.timetable-header,
-.timetable-body {
-  display: contents; /* Allows grid items to flow directly */
-}
-
-.timetable-header div,
-.timetable-time,
-.timetable-slot {
-  background-color: var(--card-bg); /* Use card background for timetable cells */
-  padding: 0.5rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.timetable-header div {
-  font-weight: 600;
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-}
-
-.timetable-time {
-  font-weight: 500;
-  justify-content: flex-start;
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-}
-
-.timetable-slot {
-  min-height: 80px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.timetable-slot.occupied {
-  background-color: var(--primary-light);
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.timetable-slot:hover {
-  background-color: var(--primary-light);
-}
-
-/* Forms */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.form-control,
-.form-select {
-  width: 100%;
-  padding: 0.875rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.form-control:focus,
-.form-select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-}
-
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: var(--light-color);
-  border: 1px solid var(--primary-color);
-}
-
-.btn-primary:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
-}
-
-.btn-secondary {
-  background-color: var(--gray-color);
-  color: var(--light-color);
-  border: 1px solid var(--gray-color);
-}
-
-.btn-secondary:hover {
-  background-color: #5a6268;
-  border-color: #5a6268;
-}
-
-.btn-save {
-  background-color: var(--success-color);
-  color: var(--light-color);
-  border: 1px solid var(--success-color);
-  margin-top: 1rem;
-}
-
-.btn-save:hover {
-  background-color: #3cb9d9;
-}
-
-.timer-controls {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.timer-controls button {
-  flex-grow: 1;
-  min-width: 120px;
-}
-
-/* Modals */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-#addSubjectModal .modal-content {
-  background: var(--card-bg);
-  padding: 2rem;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-#addSubjectModal .modal-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-color);
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-/* Subject Details Panel (Desktop) */
-.subject-details {
-  margin-left: 2rem; /* Spacing from main content */
-  position: sticky;
-  top: 2rem; /* Stays fixed at top */
-  max-height: calc(100vh - 4rem); /* Max height to prevent overflow */
-  overflow-y: auto; /* Scroll if content is too long */
-}
-
-.subject-info-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-
-.subject-info-label {
-  font-weight: 500;
-  color: var(--gray-color);
-  width: 100px; /* Fixed width for labels */
-  flex-shrink: 0;
-}
-
-.subject-info-value {
-  color: var(--text-color);
-  flex-grow: 1;
-}
-
-.exam-progress-container,
-.exam-actions {
-  width: 100%; /* Default to full width for desktop */
-}
-
-/* Resources Section (Desktop) */
-.resources-container {
-  display: grid;
-  grid-template-columns: 250px 1fr; /* Categories on left, resources on right */
-  gap: 1.5rem;
-  padding: 1.5rem;
-}
-
-.resource-categories {
-  position: sticky;
-  top: 1.5rem;
-  max-height: calc(100vh - 3rem);
-  overflow-y: auto;
-}
-
-.resource-category {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.resource-category h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-}
-
-.resource-category a {
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.resource-category a:hover {
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-}
-
-.resources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.resource-card {
-  text-align: center;
-  gap: 0.75rem;
-}
-
-.resource-card i {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.resource-card h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: var(--text-color);
-}
-
-.resource-card p {
-  font-size: 0.9rem;
-  color: var(--gray-color);
-}
-
-/* Dark Mode Adjustments */
-[data-theme="dark"] {
-  --bg-color: #1a1a2e;
-  --text-color: #e0e0e0;
-  --card-bg: #2a2a4a;
-  --border-color: #3a3a5a;
-  --primary-light: #3e2f8c;
-  --gray-color: #b0b0b0;
-
-  /* Dark mode glassmorphism */
-  --glass-bg: rgba(0, 0, 0, 0.3);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
-  .sidenav,
-  .card,
-  .stat-card,
-  .chart-card,
-  .tracker-card,
-  .current-session,
-  .progress-card,
-  .subjects-list,
-  .subject-details,
-  .empty-state,
-  #addSubjectModal .modal-content,
-  .timetable-slot,
-  .subject-card,
-  .resource-categories,
-  .resource-card,
-  .form-control,
-  .form-select {
-    background: var(--glass-bg);
-    border: var(--glass-border);
-    box-shadow: var(--glass-shadow);
-  }
-
-  .main-content {
-    background: var(--bg-color); /* Ensure consistent dark background */
-  }
-
-  .sidenav-header {
-    border-bottom-color: var(--border-color);
-  }
-
-  .user-profile {
-    background: var(--card-bg); /* Use specific dark card background for user profile */
-    box-shadow: none; /* No extra shadow on dark desktop user profile */
-  }
-
-  .user-profile .avatar {
-    background-color: var(--primary-color);
-    color: var(--light-color);
-  }
-
-  .nav-item:hover {
-    background-color: var(--primary-light);
-  }
-
-  .timetable-grid {
-    background-color: var(--border-color);
-    border-color: var(--border-color);
-  }
-
-  .timetable-header div,
-  .timetable-time,
-  .timetable-slot {
-    background-color: var(--card-bg);
-  }
-
-  .timetable-header div,
-  .timetable-time {
-    background-color: var(--primary-light);
-  }
-
-  .sessions-table th,
-  .sessions-table td {
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Adjusted border for dark mode */
-  }
-
-  .sessions-table th {
-    background: rgba(0, 0, 0, 0.3); /* Slightly more distinct background for headers in dark mode */
-  }
-
-  .form-control,
-  .form-select {
-    background-color: var(--glass-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-  }
-}
-
-/* ===================================== */
-/* Tablet Styles - From 769px to 1024px */
-/* ===================================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-  :root {
-    --sidebar-width: 80px; /* Minimized sidebar width for tablet */
-  }
-
-  .app-container {
-    grid-template-columns: var(--sidebar-width) 1fr; /* Minimized sidebar + content */
-  }
-
-  .sidenav {
-    width: var(--sidebar-width);
-    padding: 1rem 0.5rem; /* More compact padding */
-    align-items: center; /* Center content in narrow sidebar */
-  }
-
-  .sidenav-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    align-items: center;
-  }
-
-  .app-title,
-  .user-profile .user-info {
-    display: none; /* Hide text to keep sidebar minimal */
-  }
-
-  .user-profile {
-    padding: 0.5rem 0;
-    margin-bottom: 0.5rem;
-  }
-
-  .user-profile .avatar {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    margin-bottom: 0; /* No margin as text is hidden */
-  }
-
-  .nav-links {
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .nav-item {
-    padding: 0.6rem 0.5rem;
-    flex-direction: column; /* Stack icon and hidden text placeholder */
-    font-size: 0.75rem; /* Smaller font for hidden text */
-    min-width: 60px; /* Ensure sufficient width for icon */
-    text-align: center;
-  }
-
-  .nav-item span {
-    display: block; /* Show span text, but keep it small if needed */
-    font-size: 0.75rem; /* Smaller label */
-    margin-top: 0.25rem;
-  }
-
-  .nav-item i {
-    font-size: 1.4rem; /* Slightly smaller icons */
-  }
-
-  /* Main content adjusts for narrower sidebar */
-  .main-content {
-    padding: 1.5rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.6rem;
-  }
-
-  /* Grids adapt to more columns */
-  .stats-grid,
-  .chart-container,
-  .tracker-container,
-  .progress-grid,
-  .subjects-container {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 2-3 columns */
-    gap: 1.25rem;
-  }
-
-  .progress-card.large,
-  .progress-card.table-card {
-    grid-column: span 1; /* Adjust span for tablet layout */
-  }
-
-  .stat-value {
-    font-size: 2rem;
-  }
-
-  /* Forms and buttons can be slightly smaller */
-  .form-control,
-  .form-select {
-    padding: 0.8rem;
-    font-size: 0.95rem;
-  }
-
-  .btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  /* Timetable: Keep horizontal scroll if needed */
-  .timetable-container {
-    flex-direction: column; /* Stack subjects list above grid */
-  }
-
-  .timetable-subjects {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .timetable-grid {
-    grid-template-columns: 70px repeat(5, 1fr); /* Slightly adjusted column widths */
-  }
-
-  /* Subject Details Panel on Tablet */
-  .subject-details {
-    margin-left: 0; /* Full width within its grid column */
-    max-height: unset; /* Remove fixed height */
-    position: relative; /* Not sticky */
-    top: auto;
-  }
-
-  .resources-container {
-    grid-template-columns: 1fr; /* Stack categories and resources */
-  }
-
-  .resource-categories {
-    position: relative;
-    top: auto;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .resources-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  /* Dark Mode adjustments for Tablet */
-  [data-theme="dark"] {
+    :root {
+        /* Base Colors & Typography */
+        --primary-color: #4361ee;
+        --primary-light: #eef2ff;
+        --secondary-color: #3f37c9;
+        --success-color: #4cc9f0;
+        --warning-color: #f8961e;
+        --danger-color: #f94144;
+        --info-color: #4895ef;
+        --dark-color: #212529;
+        --light-color: #f8f9fa;
+        --gray-color: #6c757d;
+        --border-color: #dee2e6;
+
+        /* General Layout */
+        --sidebar-width: 280px;
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --card-bg: #f8f9fa;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        /* Original shadow for elements without glassmorphism */
+
+        /* Glassmorphism base properties (light mode defaults) */
+        --glass-bg: rgba(255, 255, 255, 0.15);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    /* Universal box-sizing for consistent layout */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Base Body Styles */
+    body {
+        font-family: 'Manrope', sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+
+    /* ===================================== */
+    /* Default (Desktop) Styles - Min-width: 1025px and up */
+    /* These styles apply by default and are overridden by media queries */
+    /* ===================================== */
+
+    .app-container {
+        display: grid;
+        /* Grid layout for sidebar and main content */
+        grid-template-columns: var(--sidebar-width) 1fr;
+        /* Sidebar width and content area */
+        min-height: 100vh;
+        /* Full viewport height */
+        transition: all 0.3s ease;
+        /* Smooth transitions for layout changes */
+    }
+
+    /* Sidenav (Desktop Sidebar) */
     .sidenav {
-      border: var(--glass-border); /* Ensure glass border */
-      box-shadow: var(--glass-shadow); /* Ensure glass shadow */
+        width: var(--sidebar-width);
+        background: var(--bg-color);
+        /* Matches body background by default */
+        padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--border-color);
+        position: sticky;
+        /* Keeps sidebar in view */
+        top: 0;
+        height: 100vh;
+        /* Full height */
+        overflow-y: auto;
+        /* Enable scrolling for long content */
+
+        /* Apply Glassmorphism to the sidebar on desktop */
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        border-radius: 0;
+        /* Remove border-radius on desktop sidebar */
     }
+
+    .sidenav-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .app-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
     .user-profile {
-      background: var(--card-bg); /* Use dark card background for user profile */
-      box-shadow: none; /* No extra shadow on dark tablet user profile */
+        display: flex;
+        flex-direction: column;
+        /* Stack avatar and info */
+        align-items: center;
+        text-align: center;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+        background: var(--card-bg);
+        /* Use card background for user profile */
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        /* Use original shadow for user profile on desktop */
+        transition: all 0.3s ease;
     }
-  }
-}
 
-/* ===================================== */
-/* Mobile Styles - Max-width: 768px */
-/* ===================================== */
-@media (max-width: 768px) {
-  :root {
-    --mobile-gap: 1rem;
-  }
+    .user-profile .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        flex-shrink: 0;
+    }
 
-  body {
-    font-size: 0.9rem;
-  }
+    .user-profile .user-info h3 {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        color: var(--text-color);
+    }
 
-  .app-container {
-    flex-direction: column; /* Stack elements vertically */
-    min-height: auto;
-    grid-template-columns: 1fr; /* Override desktop grid */
-  }
+    .user-profile .user-info p {
+        font-size: 0.8rem;
+        color: var(--gray-color);
+    }
 
-  /* Sidenav (Mobile Header) */
-  .sidenav {
-    position: sticky; /* Keeps it at the top when scrolling */
-    top: 0;
-    width: 100%;
-    display: flex; /* Make sidenav the flex container for a single row */
-    flex-direction: row; /* Horizontal layout */
-    align-items: center; /* Vertically center items */
-    justify-content: flex-start; /* Align items to the start, allows overflow */
-    height: auto; /* Allow height to adjust based on content */
-    padding: 0; /* No padding on sidenav, children will handle it */
-    border-right: none; /* Remove right border */
-    border-bottom: 1px solid var(--border-color); /* Add bottom border for visual separation */
-    /* Apply Glassmorphism to the header */
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 1000; /* Ensure header stays on top */
-    box-shadow: var(--glass-shadow); /* Re-add glassmorphism shadow for top header */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex-grow: 1;
+        /* Allows nav links to take available space */
+    }
 
-    /* Make the entire header scrollable */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    white-space: nowrap; /* Prevent content from wrapping */
-  }
+    .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        gap: 1rem;
+    }
 
-  /* Hide scrollbar for WebKit browsers (for the sidenav itself) */
-  .sidenav::-webkit-scrollbar {
-    display: none;
-  }
+    .nav-item i {
+        font-size: 1.2rem;
+        color: var(--gray-color);
+        transition: color 0.2s ease;
+    }
 
-  .sidenav-header {
-    display: flex; /* Keep it flex for user profile alignment */
-    flex-direction: row; /* Ensure user profile is aligned horizontally within its space */
-    align-items: center;
-    padding: 0.5rem 1rem; /* Compact padding for the user profile area */
-    border-bottom: none; /* Remove border as sidenav will have it */
-    flex-shrink: 0; /* Prevent it from shrinking */
-    background: none; /* Ensure no conflicting background */
-    backdrop-filter: none; /* Ensure no conflicting blur */
-    -webkit-backdrop-filter: none;
-  }
+    .nav-item:hover {
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+    }
 
-  /* Hide app name for mobile */
-  .app-title {
-    display: none;
-  }
+    .nav-item.active {
+        background-color: var(--primary-color);
+        color: var(--light-color);
+    }
 
-  /* Streamlined User Profile in Header */
-  .user-profile {
-    display: flex;
-    flex-direction: column; /* Stack avatar icon */
-    align-items: center;
-    padding: 0.25rem 0.5rem; /* Compact padding */
-    gap: 0;
-    margin: 0;
-    border-radius: 8px;
-    background: none; /* Remove background as parent .sidenav handles glassmorphism */
-    box-shadow: none;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
+    .nav-item.active i {
+        color: var(--light-color);
+    }
 
-  .user-profile .avatar {
-    width: 40px; /* Smaller avatar for header */
-    height: 40px;
-    font-size: 1rem;
-    margin-bottom: 0;
-  }
-
-  /* Hide user info text */
-  .user-profile .user-info {
-    display: none;
-  }
-
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1; /* Allow nav links to take remaining space */
-    padding: 0.75rem 1rem; /* Padding for the horizontal nav */
-    gap: 1rem;
-    justify-content: flex-start;
-    overflow-x: visible; /* Sidenav handles scrolling */
-    -webkit-overflow-scrolling: auto;
-    scrollbar-width: auto;
-    border-top: none;
-    background: none; /* Remove background as parent .sidenav handles glassmorphism */
-    box-shadow: none;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  /* Remove scrollbar hiding from nav-links as sidenav handles it now */
-  .nav-links::-webkit-scrollbar {
-    display: auto;
-  }
-
-  .nav-item {
-    padding: 0.5rem;
-    font-size: 0.85rem;
-    gap: 0;
-    flex-direction: column;
-    align-items: center;
-    min-width: 60px;
-    white-space: nowrap;
-  }
-
-  .nav-item span {
-    display: none; /* Hide text on mobile nav */
-  }
-
-  .nav-item i {
-    font-size: 1.5rem;
-  }
-
-  /* Main content adjustments for mobile */
-  .main-content {
-    margin-left: 0;
-    padding: 1.5rem var(--mobile-gap);
-    min-height: calc(100vh - (var(--mobile-nav-height, 0px) + var(--mobile-header-height, 0px))); /* Account for mobile header and nav */
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  /* Grid layouts become single column */
-  .stats-grid,
-  .chart-container,
-  .tracker-container,
-  .progress-grid,
-  .subjects-container {
-    grid-template-columns: 1fr;
-    gap: var(--mobile-gap);
-  }
-
-  .progress-card.large,
-  .progress-card.table-card {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .stat-value {
-    font-size: 1.8rem;
-  }
-
-  /* Forms and buttons */
-  .form-control,
-  .form-select {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .timer-controls {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .timer-controls button {
-    min-width: unset;
-    width: 100%;
-  }
-
-  .btn-save {
-    width: 100%;
-  }
-
-  /* Recent Sessions Table on Mobile */
-  .sessions-table {
-    font-size: 0.85rem;
-    display: block; /* Allows horizontal scrolling */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    width: 100%; /* Ensure it takes full width of its container */
-    border-collapse: collapse; /* Collapse borders for cleaner look */
-    background: none; /* Ensure no background, so parent glassmorphism is visible */
-    border-radius: 8px; /* Consistent rounding */
-    box-shadow: none; /* REMOVE SHADOW BEHIND THIS SECTION */
-  }
-
-  .sessions-table th,
-  .sessions-table td {
-    padding: 0.6rem 0.8rem; /* Adjusted padding for cells */
-    text-align: left; /* Align text to the left for readability */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* More defined borders for cells */
-    background: none; /* Ensure cell backgrounds are transparent */
-    color: var(--text-color); /* Ensure text color is readable */
-  }
-
-  .sessions-table th {
-    background: rgba(255, 255, 255, 0.2); /* Slightly more distinct background for headers */
-    font-weight: 600; /* Make header text slightly bolder */
-  }
-
-  /* Timetable adjustments */
-  .timetable-container {
-    flex-direction: column;
-    gap: var(--mobile-gap);
-  }
-
-  .timetable-subjects {
-    width: 100%;
-    flex-shrink: 1;
-  }
-
-  .timetable-grid {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .timetable-header,
-  .timetable-body {
-    grid-template-columns: 60px repeat(5, 1fr);
-  }
-
-  .timetable-time {
-    font-size: 0.8rem;
-  }
-
-  .timetable-slot {
-    min-height: 50px;
-    padding: 0.3rem;
-  }
-
-  /* Subject Details Panel (Mobile) */
-  .subject-details {
-    margin-left: 0;
-    padding: 1.5rem;
-    max-height: unset; /* Remove fixed height */
-    position: relative; /* Not sticky */
-    top: auto;
-  }
-
-  .subject-info-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .subject-info-label {
-    width: auto;
-    margin-bottom: 0.25rem;
-  }
-
-  /* Resources Section (Mobile) */
-  .resources-container {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
-
-  .resource-categories {
-    position: relative;
-    top: auto;
-    width: 100%;
-    margin-bottom: var(--mobile-gap);
-  }
-
-  .resources-grid,
-  .resource-category {
-    grid-template-columns: 1fr;
-  }
-
-  .resource-card {
-    padding: 1.25rem;
-  }
-
-  /* Dark Mode adjustments for Mobile */
-  [data-theme="dark"] {
-    /* Adjust glassmorphism for dark mode */
-    --glass-bg: rgba(0, 0, 0, 0.3);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
+    /* Main Content Area */
     .main-content {
-      background: var(--bg-primary); /* Ensure consistent dark background */
+        padding: 2rem;
+        margin-left: 0;
+        /* Handled by grid-template-columns */
+        background: var(--bg-color);
+        min-height: 100vh;
     }
 
-    /* Apply dark mode glassmorphism to relevant elements */
-    .sidenav, /* Mobile header */
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    .date-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .date-controls button {
+        background: var(--primary-color);
+        color: var(--light-color);
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .date-controls button:hover {
+        background-color: var(--secondary-color);
+    }
+
+    #currentDate {
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    /* General Card Styles for Desktop (Glassmorphism applied by default) */
     .card,
     .stat-card,
     .chart-card,
@@ -4406,30 +3848,1104 @@ body {
     .resource-categories,
     .resource-card,
     .form-control,
-    .form-select {
-      background: var(--glass-bg);
-      border: var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+    /* Apply to form controls */
+    .form-select
+
+    /* Apply to select inputs */
+        {
+        background: var(--glass-bg);
+        /* Translucent background */
+        backdrop-filter: blur(10px);
+        /* Blur effect */
+        -webkit-backdrop-filter: blur(10px);
+        /* Webkit support */
+        border: var(--glass-border);
+        /* Border */
+        box-shadow: var(--glass-shadow);
+        /* Shadow */
+        border-radius: 12px;
+        /* Consistent rounded corners */
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    .form-control,
-    .time-selector,
-    select {
-      background: var(--glass-bg); /* Darken form inputs with glassmorphism */
-      color: var(--text-primary);
+    /* Ensure main content background is not blurred, or blurred differently */
+    .main-content {
+        background: var(--bg-color);
+        /* Maintain default body background for main content area */
+        backdrop-filter: none;
+        /* Remove blur from main content itself */
+        -webkit-backdrop-filter: none;
     }
 
-    /* Dark mode for table fix */
+    /* Specific Card Layouts */
+    .stats-grid,
+    .chart-container,
+    .tracker-container,
+    .progress-grid,
+    .subjects-container {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        /* Responsive columns */
+    }
+
+    .stat-card {
+        text-align: center;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--gray-color);
+    }
+
+    .progress-card.large {
+        grid-column: span 2;
+        /* Occupy 2 columns */
+    }
+
+    .progress-card.table-card {
+        grid-column: span 2;
+        /* Occupy 2 columns */
+    }
+
+    /* Recent Sessions Table */
+    .sessions-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        /* Apply glassmorphism integration for table */
+        background: none;
+        /* Inherit parent's glassmorphism */
+        border-radius: 8px;
+        /* Consistent rounding */
+        box-shadow: none;
+        /* Remove explicit shadow here */
+    }
+
     .sessions-table th,
     .sessions-table td {
-      border: 1px solid rgba(255, 255, 255, 0.15); /* Adjusted border for dark mode */
+        padding: 0.8rem 1rem;
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        /* More defined borders for cells */
+        background: none;
+        /* Ensure cell backgrounds are transparent */
+        color: var(--text-color);
+        /* Ensure text color is readable */
     }
 
     .sessions-table th {
-      background: rgba(0, 0, 0, 0.3); /* Slightly more distinct background for headers in dark mode */
+        background: rgba(255, 255, 255, 0.2);
+        /* Slightly more distinct background for headers */
+        font-weight: 600;
     }
-  }
-}
+
+    /* Timetable */
+    .timetable-container {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .timetable-subjects {
+        flex-shrink: 0;
+        width: 250px;
+        /* Fixed width for subjects list */
+    }
+
+    .timetable-grid {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 80px repeat(5, 1fr);
+        /* Time column + 5 days */
+        gap: 1px;
+        /* Small gap for grid lines */
+        background-color: var(--border-color);
+        /* Grid lines */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow-x: auto;
+        /* Allow horizontal scroll if content overflows */
+    }
+
+    .timetable-header,
+    .timetable-body {
+        display: contents;
+        /* Allows grid items to flow directly */
+    }
+
+    .timetable-header div,
+    .timetable-time,
+    .timetable-slot {
+        background-color: var(--card-bg);
+        /* Use card background for timetable cells */
+        padding: 0.5rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .timetable-header div {
+        font-weight: 600;
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+    }
+
+    .timetable-time {
+        font-weight: 500;
+        justify-content: flex-start;
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+    }
+
+    .timetable-slot {
+        min-height: 80px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .timetable-slot.occupied {
+        background-color: var(--primary-light);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .timetable-slot:hover {
+        background-color: var(--primary-light);
+    }
+
+    /* Forms */
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+
+    .form-control,
+    .form-select {
+        width: 100%;
+        padding: 0.875rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+
+    .btn-secondary {
+        background-color: var(--gray-color);
+        color: var(--light-color);
+        border: 1px solid var(--gray-color);
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #5a6268;
+    }
+
+    .btn-save {
+        background-color: var(--success-color);
+        color: var(--light-color);
+        border: 1px solid var(--success-color);
+        margin-top: 1rem;
+    }
+
+    .btn-save:hover {
+        background-color: #3cb9d9;
+    }
+
+    .timer-controls {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .timer-controls button {
+        flex-grow: 1;
+        min-width: 120px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+    }
+
+    #addSubjectModal .modal-content {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    #addSubjectModal .modal-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    /* Subject Details Panel (Desktop) */
+    .subject-details {
+        margin-left: 2rem;
+        /* Spacing from main content */
+        position: sticky;
+        top: 2rem;
+        /* Stays fixed at top */
+        max-height: calc(100vh - 4rem);
+        /* Max height to prevent overflow */
+        overflow-y: auto;
+        /* Scroll if content is too long */
+    }
+
+    .subject-info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+    }
+
+    .subject-info-label {
+        font-weight: 500;
+        color: var(--gray-color);
+        width: 100px;
+        /* Fixed width for labels */
+        flex-shrink: 0;
+    }
+
+    .subject-info-value {
+        color: var(--text-color);
+        flex-grow: 1;
+    }
+
+    .exam-progress-container,
+    .exam-actions {
+        width: 100%;
+        /* Default to full width for desktop */
+    }
+
+    /* Resources Section (Desktop) */
+    .resources-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        /* Categories on left, resources on right */
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .resource-categories {
+        position: sticky;
+        top: 1.5rem;
+        max-height: calc(100vh - 3rem);
+        overflow-y: auto;
+    }
+
+    .resource-category {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .resource-category h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+
+    .resource-category a {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .resource-category a:hover {
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+    }
+
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .resource-card {
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .resource-card i {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .resource-card h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--text-color);
+    }
+
+    .resource-card p {
+        font-size: 0.9rem;
+        color: var(--gray-color);
+    }
+
+    /* Dark Mode Adjustments */
+    [data-theme="dark"] {
+        --bg-color: #1a1a2e;
+        --text-color: #e0e0e0;
+        --card-bg: #2a2a4a;
+        --border-color: #3a3a5a;
+        --primary-light: #3e2f8c;
+        --gray-color: #b0b0b0;
+
+        /* Dark mode glassmorphism */
+        --glass-bg: rgba(0, 0, 0, 0.3);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+        --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+        .sidenav,
+        .card,
+        .stat-card,
+        .chart-card,
+        .tracker-card,
+        .current-session,
+        .progress-card,
+        .subjects-list,
+        .subject-details,
+        .empty-state,
+        #addSubjectModal .modal-content,
+        .timetable-slot,
+        .subject-card,
+        .resource-categories,
+        .resource-card,
+        .form-control,
+        .form-select {
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .main-content {
+            background: var(--bg-color);
+            /* Ensure consistent dark background */
+        }
+
+        .sidenav-header {
+            border-bottom-color: var(--border-color);
+        }
+
+        .user-profile {
+            background: var(--card-bg);
+            /* Use specific dark card background for user profile */
+            box-shadow: none;
+            /* No extra shadow on dark desktop user profile */
+        }
+
+        .user-profile .avatar {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .nav-item:hover {
+            background-color: var(--primary-light);
+        }
+
+        .timetable-grid {
+            background-color: var(--border-color);
+            border-color: var(--border-color);
+        }
+
+        .timetable-header div,
+        .timetable-time,
+        .timetable-slot {
+            background-color: var(--card-bg);
+        }
+
+        .timetable-header div,
+        .timetable-time {
+            background-color: var(--primary-light);
+        }
+
+        .sessions-table th,
+        .sessions-table td {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* Adjusted border for dark mode */
+        }
+
+        .sessions-table th {
+            background: rgba(0, 0, 0, 0.3);
+            /* Slightly more distinct background for headers in dark mode */
+        }
+
+        .form-control,
+        .form-select {
+            background-color: var(--glass-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+    }
+
+    /* ===================================== */
+    /* Tablet Styles - From 769px to 1024px */
+    /* ===================================== */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        :root {
+            --sidebar-width: 80px;
+            /* Minimized sidebar width for tablet */
+        }
+
+        .app-container {
+            grid-template-columns: var(--sidebar-width) 1fr;
+            /* Minimized sidebar + content */
+        }
+
+        .sidenav {
+            width: var(--sidebar-width);
+            padding: 1rem 0.5rem;
+            /* More compact padding */
+            align-items: center;
+            /* Center content in narrow sidebar */
+        }
+
+        .sidenav-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            align-items: center;
+        }
+
+        .app-title,
+        .user-profile .user-info {
+            display: none;
+            /* Hide text to keep sidebar minimal */
+        }
+
+        .user-profile {
+            padding: 0.5rem 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-profile .avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            /* No margin as text is hidden */
+        }
+
+        .nav-links {
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            padding: 0.6rem 0.5rem;
+            flex-direction: column;
+            /* Stack icon and hidden text placeholder */
+            font-size: 0.75rem;
+            /* Smaller font for hidden text */
+            min-width: 60px;
+            /* Ensure sufficient width for icon */
+            text-align: center;
+        }
+
+        .nav-item span {
+            display: block;
+            /* Show span text, but keep it small if needed */
+            font-size: 0.75rem;
+            /* Smaller label */
+            margin-top: 0.25rem;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            /* Slightly smaller icons */
+        }
+
+        /* Main content adjusts for narrower sidebar */
+        .main-content {
+            padding: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+        }
+
+        /* Grids adapt to more columns */
+        .stats-grid,
+        .chart-container,
+        .tracker-container,
+        .progress-grid,
+        .subjects-container {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            /* 2-3 columns */
+            gap: 1.25rem;
+        }
+
+        .progress-card.large,
+        .progress-card.table-card {
+            grid-column: span 1;
+            /* Adjust span for tablet layout */
+        }
+
+        .stat-value {
+            font-size: 2rem;
+        }
+
+        /* Forms and buttons can be slightly smaller */
+        .form-control,
+        .form-select {
+            padding: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Timetable: Keep horizontal scroll if needed */
+        .timetable-container {
+            flex-direction: column;
+            /* Stack subjects list above grid */
+        }
+
+        .timetable-subjects {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .timetable-grid {
+            grid-template-columns: 70px repeat(5, 1fr);
+            /* Slightly adjusted column widths */
+        }
+
+        /* Subject Details Panel on Tablet */
+        .subject-details {
+            margin-left: 0;
+            /* Full width within its grid column */
+            max-height: unset;
+            /* Remove fixed height */
+            position: relative;
+            /* Not sticky */
+            top: auto;
+        }
+
+        .resources-container {
+            grid-template-columns: 1fr;
+            /* Stack categories and resources */
+        }
+
+        .resource-categories {
+            position: relative;
+            top: auto;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .resources-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Dark Mode adjustments for Tablet */
+        [data-theme="dark"] {
+            .sidenav {
+                border: var(--glass-border);
+                /* Ensure glass border */
+                box-shadow: var(--glass-shadow);
+                /* Ensure glass shadow */
+            }
+
+            .user-profile {
+                background: var(--card-bg);
+                /* Use dark card background for user profile */
+                box-shadow: none;
+                /* No extra shadow on dark tablet user profile */
+            }
+        }
+    }
+
+    /* ===================================== */
+    /* Mobile Styles - Max-width: 768px */
+    /* ===================================== */
+    @media (max-width: 768px) {
+        :root {
+            --mobile-gap: 1rem;
+        }
+
+        body {
+            font-size: 0.9rem;
+        }
+
+        .app-container {
+            flex-direction: column;
+            /* Stack elements vertically */
+            min-height: auto;
+            grid-template-columns: 1fr;
+            /* Override desktop grid */
+        }
+
+        /* Sidenav (Mobile Header) */
+        .sidenav {
+            position: sticky;
+            /* Keeps it at the top when scrolling */
+            top: 0;
+            width: 100%;
+            display: flex;
+            /* Make sidenav the flex container for a single row */
+            flex-direction: row;
+            /* Horizontal layout */
+            align-items: center;
+            /* Vertically center items */
+            justify-content: flex-start;
+            /* Align items to the start, allows overflow */
+            height: auto;
+            /* Allow height to adjust based on content */
+            padding: 0;
+            /* No padding on sidenav, children will handle it */
+            border-right: none;
+            /* Remove right border */
+            border-bottom: 1px solid var(--border-color);
+            /* Add bottom border for visual separation */
+            /* Apply Glassmorphism to the header */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            /* Ensure header stays on top */
+            box-shadow: var(--glass-shadow);
+            /* Re-add glassmorphism shadow for top header */
+
+            /* Make the entire header scrollable */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling for iOS */
+            scrollbar-width: none;
+            /* Hide scrollbar for Firefox */
+            white-space: nowrap;
+            /* Prevent content from wrapping */
+        }
+
+        /* Hide scrollbar for WebKit browsers (for the sidenav itself) */
+        .sidenav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .sidenav-header {
+            display: flex;
+            /* Keep it flex for user profile alignment */
+            flex-direction: row;
+            /* Ensure user profile is aligned horizontally within its space */
+            align-items: center;
+            padding: 0.5rem 1rem;
+            /* Compact padding for the user profile area */
+            border-bottom: none;
+            /* Remove border as sidenav will have it */
+            flex-shrink: 0;
+            /* Prevent it from shrinking */
+            background: none;
+            /* Ensure no conflicting background */
+            backdrop-filter: none;
+            /* Ensure no conflicting blur */
+            -webkit-backdrop-filter: none;
+        }
+
+        /* Hide app name for mobile */
+        .app-title {
+            display: none;
+        }
+
+        /* Streamlined User Profile in Header */
+        .user-profile {
+            display: flex;
+            flex-direction: column;
+            /* Stack avatar icon */
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            /* Compact padding */
+            gap: 0;
+            margin: 0;
+            border-radius: 8px;
+            background: none;
+            /* Remove background as parent .sidenav handles glassmorphism */
+            box-shadow: none;
+            border: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .user-profile .avatar {
+            width: 40px;
+            /* Smaller avatar for header */
+            height: 40px;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Hide user info text */
+        .user-profile .user-info {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            /* Allow nav links to take remaining space */
+            padding: 0.75rem 1rem;
+            /* Padding for the horizontal nav */
+            gap: 1rem;
+            justify-content: flex-start;
+            overflow-x: visible;
+            /* Sidenav handles scrolling */
+            -webkit-overflow-scrolling: auto;
+            scrollbar-width: auto;
+            border-top: none;
+            background: none;
+            /* Remove background as parent .sidenav handles glassmorphism */
+            box-shadow: none;
+            border: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        /* Remove scrollbar hiding from nav-links as sidenav handles it now */
+        .nav-links::-webkit-scrollbar {
+            display: auto;
+        }
+
+        .nav-item {
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            gap: 0;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+            white-space: nowrap;
+        }
+
+        .nav-item span {
+            display: none;
+            /* Hide text on mobile nav */
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+        }
+
+        /* Main content adjustments for mobile */
+        .main-content {
+            margin-left: 0;
+            padding: 1.5rem var(--mobile-gap);
+            min-height: calc(100vh - (var(--mobile-nav-height, 0px) + var(--mobile-header-height, 0px)));
+            /* Account for mobile header and nav */
+        }
+
+        .section-header {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Grid layouts become single column */
+        .stats-grid,
+        .chart-container,
+        .tracker-container,
+        .progress-grid,
+        .subjects-container {
+            grid-template-columns: 1fr;
+            gap: var(--mobile-gap);
+        }
+
+        .progress-card.large,
+        .progress-card.table-card {
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+        }
+
+        /* Forms and buttons */
+        .form-control,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-controls {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .timer-controls button {
+            min-width: unset;
+            width: 100%;
+        }
+
+        .btn-save {
+            width: 100%;
+        }
+
+        /* Recent Sessions Table on Mobile */
+        .sessions-table {
+            font-size: 0.85rem;
+            display: block;
+            /* Allows horizontal scrolling */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            width: 100%;
+            /* Ensure it takes full width of its container */
+            border-collapse: collapse;
+            /* Collapse borders for cleaner look */
+            background: none;
+            /* Ensure no background, so parent glassmorphism is visible */
+            border-radius: 8px;
+            /* Consistent rounding */
+            box-shadow: none;
+            /* REMOVE SHADOW BEHIND THIS SECTION */
+        }
+
+        .sessions-table th,
+        .sessions-table td {
+            padding: 0.6rem 0.8rem;
+            /* Adjusted padding for cells */
+            text-align: left;
+            /* Align text to the left for readability */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            /* More defined borders for cells */
+            background: none;
+            /* Ensure cell backgrounds are transparent */
+            color: var(--text-color);
+            /* Ensure text color is readable */
+        }
+
+        .sessions-table th {
+            background: rgba(255, 255, 255, 0.2);
+            /* Slightly more distinct background for headers */
+            font-weight: 600;
+            /* Make header text slightly bolder */
+        }
+
+        /* Timetable adjustments */
+        .timetable-container {
+            flex-direction: column;
+            gap: var(--mobile-gap);
+        }
+
+        .timetable-subjects {
+            width: 100%;
+            flex-shrink: 1;
+        }
+
+        .timetable-grid {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .timetable-header,
+        .timetable-body {
+            grid-template-columns: 60px repeat(5, 1fr);
+        }
+
+        .timetable-time {
+            font-size: 0.8rem;
+        }
+
+        .timetable-slot {
+            min-height: 50px;
+            padding: 0.3rem;
+        }
+
+        /* Subject Details Panel (Mobile) */
+        .subject-details {
+            margin-left: 0;
+            padding: 1.5rem;
+            max-height: unset;
+            /* Remove fixed height */
+            position: relative;
+            /* Not sticky */
+            top: auto;
+        }
+
+        .subject-info-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .subject-info-label {
+            width: auto;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Resources Section (Mobile) */
+        .resources-container {
+            grid-template-columns: 1fr;
+            padding: 1rem;
+        }
+
+        .resource-categories {
+            position: relative;
+            top: auto;
+            width: 100%;
+            margin-bottom: var(--mobile-gap);
+        }
+
+        .resources-grid,
+        .resource-category {
+            grid-template-columns: 1fr;
+        }
+
+        .resource-card {
+            padding: 1.25rem;
+        }
+
+        /* Dark Mode adjustments for Mobile */
+        [data-theme="dark"] {
+            /* Adjust glassmorphism for dark mode */
+            --glass-bg: rgba(0, 0, 0, 0.3);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+            .main-content {
+                background: var(--bg-primary);
+                /* Ensure consistent dark background */
+            }
+
+            /* Apply dark mode glassmorphism to relevant elements */
+            .sidenav,
+            /* Mobile header */
+            .card,
+            .stat-card,
+            .chart-card,
+            .tracker-card,
+            .current-session,
+            .progress-card,
+            .subjects-list,
+            .subject-details,
+            .empty-state,
+            #addSubjectModal .modal-content,
+            .timetable-slot,
+            .subject-card,
+            .resource-categories,
+            .resource-card,
+            .form-control,
+            .form-select {
+                background: var(--glass-bg);
+                border: var(--glass-border);
+                box-shadow: var(--glass-shadow);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+
+            .form-control,
+            .time-selector,
+            select {
+                background: var(--glass-bg);
+                /* Darken form inputs with glassmorphism */
+                color: var(--text-primary);
+            }
+
+            /* Dark mode for table fix */
+            .sessions-table th,
+            .sessions-table td {
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                /* Adjusted border for dark mode */
+            }
+
+            .sessions-table th {
+                background: rgba(0, 0, 0, 0.3);
+                /* Slightly more distinct background for headers in dark mode */
+            }
+        }
+    }
 }
