@@ -352,7 +352,7 @@ body {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);    
 }
-.modal-title {
+.modal-title, #importBackup {
     color: #ffffff;
     font-weight: 600;
     background: none !important;
@@ -503,6 +503,31 @@ body {
 
 #openAllResources:hover {
     background: rgba(67, 97, 238, 1);
+}
+.sessions-table {
+    background: rgba(30, 30, 40, 0.7) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.sessions-table th {
+    background: rgba(40, 40, 50, 0.8) !important;
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.sessions-table td {
+    background: rgba(35, 35, 45, 0.6) !important;
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+.sessions-table tr:hover td {
+    background: rgba(50, 50, 60, 0.7) !important;
+}
+.sessions-table tr:last-child td {
+    border-bottom: none !important;
 }
 }
 /* Dark Mode Accordion Styles - Clean Grey Version */
