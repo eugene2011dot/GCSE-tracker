@@ -1300,6 +1300,7 @@ function init() {
     setupNavigation();
     setupEventListeners();
     populateSubjectSelects();
+    NotesManager.init();
     updateCurrentDate();
     renderSubjects();
     renderRecentSessions();
@@ -1314,6 +1315,7 @@ function init() {
     initMusicPlayer();
     initTracker();
     setupExamRules();
+
 }
 
 // Load user data from localStorage
@@ -1731,30 +1733,30 @@ function initTimer() {
 
 // Start timer function
 function startTimer() {
-  if (timer.running) return;
-  
-  if (!subjectSelect.value) {
-    alert('Please select a subject first');
-    return;
-  }
+    if (timer.running) return;
 
-  timer = {
-    interval: null,
-    startTime: new Date(),
-    elapsed: 0,
-    running: true,
-    subject: subjectSelect.value,
-    topic: topicSelect.value
-  };
+    if (!subjectSelect.value) {
+        alert('Please select a subject first');
+        return;
+    }
 
-  // Start updating every second
-  timer.interval = setInterval(updateTimerDisplay, 1000);
-  
-  // Update UI
-  startTimerBtn.disabled = true;
-  stopTimerBtn.disabled = false;
-  updateSessionInfoDisplay();
-  saveTimerState();
+    timer = {
+        interval: null,
+        startTime: new Date(),
+        elapsed: 0,
+        running: true,
+        subject: subjectSelect.value,
+        topic: topicSelect.value
+    };
+
+    // Start updating every second
+    timer.interval = setInterval(updateTimerDisplay, 1000);
+
+    // Update UI
+    startTimerBtn.disabled = true;
+    stopTimerBtn.disabled = false;
+    updateSessionInfoDisplay();
+    saveTimerState();
 }
 
 // Update timer every second
@@ -1771,61 +1773,61 @@ function updateTimer() {
 
 // Stop timer function
 function stopTimer() {
-  if (!timer.running) return;
-  
-  clearInterval(timer.interval);
-  timer.running = false;
-  
-  // Update UI
-  stopTimerBtn.disabled = true;
-  startTimerBtn.disabled = false;
-  saveTimerState();
+    if (!timer.running) return;
+
+    clearInterval(timer.interval);
+    timer.running = false;
+
+    // Update UI
+    stopTimerBtn.disabled = true;
+    startTimerBtn.disabled = false;
+    saveTimerState();
 }
 function updateTimerDisplay() {
-  if (!timer.running) return;
-  
-  // Calculate elapsed time
-  const now = new Date();
-  timer.elapsed = Math.floor((now - timer.startTime) / 1000);
-  
-  // Format as HH:MM:SS
-  const hours = Math.floor(timer.elapsed / 3600);
-  const minutes = Math.floor((timer.elapsed % 3600) / 60);
-  const seconds = timer.elapsed % 60;
-  
-  timerDisplay.textContent = 
-    `${hours.toString().padStart(2, '0')}:` +
-    `${minutes.toString().padStart(2, '0')}:` +
-    `${seconds.toString().padStart(2, '0')}`;
-    
-  saveTimerState();
+    if (!timer.running) return;
+
+    // Calculate elapsed time
+    const now = new Date();
+    timer.elapsed = Math.floor((now - timer.startTime) / 1000);
+
+    // Format as HH:MM:SS
+    const hours = Math.floor(timer.elapsed / 3600);
+    const minutes = Math.floor((timer.elapsed % 3600) / 60);
+    const seconds = timer.elapsed % 60;
+
+    timerDisplay.textContent =
+        `${hours.toString().padStart(2, '0')}:` +
+        `${minutes.toString().padStart(2, '0')}:` +
+        `${seconds.toString().padStart(2, '0')}`;
+
+    saveTimerState();
 }
 
 function saveTimerState() {
-  localStorage.setItem('studyTimer', JSON.stringify({
-    ...timer,
-    startTime: timer.startTime.getTime()
-  }));
+    localStorage.setItem('studyTimer', JSON.stringify({
+        ...timer,
+        startTime: timer.startTime.getTime()
+    }));
 }
 
 
 // Reset timer completely
 function resetTimer() {
-  clearInterval(timer.interval);
-  timer = {
-    interval: null,
-    startTime: null,
-    elapsed: 0,
-    running: false,
-    subject: null,
-    topic: null
-  };
-  
-  timerDisplay.textContent = '00:00:00';
-  startTimerBtn.disabled = false;
-  stopTimerBtn.disabled = true;
-  updateSessionInfoDisplay();
-  localStorage.removeItem('studyTimer');
+    clearInterval(timer.interval);
+    timer = {
+        interval: null,
+        startTime: null,
+        elapsed: 0,
+        running: false,
+        subject: null,
+        topic: null
+    };
+
+    timerDisplay.textContent = '00:00:00';
+    startTimerBtn.disabled = false;
+    stopTimerBtn.disabled = true;
+    updateSessionInfoDisplay();
+    localStorage.removeItem('studyTimer');
 }
 
 // Save session to localStorage
@@ -1845,28 +1847,28 @@ function clearSessionState() {
     localStorage.removeItem('currentStudySession');
 }
 function updateSessionInfoDisplay() {
-  currentSubjectDisplay.textContent = timer.subject || 'Not selected';
-  
-  // Format topics
-  let topicsText = 'General study';
-  if (timer.topic) {
-    const selectedOptions = topicSelect.selectedOptions;
-    if (selectedOptions.length > 0) {
-      const topics = Array.from(selectedOptions).map(opt => opt.value);
-      if (topics.length === 1) {
-        topicsText = topics[0];
-      } else if (topics.length > 1) {
-        topicsText = topics.slice(0, -1).join(', ') + ' and ' + topics.slice(-1);
-      }
-    } else {
-      topicsText = timer.topic;
-    }
-  }
+    currentSubjectDisplay.textContent = timer.subject || 'Not selected';
 
-  currentTopicDisplay.textContent = topicsText;
-  sessionStartTime.textContent = timer.startTime
-    ? formatTime(timer.startTime)
-    : '--:-- --';
+    // Format topics
+    let topicsText = 'General study';
+    if (timer.topic) {
+        const selectedOptions = topicSelect.selectedOptions;
+        if (selectedOptions.length > 0) {
+            const topics = Array.from(selectedOptions).map(opt => opt.value);
+            if (topics.length === 1) {
+                topicsText = topics[0];
+            } else if (topics.length > 1) {
+                topicsText = topics.slice(0, -1).join(', ') + ' and ' + topics.slice(-1);
+            }
+        } else {
+            topicsText = timer.topic;
+        }
+    }
+
+    currentTopicDisplay.textContent = topicsText;
+    sessionStartTime.textContent = timer.startTime
+        ? formatTime(timer.startTime)
+        : '--:-- --';
 }
 // Clear session state
 function clearSessionState() {
@@ -1875,48 +1877,356 @@ function clearSessionState() {
 
 // Log study session (updated)
 function logStudySession(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (!timer.startTime || timer.elapsed === 0) {
-    alert('Please start and complete a session first');
-    return;
-  }
+    if (!timer.startTime || timer.elapsed === 0) {
+        alert('Please start and complete a session first');
+        return;
+    }
 
-  // Get selected topics (works for both single and multi-select)
-  const selectedOptions = topicSelect.selectedOptions;
-  const selectedTopics = selectedOptions.length > 0
-    ? Array.from(selectedOptions).map(opt => opt.value)
-    : ['General study']; // Default if nothing selected
+    // Get selected topics (works for both single and multi-select)
+    const selectedOptions = topicSelect.selectedOptions;
+    const selectedTopics = selectedOptions.length > 0
+        ? Array.from(selectedOptions).map(opt => opt.value)
+        : ['General study']; // Default if nothing selected
 
-  // Create a session for EACH selected topic
-  selectedTopics.forEach(topic => {
-    userData.studySessions.push({
-      date: timer.startTime.toISOString(),
-      subject: timer.subject,
-      topic: topic,
-      duration: timer.elapsed // Duration in seconds
+    // Create a session for EACH selected topic
+    selectedTopics.forEach(topic => {
+        userData.studySessions.push({
+            date: timer.startTime.toISOString(),
+            subject: timer.subject,
+            topic: topic,
+            duration: timer.elapsed // Duration in seconds
+        });
     });
-  });
 
-  saveUserData();
-  resetTimer();
+    saveUserData();
+    resetTimer();
 
-  // Update UI
-  renderRecentSessions();
-  updateDashboardStats();
-  renderCharts();
-  renderSubjects();
+    // Update UI
+    renderRecentSessions();
+    updateDashboardStats();
+    renderCharts();
+    renderSubjects();
 }
+
+const NotesManager = {
+  // Safe ID generator
+  generateId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  },
+
+  init() {
+    this.setupEventListeners();
+    this.renderSubjectOptions();
+    this.renderAllNotes();
+  },
+
+  setupEventListeners() {
+    // Study session tracker notes
+    document.getElementById('saveCurrentNote')?.addEventListener('click', () => this.saveCurrentNote());
+    document.getElementById('viewOtherNotes')?.addEventListener('click', () => this.showNotesModal());
+    
+    // Standalone notes form
+    document.getElementById('standaloneNoteForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.saveStandaloneNote();
+    });
+    
+    // Subject selection changes
+    document.getElementById('noteSubjects')?.addEventListener('change', () => this.handleSubjectSelection());
+  },
+
+  handleSubjectSelection() {
+    const topicSelect = document.getElementById('noteTopic');
+    const selectedSubjects = Array.from(
+      document.getElementById('noteSubjects').selectedOptions
+    ).map(opt => opt.value);
+    
+    topicSelect.disabled = selectedSubjects.length > 1;
+    
+    if (selectedSubjects.length === 1 && selectedSubjects[0] !== 'general') {
+      this.populateTopicOptions(selectedSubjects[0]);
+    } else {
+      topicSelect.innerHTML = '<option value="">Select topic...</option>';
+    }
+  },
+
+  renderSubjectOptions() {
+    const select = document.getElementById('noteSubjects');
+    if (!select) return;
+    
+    // Clear existing options except "General Note"
+    while (select.options.length > 1) {
+      select.remove(1);
+    }
+    
+    // Add user's subjects
+    userData.subjects.forEach(subject => {
+      const option = new Option(subject.displayName || subject.name, subject.name);
+      select.add(option);
+    });
+  },
+
+  populateTopicOptions(subjectName) {
+    const select = document.getElementById('noteTopic');
+    if (!select) return;
+    
+    select.innerHTML = '<option value="">Select topic...</option>';
+    
+    const subjectData = gcseSubjects[subjectName];
+    if (subjectData?.topics) {
+      subjectData.topics.forEach(topic => {
+        select.add(new Option(topic, topic));
+      });
+    }
+  },
+
+  saveCurrentNote() {
+    const noteContent = document.getElementById('currentNote')?.value.trim();
+    const currentSubject = subjectSelect.value;
+    
+    if (!currentSubject) {
+      alert('Please select a subject first');
+      return;
+    }
+    
+    if (!noteContent) {
+      alert('Note cannot be empty');
+      return;
+    }
+    
+    const newNote = {
+      id: this.generateId(),
+      type: 'session',
+      subject: currentSubject,
+      topic: topicSelect.value || 'General Study',
+      content: noteContent,
+      createdAt: new Date().toISOString(),
+      sessionId: currentSession?.id
+    };
+    
+    this.saveNote(newNote);
+    document.getElementById('currentNote').value = '';
+    
+    // Visual feedback
+    const btn = document.getElementById('saveCurrentNote');
+    if (btn) {
+      btn.textContent = '✓ Saved';
+      setTimeout(() => {
+        btn.textContent = 'Save';
+      }, 2000);
+    }
+  },
+
+  saveStandaloneNote() {
+    const content = document.getElementById('noteContent')?.value.trim();
+    const subjectSelect = document.getElementById('noteSubjects');
+    const subjects = Array.from(subjectSelect.selectedOptions).map(opt => opt.value);
+    const topic = document.getElementById('noteTopic')?.value;
+    
+    if (!content) {
+      alert('Note content cannot be empty');
+      return;
+    }
+    
+    if (subjects.length === 0) {
+      alert('Please select at least one subject');
+      return;
+    }
+    
+    const newNote = {
+      id: this.generateId(),
+      type: 'standalone',
+      subjects: subjects,
+      topic: subjects.length === 1 ? topic || null : null,
+      content: content,
+      createdAt: new Date().toISOString()
+    };
+    
+    this.saveNote(newNote);
+    this.renderAllNotes();
+    document.getElementById('standaloneNoteForm').reset();
+    
+    // Visual feedback
+    const btn = document.querySelector('#standaloneNoteForm [type="submit"]');
+    if (btn) {
+      const originalText = btn.textContent;
+      btn.textContent = '✓ Saved';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    }
+  },
+
+
+    // Save note to storage
+    saveNote(note) {
+        if (!userData.notes) userData.notes = [];
+        userData.notes.unshift(note);
+
+        try {
+            localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
+            console.log("Note saved:", note);
+        } catch (e) {
+            console.error("Save error:", e);
+            if (e.name === 'QuotaExceededError') {
+                this.clearOldData();
+                localStorage.setItem('gcseStudyTrackerData', JSON.stringify(userData));
+            }
+        }
+    },
+
+    clearOldData() {
+        // Keep only recent 50 items
+        ['notes', 'studySessions'].forEach(key => {
+            if (userData[key] && userData[key].length > 50) {
+                userData[key] = userData[key].slice(0, 50);
+            }
+        });
+    },
+
+// Show notes modal in study session tracker
+showNotesModal() {
+        const currentSubject = subjectSelect.value;
+        if (!currentSubject) {
+            alert('Please select a subject first');
+            return;
+        }
+
+        const modal = new bootstrap.Modal(document.getElementById('notesModal'));
+        const notesList = document.getElementById('notesList');
+        notesList.innerHTML = '';
+
+        // Filter notes for current subject
+        const subjectNotes = (userData.notes || []).filter(note => {
+            if (note.type === 'session') {
+                return note.subject === currentSubject;
+            } else {
+                return note.subjects.includes(currentSubject);
+            }
+        });
+
+        if (subjectNotes.length === 0) {
+            notesList.innerHTML = '<div class="empty-state">No notes found for this subject</div>';
+        } else {
+            subjectNotes.forEach(note => {
+                const noteCard = document.createElement('div');
+                noteCard.className = 'note-card';
+                noteCard.innerHTML = `
+          <div class="note-card-content">${note.content}</div>
+          <div class="note-card-meta">
+            <small>${new Date(note.createdAt).toLocaleString()}</small>
+            ${note.topic ? `<small>Topic: ${note.topic}</small>` : ''}
+          </div>
+          <button class="btn btn-sm btn-outline-danger delete-note" data-id="${note.id}">
+            <i class="bi bi-trash"></i>
+          </button>
+        `;
+                notesList.appendChild(noteCard);
+
+                // Add click handler to insert note into current session
+                noteCard.querySelector('.note-card-content').addEventListener('click', () => {
+                    document.getElementById('currentNote').value = note.content;
+                    modal.hide();
+                });
+
+                // Add delete handler
+                noteCard.querySelector('.delete-note').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm('Delete this note permanently?')) {
+                        this.deleteNote(note.id);
+                        noteCard.remove();
+                    }
+                });
+            });
+        }
+
+        modal.show();
+    },
+
+    // Delete a note
+    deleteNote(noteId) {
+        if (!userData.notes) return;
+        userData.notes = userData.notes.filter(note => note.id !== noteId);
+        saveUserData();
+    },
+
+    // Render all notes in notes tab
+    renderAllNotes() {
+        const container = document.getElementById('allNotesContainer');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const allNotes = (userData.notes || []).sort((a, b) =>
+            new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        if (allNotes.length === 0) {
+            container.innerHTML = '<div class="empty-state">No notes created yet</div>';
+            return;
+        }
+
+        allNotes.forEach(note => {
+            const noteCard = document.createElement('div');
+            noteCard.className = 'note-card';
+            noteCard.innerHTML = `
+        <div class="note-card-header">
+          <h5>${note.type === 'session' ? note.subject : note.subjects.join(', ')}</h5>
+          ${note.topic ? `<span class="badge bg-secondary">${note.topic}</span>` : ''}
+          <button class="btn btn-sm btn-outline-danger delete-note" data-id="${note.id}">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+        <div class="note-card-content">${note.content}</div>
+        <div class="note-card-footer">
+          <small>${new Date(note.createdAt).toLocaleString()}</small>
+          <small>${note.type === 'session' ? 'Session Note' : 'Standalone Note'}</small>
+        </div>
+      `;
+            container.appendChild(noteCard);
+
+            // Add delete handler
+            noteCard.querySelector('.delete-note').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (confirm('Delete this note permanently?')) {
+                    this.deleteNote(note.id);
+                    noteCard.remove();
+                }
+            });
+        });
+    },
+
+    // Search notes
+    searchNotes(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const notes = document.querySelectorAll('#allNotesContainer .note-card');
+
+        notes.forEach(note => {
+            const content = note.querySelector('.note-card-content').textContent.toLowerCase();
+            const matches = content.includes(searchTerm);
+            note.style.display = matches ? 'block' : 'none';
+        });
+    }
+};
 
 // Helper function to format time
 function formatTime(date) {
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 // Start timer UI
 function startTimerUI() {
-  startTimerBtn.disabled = true;
-  stopTimerBtn.disabled = false;
-  updateSessionInfoDisplay();
+    startTimerBtn.disabled = true;
+    stopTimerBtn.disabled = false;
+    updateSessionInfoDisplay();
 }
 function resetTimer() {
     if (timerInterval) clearInterval(timerInterval);

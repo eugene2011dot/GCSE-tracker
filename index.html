@@ -38,6 +38,10 @@
           <i class="bi bi-book"></i>
           <span>Subjects</span>
         </li>
+        <li class="nav-item" data-target="notes-section">
+          <i class="bi bi-journal-text"></i>
+          <span>Notes</span>
+        </li>
         <li class="nav-item" data-target="work">
           <i class="bi bi-file-earmark-text"></i>
           <span>School</span>
@@ -62,10 +66,7 @@
           <i class="bi bi-person-hearts"></i>
           <span>Wellbeing</span>
         </li>
-        <li class="nav-item" data-target="music">
-          <i class="bi bi-music-note-list"></i>
-          <span>Focus Music</span>
-        </li>
+
       </ul>
       <!-- Data Protection Accordion -->
       <script>
@@ -930,6 +931,21 @@
         </div>
       </section>
 
+
+      <div class="modal fade" id="notesModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Previous Notes</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div id="notesList" class="notes-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Study Tracker Section -->
       <section id="tracker" class="content-section">
         <div class="section-header">
@@ -991,8 +1007,53 @@
             </div>
           </div>
         </div>
+        <div class="notes-section">
+          <h4>Session Notes</h4>
+          <div id="currentNoteContainer">
+            <textarea id="currentNote" placeholder="Add notes for this session..."></textarea>
+            <button id="saveCurrentNote" class="btn btn-sm btn-primary">Save</button>
+            <button id="viewOtherNotes" class="btn btn-sm btn-outline-secondary">View Other Notes</button>
+          </div>
+        </div>
       </section>
 
+      <section id="notes-section" class="content-section">
+        <div class="section-header">
+          <h2>Notes</h2>
+        </div>
+
+        <div class="standalone-notes">
+          <h3>Create New Note</h3>
+          <form id="standaloneNoteForm">
+            <div class="mb-3">
+              <label class="form-label">Subjects</label>
+              <select id="noteSubjects" class="form-select" multiple>
+                <option value="general">General Note</option>
+                <!-- Subjects will be populated dynamically -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Topic (optional)</label>
+              <select id="noteTopic" class="form-select" disabled>
+                <option value="">Select topic...</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Note Content</label>
+              <textarea id="noteContent" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Note</button>
+          </form>
+
+          <div class="all-notes-list mt-4">
+            <h4>All Notes</h4>
+            <div class="search-notes mb-3">
+              <input type="text" id="searchNotes" class="form-control" placeholder="Search notes...">
+            </div>
+            <div id="allNotesContainer" class="notes-grid"></div>
+          </div>
+        </div>
+      </section>
       <!-- Progress Section -->
       <section id="progress" class="content-section">
         <div class="section-header">
@@ -1371,44 +1432,44 @@
       </div>
     </div>
   </div>
-        <div class="data-protection-container">
-        <div class="protection-panel" id="protectionPanel">
-          <div class="panel-content">
-            <!-- Backup Controls -->
-            <button id="exportBtn" class="btn btn-primary data-btn">
-              <i class="bi bi-download"></i> Backup All Data
-            </button>
+  <div class="data-protection-container">
+    <div class="protection-panel" id="protectionPanel">
+      <div class="panel-content">
+        <!-- Backup Controls -->
+        <button id="exportBtn" class="btn btn-primary data-btn">
+          <i class="bi bi-download"></i> Backup All Data
+        </button>
 
-            <label for="importBackup" class="btn btn-outline-secondary data-btn">
-              <i class="bi bi-upload"></i> Restore Backup
-            </label>
-            <input type="file" id="importBackup" accept=".json">
+        <label for="importBackup" class="btn btn-outline-secondary data-btn">
+          <i class="bi bi-upload"></i> Restore Backup
+        </label>
+        <input type="file" id="importBackup" accept=".json">
 
-            <div class="d-flex justify-content-between small text-muted">
-              <span>Last backup:</span>
-              <span id="lastBackupTime" class="fw-monospace">Never</span>
-            </div>
-
-            <!-- Backup History -->
-            <div class="backup-history">
-              <h6>Recent Backups</h6>
-              <ul id="backupList">
-                <!-- Will be populated by JavaScript -->
-                <li>No backups found</li>
-              </ul>
-            </div>
-          </div>
-
+        <div class="d-flex justify-content-between small text-muted">
+          <span>Last backup:</span>
+          <span id="lastBackupTime" class="fw-monospace">Never</span>
         </div>
 
-        <button class="protection-toggle" id="protectionToggle">
-          <span><i class="bi bi-shield-lock"></i> Data Protection</span>
-          <i class="bi bi-chevron-up"></i>
-        </button>
-        <button id="darkModeBtn" class="btn btn-sm btn-outline-secondary">
-          <i class="bi bi-moon"></i> Toggle Dark Mode
-        </button>
+        <!-- Backup History -->
+        <div class="backup-history">
+          <h6>Recent Backups</h6>
+          <ul id="backupList">
+            <!-- Will be populated by JavaScript -->
+            <li>No backups found</li>
+          </ul>
+        </div>
       </div>
+
+    </div>
+
+    <button class="protection-toggle" id="protectionToggle">
+      <span><i class="bi bi-shield-lock"></i> Data Protection</span>
+      <i class="bi bi-chevron-up"></i>
+    </button>
+    <button id="darkModeBtn" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-moon"></i> Toggle Dark Mode
+    </button>
+  </div>
 
   <script>
     // Panel toggle only

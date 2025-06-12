@@ -46,6 +46,10 @@ body {
     width: var(--sidebar-width);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    scroll-behavior: auto;
+    scrollbar-width: none;
+    scrollbar-color: #6c6c6c00 #ffffff;
 }
 
 .sidenav-header {
@@ -528,6 +532,18 @@ body {
 }
 .sessions-table tr:last-child td {
     border-bottom: none !important;
+}
+.data-protection-container,
+.data-protection-container span,
+.data-protection-container h6,
+.data-protection-container li,
+.data-protection-container button :not(#darkModeBtn, .bi bi-moon) {
+    color: #ffffff !important; /* Ensures all text elements are white */
+}
+
+/* Also ensure the label acting as a button has white text */
+.data-protection-container label.data-btn {
+    color: #ffffff !important;
 }
 }
 /* Dark Mode Accordion Styles - Clean Grey Version */
@@ -3616,7 +3632,71 @@ select:not(.multi-select) {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
 }
+/* Notes specific styles */
+.notes-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+}
 
+#currentNote {
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.note-card {
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.note-card:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.note-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.note-card-content {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+}
+
+.note-card-meta, .note-card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.delete-note {
+  margin-left: auto;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
     :root {

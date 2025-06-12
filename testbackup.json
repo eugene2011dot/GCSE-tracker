@@ -1,0 +1,46 @@
+{
+  "userData": {
+    "subjects": [
+      {
+        "id": "sub-math",
+        "name": "Mathematics",
+        "examBoard": "Edexcel",
+        "gradeTarget": "8",
+        "topics": [
+          {"id": "topic-alg", "name": "Algebra", "mastery": 0.75},
+          {"id": "topic-calc", "name": "Calculus", "mastery": 0.60},
+          {"id": "topic-geo", "name": "Geometry", "mastery": 0.85}
+        ]
+      },
+      {
+        "id": "sub-eng",
+        "name": "English Literature",
+        "examBoard": "AQA",
+        "gradeTarget": "7",
+        "topics": [
+          {"id": "topic-poet", "name": "Poetry Analysis", "mastery": 0.90},
+          {"id": "topic-novel", "name": "Novel Study", "mastery": 0.70}
+        ]
+      }
+    ],
+    "studySessions": [
+      {
+        "id": "session-1",
+        "date": "2025-06-10T10:00:00.000Z",
+        "durationMinutes": 90,
+        "subjectId": "sub-math",
+        "topicId": "topic-alg",
+        "notes": "Worked through past paper questions on quadratic equations."
+      },
+      {
+        "id": "session-2",
+        "date": "2025-06-11T14:15:00.000Z",
+        "durationMinutes": 60,
+        "subjectId": "sub-eng",
+        "topicId": "topic-poet",
+        "notes": "Reviewed 'Ozymandias' and 'London'."
+      }
+    ]
+  },
+  "settings": "{\"darkMode\":true,\"notificationsEnabled\":true,\"preferredTheme\":\"midnight\"}"
+}
