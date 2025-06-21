@@ -114,86 +114,1088 @@ let selectedSubject = null;
 let selectedSession = null;
 // GCSE Subjects Data
 const gcseSubjects = {
-    "English Language": {
-        examBoard: "AQA",
-        topics: ["Reading", "Writing", "Creative Writing", "Non-fiction Texts", "Persuasive Writing"]
-    },
-    "English Literature": {
-        examBoard: "AQA",
-        topics: ["Shakespeare", "19th Century Fiction", "Modern Text", "Poetry", "Unseen Poetry"]
-    },
-    "Mathematics": {
-        examBoard: "Edexcel",
-        topics: ["Number", "Algebra", "Ratio & Proportion", "Geometry", "Statistics", "Probability"]
-    },
     "Biology": {
-        examBoard: "OCR",
-        topics: ["Cell Biology", "Infection & Response", "Bioenergetics", "Homeostasis", "Inheritance", "Ecology"]
+        "AQA": {
+            topics: [
+                "Cell biology",
+                "Organisation",
+                "Infection & response",
+                "Bioenergetics",
+                "Homeostasis & response",
+                "Inheritance, variation & evolution",
+                "Ecology",
+                "Key ideas"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Key concepts in biology",
+                "Cells and control",
+                "Genetics",
+                "Natural selection & genetic modification",
+                "Health, disease & development of medicines",
+                "Plant structures & their functions",
+                "Animal coordination, control & homeostasis",
+                "Exchange & transport in animals",
+                "Ecosystems & material cycles"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Cell-level systems",
+                "Scaling up",
+                "Organism-level systems",
+                "Community-level systems",
+                "Genes, inheritance & selection",
+                "Global challenges",
+                "Practical skills"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Cells and movement across membranes",
+                "Respiration & the respiratory system",
+                "Digestion & digestive system",
+                "Circulatory system",
+                "Plant structures & photosynthesis",
+                "Ecosystems, nutrient cycles & human impact",
+                "Classification & biodiversity",
+                "Cell division & stem cells",
+                "Variation & evolution",
+                "Response & regulation",
+                "Kidneys & homeostasis",
+                "Micro‑organisms & their applications",
+                "Disease, defence & treatment"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Cells, living processes & biodiversity",
+                "Body systems, genetics, microorganisms & health",
+                "Practical skills"
+            ]
+        }
     },
     "Chemistry": {
-        examBoard: "OCR",
-        topics: ["Atomic Structure", "Bonding", "Quantitative Chemistry", "Chemical Changes", "Energy Changes", "Organic Chemistry"]
+        "AQA": {
+            topics: [
+                "Atomic structure & the Periodic Table",
+                "Bonding, structure, and the properties of matter",
+                "Quantitative chemistry",
+                "Chemical changes",
+                "Energy changes",
+                "The rate and extent of chemical change",
+                "Organic chemistry",
+                "Chemical analysis",
+                "Chemistry of the atmosphere",
+                "Using resources",
+                "Practical skills"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Key concepts in chemistry",
+                "States of matter and mixtures",
+                "Chemical changes",
+                "Extracting metals and equilibria",
+                "Groups in the periodic table",
+                "Rates of reaction and energy changes",
+                "Fuels and Earth science"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Particles",
+                "Atoms, elements and compounds",
+                "Chemical reactions",
+                "Predicting and identifying reactions and products",
+                "Monitoring and controlling chemical reactions",
+                "Global challenges",
+                "Practical skills"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "The nature of substances and chemical reactions",
+                "Atomic structure and the Periodic Table",
+                "Water and atmospheric science",
+                "Chemical calculations",
+                "Chemical changes",
+                "Energy changes in chemistry",
+                "The rate and extent of chemical change",
+                "Organic chemistry",
+                "Analysis and purification of substances"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Structures, trends, chemical reactions, quantitative chemistry and analysis",
+                "Further chemical reactions, rates and equilibrium, calculations and organic chemistry",
+                "Practical skills"
+            ]
+        }
     },
     "Physics": {
-        examBoard: "OCR",
-        topics: ["Energy", "Electricity", "Particle Model", "Atomic Structure", "Forces", "Waves", "Magnetism"]
+        "AQA": {
+            topics: [
+                "Energy",
+                "Electricity",
+                "Particle model of matter",
+                "Atomic structure",
+                "Forces",
+                "Waves",
+                "Magnetism and electromagnetism",
+                "Space physics",
+                "Key ideas"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Key concepts of physics",
+                "Motion and forces",
+                "Conservation of energy",
+                "Waves",
+                "Light and the electromagnetic spectrum",
+                "Radioactivity",
+                "Astronomy",
+                "Energy – Forces doing work",
+                "Forces and their effects",
+                "Electricity and circuits",
+                "Static electricity",
+                "Magnetism and the motor effect",
+                "Electromagnetic induction",
+                "Particle model",
+                "Forces and matter"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Matter",
+                "Forces",
+                "Electricity",
+                "Magnetism and magnetic fields",
+                "Waves in matter",
+                "Radioactivity",
+                "Energy",
+                "Global challenges",
+                "Practical skills"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Electricity, energy and waves",
+                "Forces, space and radioactivity"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Forces, energy, moments and radioactivity",
+                "Waves, sound and light",
+                "Electricity, magnetism and space physics",
+                "Practical skills"
+            ]
+        }
     },
-    "Computer Science": {
-        examBoard: "OCR",
-        topics: ["Systems Architecture", "Memory", "Storage", "Networks", "System Security", "Software", "Programming", "Algorithms", "Logic"]
+    "Mathematics": {
+        "AQA": {
+            topics: [
+                "Number",
+                "Algebra",
+                "Ratio, proportion and rates of change",
+                "Geometry and measures",
+                "Probability",
+                "Statistics"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Number",
+                "Algebra",
+                "Ratio, proportion and rates of change",
+                "Geometry and measures",
+                "Probability",
+                "Statistics"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Number",
+                "Algebra",
+                "Ratio, proportion and rates of change",
+                "Geometry and measures",
+                "Probability",
+                "Statistics"
+            ]
+        }
     },
-    "Geography": {
-        examBoard: "AQA",
-        topics: ["Physical Landscapes", "Weather & Climate", "Ecosystems", "Urban Issues", "Economic Development", "Resource Management"]
+    "English Language": {
+        topics: [
+            "Reading",
+            "Writing",
+            "Creative Writing",
+            "Non-fiction Texts",
+            "Persuasive Writing"
+        ]
     },
-    "History": {
-        examBoard: "Edexcel",
-        topics: ["Medicine Through Time", "Anglo-Saxon & Norman England", "American West", "Weimar & Nazi Germany", "Cold War"]
+    "English Literature": {
+        topics: [
+            "Shakespeare",
+            "19th Century Fiction",
+            "Modern Text",
+            "Poetry",
+            "Unseen Poetry"
+        ]
     },
     "French": {
-        examBoard: "AQA",
-        topics: ["Identity & Culture", "Local Area", "School", "Future Aspirations", "International Issues"]
+        topics: [
+            "Identity and Culture",
+            "Local Area, Holiday and Travel",
+            "School",
+            "Future Aspirations, Study and Work",
+            "International and Global Dimension"
+        ]
     },
     "Spanish": {
-        examBoard: "AQA",
-        topics: ["Identity & Culture", "Local Area", "School", "Future Aspirations", "International Issues"]
+        topics: [
+            "Identity and Culture",
+            "Local Area, Holiday and Travel",
+            "School",
+            "Future Aspirations, Study and Work",
+            "International and Global Dimension"
+        ]
     },
-    "Art & Design": {
-        examBoard: "AQA",
-        topics: ["Portfolio", "Externally Set Assignment"]
+    "German": {
+        topics: [
+            "Identity and Culture",
+            "Local Area, Holiday and Travel",
+            "School",
+            "Future Aspirations, Study and Work",
+            "International and Global Dimension"
+        ]
+    },
+    "Art and Design": {
+        topics: [
+            "Portfolio",
+            "Externally Set Assignment"
+        ]
     },
     "Music": {
-        examBoard: "Edexcel",
-        topics: ["Performing", "Composing", "Appraising"]
+        topics: [
+            "Performing",
+            "Composing",
+            "Appraising"
+        ]
     },
-    "Physical Education": {
-        examBoard: "AQA",
-        topics: ["Anatomy & Physiology", "Movement Analysis", "Physical Training", "Sports Psychology", "Health & Fitness"]
+    "Dance": {
+        topics: [
+            "Performance",
+            "Choreography",
+            "Appreciation and Critical Understanding"
+        ]
+    },
+    "Psychology": {
+        topics: [
+            "Memory",
+            "Perception",
+            "Development",
+            "Social Influence",
+            "Psychological Problems",
+            "Research Methods"
+        ]
+    },
+    "Further Mathematics": {
+        topics: [
+            "Proof",
+            "Complex Numbers",
+            "Matrices",
+            "Further Algebra and Functions",
+            "Further Calculus",
+            "Further Vectors",
+            "Polar Coordinates",
+            "Hyperbolic Functions"
+        ]
+    },
+    "Geography": {
+        "AQA": {
+            topics: [
+                "Living with the physical environment",
+                "Challenges in the human environment",
+                "Geographical applications",
+                "Geographical skills"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "The physical environment",
+                "The human environment",
+                "Geographical investigations"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Physical Geography",
+                "Human Geography",
+                "Geographical Skills"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Physical Geography",
+                "Human Geography",
+                "Environmental Challenges"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Physical Geography",
+                "Human Geography",
+                "Geographical Skills"
+            ]
+        }
+    },
+
+    "Computer Science": {
+        "AQA": {
+            topics: [
+                "Fundamentals of algorithms",
+                "Programming",
+                "Fundamentals of data representation",
+                "Computer systems",
+                "Fundamentals of computer networks",
+                "Cyber security",
+                "Relational databases and SQL",
+                "Ethical, legal and environmental impacts"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Computational thinking",
+                "Data",
+                "Computers",
+                "Networks",
+                "Issues and impact",
+                "Problem solving with programming"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Systems architecture",
+                "Memory and storage",
+                "Networks and topologies",
+                "Network security",
+                "Systems software",
+                "Ethical, legal, cultural impacts",
+                "Algorithms",
+                "Programming fundamentals",
+                "Boolean logic",
+                "Producing robust programs"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Hardware",
+                "Logical operations",
+                "Communication",
+                "Software development (NEA)"
+            ]
+        }
     },
     "Religious Studies": {
-        examBoard: "AQA",
-        topics: ["Christianity", "Islam", "Relationships", "Life Issues", "Peace & Conflict", "Crime & Punishment"]
+        "AQA": {
+            topics: [
+                "Christian beliefs and practices",
+                "Islamic beliefs and practices",
+                "Relationships and families",
+                "Religion and life",
+                "Peace and conflict",
+                "Crime and punishment"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Christianity",
+                "Islam",
+                "Philosophy",
+                "Ethics"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Religion and ethics",
+                "Philosophy and religion",
+                "Religion, peace and conflict"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Christianity",
+                "Islam",
+                "Philosophy and ethics"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Christianity",
+                "Islam",
+                "Judaism",
+                "Philosophy and ethics"
+            ]
+        }
     },
+
     "Business Studies": {
-        examBoard: "Edexcel",
-        topics: ["Enterprise", "Marketing", "Finance", "Operations", "Human Resources"]
+        "AQA": {
+            topics: [
+                "Business in the real world",
+                "Influences on business",
+                "Business operations",
+                "Human resources",
+                "Marketing",
+                "Finance"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Enterprise and entrepreneurship",
+                "Finance",
+                "Marketing and market research",
+                "Operations management",
+                "Human resources"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Business activity",
+                "Marketing and people",
+                "Operations and finance"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Business activity",
+                "People in business",
+                "Marketing and operations",
+                "Finance"
+            ]
+        }
+    },
+
+    "Drama": {
+        "AQA": {
+            topics: [
+                "Devising",
+                "Text in performance",
+                "Theatre roles and responsibilities"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Devising theatre",
+                "Performing from a text",
+                "Interpreting theatre"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Devising drama",
+                "Presenting and performing texts",
+                "Drama performance and response"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Performance and production skills",
+                "Devised and scripted drama",
+                "Drama performance and response"
+            ]
+        }
+    },
+
+    "Media Studies": {
+        "AQA": {
+            topics: [
+                "Media language",
+                "Media representation",
+                "Media industries",
+                "Audience"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Media language",
+                "Representation",
+                "Media industries and audiences",
+                "Contexts"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Media language",
+                "Representation",
+                "Media industries and audiences",
+                "Contexts"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Media language and representation",
+                "Media industries and audiences",
+                "Media contexts"
+            ]
+        }
+    },
+
+    "Design and Technology": {
+        "AQA": {
+            topics: [
+                "Core technical principles",
+                "Core designing and making principles",
+                "Specialist technical principles",
+                "Designing and making principles"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Designing and making principles",
+                "Core technical principles",
+                "Specialist technical principles"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Technical principles",
+                "Designing and making principles"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Design and making principles",
+                "Technical principles"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Designing and making principles",
+                "Technical knowledge"
+            ]
+        }
+    },
+
+    "Physical Education": {
+        "AQA": {
+            topics: [
+                "Applied anatomy and physiology",
+                "Movement analysis",
+                "Physical training",
+                "Use of data",
+                "Sports psychology",
+                "Health, fitness and well-being"
+            ]
+        },
+        "Edexcel": {
+            topics: [
+                "Applied anatomy and physiology",
+                "Movement analysis",
+                "Physical training",
+                "Sports psychology",
+                "Health, fitness and well-being"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Physical factors affecting performance",
+                "Socio-cultural issues",
+                "Health, fitness and well-being",
+                "Psychological factors"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Applied anatomy and physiology",
+                "Movement analysis",
+                "Physical training",
+                "Socio-cultural influences",
+                "Health, fitness and well-being",
+                "Sports psychology"
+            ]
+        }
+    },
+    "Food Preparation and Nutrition": {
+        "AQA": {
+            topics: [
+                "Food, nutrition and health",
+                "Food science",
+                "Food safety",
+                "Food choice",
+                "Food provenance"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Nutrition and health",
+                "Food science",
+                "Food safety and hygiene",
+                "Food choice and sensory evaluation",
+                "Food provenance"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Nutrition",
+                "Food science",
+                "Food safety",
+                "Food choice",
+                "Food provenance"
+            ]
+        }
+    },
+
+    "Economics": {
+        "Edexcel": {
+            topics: [
+                "The economic problem",
+                "How markets work",
+                "Market failure and government intervention",
+                "The UK economy",
+                "The global economy"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Microeconomics",
+                "Macroeconomics",
+                "The UK economy",
+                "International trade",
+                "Economic development"
+            ]
+        }
+    },
+
+    "Sociology": {
+        "AQA": {
+            topics: [
+                "Families and households",
+                "Education",
+                "Crime and deviance",
+                "Social stratification"
+            ]
+        },
+        "OCR": {
+            topics: [
+                "Sociological research methods",
+                "Socialisation, culture and identity",
+                "Social inequality",
+                "Families and households",
+                "Education"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Socialisation",
+                "Social groups",
+                "Social stratification",
+                "Deviance and social control",
+                "Research methods"
+            ]
+        }
+    },
+
+    "Citizenship Studies": {
+        "WJEC": {
+            topics: [
+                "Rights and responsibilities",
+                "Democracy and government",
+                "The law and the justice system",
+                "Living in a diverse society",
+                "Active citizenship"
+            ]
+        },
+        "CCEA": {
+            topics: [
+                "Rights and responsibilities",
+                "Democracy and government",
+                "Justice system",
+                "Active citizenship",
+                "Social issues"
+            ]
+        }
+    },
+
+    "Learning for Life and Work": {
+        "CCEA": {
+            topics: [
+                "Employability skills",
+                "Personal development",
+                "Local and global citizenship",
+                "Home economics",
+                "Conflict and peace"
+            ]
+        }
+    },
+
+    "Classical Greek": {
+        "WJEC": {
+            topics: [
+                "Language skills",
+                "Grammar and syntax",
+                "Translation",
+                "Literature study"
+            ]
+        }
+    },
+
+    "Latin": {
+        "OCR": {
+            topics: [
+                "Language",
+                "Grammar and syntax",
+                "Translation",
+                "Literature and culture"
+            ]
+        },
+        "WJEC": {
+            topics: [
+                "Language",
+                "Grammar",
+                "Translation",
+                "Roman history and culture"
+            ]
+        }
     }
 };
+
 const examData = {
     "AQA": {
         "name": "AQA",
         "subjects": [
             {
+                "name": "Art and Design",
+                "icon": "palette",
+                "exams": []
+            },
+            {
+                "name": "Bengali",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2026-06-03T13:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2026-06-03T13:30:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2026-06-11T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Biology",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2026-05-12T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2026-06-08T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Business Studies",
+                "icon": "briefcase",
+                "exams": [
+                    {
+                        "name": "Paper 1: Influences of operations and HRM on business activity",
+                        "datetime": "2026-05-11T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2: Influences of marketing and finance on business activity",
+                        "datetime": "2026-05-21T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Chemistry",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2026-05-18T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2026-06-12T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Chinese (Mandarin)",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2026-05-11T13:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2026-05-11T13:30:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2026-05-18T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Citizenship Studies",
+                "icon": "person-fill",
+                "exams": [
+                    {
+                        "name": "Paper 1",
+                        "datetime": "2026-05-07T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2",
+                        "datetime": "2026-05-14T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Combined Science: Synergy",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Life and Environmental Sciences",
+                        "datetime": "2026-05-12T13:30:00"
+                    },
+                    {
+                        "name": "Life and Environmental Sciences",
+                        "datetime": "2026-06-02T09:00:00"
+                    },
+                    {
+                        "name": "Physical Sciences",
+                        "datetime": "2026-06-08T09:00:00"
+                    },
+                    {
+                        "name": "Physical Sciences",
+                        "datetime": "2026-06-12T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Combined Science: Trilogy",
+                "icon": "beaker",
+                "exams": [
+                    {
+                        "name": "Biology Paper 1",
+                        "datetime": "2026-05-12T13:30:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 1",
+                        "datetime": "2026-05-18T09:00:00"
+                    },
+                    {
+                        "name": "Physics Paper 1",
+                        "datetime": "2026-06-02T09:00:00"
+                    },
+                    {
+                        "name": "Biology Paper 2",
+                        "datetime": "2026-06-08T09:00:00"
+                    },
+                    {
+                        "name": "Chemistry Paper 2",
+                        "datetime": "2026-06-12T09:00:00"
+                    },
+                    {
+                        "name": "Physics Paper 2",
+                        "datetime": "2026-06-15T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Computer Science",
+                "icon": "cpu",
+                "exams": [
+                    {
+                        "name": "Computational thinking and programming skills (C#)",
+                        "datetime": "2026-05-13T13:30:00"
+                    },
+                    {
+                        "name": "Computational thinking and programming skills (Python)",
+                        "datetime": "2026-05-13T13:30:00"
+                    },
+                    {
+                        "name": "Computational thinking and programming skills (VB.Net)",
+                        "datetime": "2026-05-13T13:30:00"
+                    },
+                    {
+                        "name": "Computing concepts",
+                        "datetime": "2026-05-19T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Dance",
+                "icon": "music-note",
+                "exams": [
+                    {
+                        "name": "Dance appreciation",
+                        "datetime": "2026-06-12T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Design and Technology",
+                "icon": "hammer",
+                "exams": [
+                    {
+                        "name": "Written",
+                        "datetime": "2026-06-10T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Drama",
+                "icon": "mask",
+                "exams": [
+                    {
+                        "name": "Understanding drama",
+                        "datetime": "2026-05-08T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Economics",
+                "icon": "cash-coin",
+                "exams": [
+                    {
+                        "name": "Paper 1 - How markets work",
+                        "datetime": "2026-05-08T13:30:00"
+                    },
+                    {
+                        "name": "Paper 2 - How the economy works",
+                        "datetime": "2026-05-22T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Engineering",
+                "icon": "tools",
+                "exams": [
+                    {
+                        "name": "Written",
+                        "datetime": "2026-06-01T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "English Language",
+                "icon": "book",
+                "exams": [
+                    {
+                        "name": "Explorations in creative reading and writing",
+                        "datetime": "2026-05-21T09:00:00"
+                    },
+                    {
+                        "name": "Writers' viewpoints and perspectives",
+                        "datetime": "2026-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
                 "name": "English Literature",
                 "icon": "book",
                 "exams": [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-12T09:00:00"
+                        "name": "Shakespeare and the 19th century novel",
+                        "datetime": "2026-05-11T09:00:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-05-20T09:00:00"
+                        "name": "Modern texts and poetry",
+                        "datetime": "2026-05-19T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "Food preparation and nutrition",
+                "icon": "utensils",
+                "exams": [
+                    {
+                        "name": "Paper 1: Food preparation and nutrition",
+                        "datetime": "2026-06-11T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "French",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2026-05-20T09:00:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2026-05-20T09:00:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2026-06-04T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "Geography",
+                "icon": "globe",
+                "exams": [
+                    {
+                        "name": "Paper 1: Living with the physical environment",
+                        "datetime": "2026-05-13T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2: Challenges in the human environment",
+                        "datetime": "2026-06-03T13:30:00"
+                    },
+                    {
+                        "name": "Paper 3: Geographical applications",
+                        "datetime": "2026-06-11T09:00:00"
+                    }
+                ]
+            },
+            {
+                "name": "German",
+                "icon": "translate",
+                "exams": [
+                    {
+                        "name": "Listening",
+                        "datetime": "2026-05-07T13:30:00"
+                    },
+                    {
+                        "name": "Reading",
+                        "datetime": "2026-05-07T13:30:00"
+                    },
+                    {
+                        "name": "Writing",
+                        "datetime": "2026-05-14T13:30:00"
+                    }
+                ]
+            },
+            {
+                "name": "History",
+                "icon": "clock-history",
+                "exams": [
+                    {
+                        "name": "Paper 1 - Understanding the modern world",
+                        "datetime": "2026-05-15T09:00:00"
+                    },
+                    {
+                        "name": "Paper 2 - Shaping the nation",
+                        "datetime": "2026-06-04T09:00:00"
                     }
                 ]
             },
@@ -203,85 +1205,23 @@ const examData = {
                 "exams": [
                     {
                         "name": "Paper 1 (Non-Calculator)",
-                        "datetime": "2025-05-15T09:30:00"
+                        "datetime": "2026-05-15T09:30:00"
                     },
                     {
                         "name": "Paper 2 (Calculator)",
-                        "datetime": "2025-06-04T09:30:00"
+                        "datetime": "2026-06-04T09:30:00"
                     },
                     {
                         "name": "Paper 3 (Calculator)",
-                        "datetime": "2025-06-11T09:30:00"
+                        "datetime": "2026-06-11T09:30:00"
                     },
                     {
                         "name": "Further Maths - Paper 1",
-                        "datetime": "2025-06-12T13:30:00"
+                        "datetime": "2026-06-12T13:30:00"
                     },
                     {
                         "name": "Further Maths - Paper 2",
-                        "datetime": "2025-06-18T13:30:00"
-                    }
-                ]
-            },
-            {
-                "name": "English Language",
-                "icon": "book",
-                "exams": [
-                    {
-                        "name": "Paper 1 - Fiction and Creative Writing",
-                        "datetime": "2025-05-15T13:30:00"
-                    },
-                    {
-                        "name": "Paper 2 - Non-Fiction",
-                        "datetime": "2025-05-18T09:00:00"
-                    }
-                ]
-            },
-            {
-                "name": "Science",
-                "icon": "beaker",
-                "exams": [
-                    {
-                        "name": "Biology Paper 1",
-                        "datetime": "2025-05-13T13:20:00"
-                    },
-                    {
-                        "name": "Chemistry Paper 1",
-                        "datetime": "2025-05-19T09:20:00"
-                    },
-                    {
-                        "name": "Physics Paper 1",
-                        "datetime": "2025-05-22T13:20:00"
-                    },
-                    {
-                        "name": "Biology Paper 2",
-                        "datetime": "2025-06-09T09:30:00"
-                    },
-                    {
-                        "name": "Chemistry Paper 2",
-                        "datetime": "2025-06-13T09:30:00"
-                    },
-                    {
-                        "name": "Physics Paper 2",
-                        "datetime": "2025-06-16T09:30:00"
-                    }
-                ]
-            },
-            {
-                "name": "Geography",
-                "icon": "globe",
-                "exams": [
-                    {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-14T09:30:00"
-                    },
-                    {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-06T13:20:00"
-                    },
-                    {
-                        "name": "Paper 3",
-                        "datetime": "2025-06-12T09:30:00"
+                        "datetime": "2026-06-18T13:30:00"
                     }
                 ]
             },
@@ -291,85 +1231,11 @@ const examData = {
                 "exams": [
                     {
                         "name": "Paper 1",
-                        "datetime": "2025-05-19T13:30:00"
+                        "datetime": "2026-05-19T13:30:00"
                     },
                     {
                         "name": "Paper 2",
-                        "datetime": "2025-06-09T13:30:00"
-                    }
-                ]
-            },
-            {
-                "name": "Languages",
-                "icon": "translate",
-                "exams": [
-                    {
-                        "name": "Speaking",
-                        "datetime": "2025-03-31T08:30:00"
-                    },
-                    {
-                        "name": "Writing",
-                        "datetime": "2025-06-17T09:30:00"
-                    },
-                    {
-                        "name": "Listening and Reading",
-                        "datetime": "2025-06-10T09:20:00"
-                    }
-                ]
-            },
-            {
-                "name": "Design and Technology",
-                "icon": "hammer",
-                "exams": [
-                    {
-                        "name": "Paper 1",
-                        "datetime": "2025-06-18T09:30:00"
-                    }
-                ]
-            },
-            {
-                "name": "Business Studies",
-                "icon": "briefcase",
-                "exams": [
-                    {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-09T13:30:00"
-                    },
-                    {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-05T09:00:00"
-                    }
-                ]
-            },
-            {
-                "name": "Computer Science",
-                "icon": "cpu",
-                "exams": [
-                    {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-12T13:30:00"
-                    },
-                    {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-07T09:00:00"
-                    }
-                ]
-            },
-            {
-                "name": "History",
-                "icon": "clock-history",
-                "exams": [
-                    {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-14T13:30:00"
-                    },
-                    {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-03T09:00:00"
-                    },
-                    {
-                        "name": "Paper 3",
-                        "datetime": "2025-06-10T13:30:00"
+                        "datetime": "2026-06-09T13:30:00"
                     }
                 ]
             },
@@ -379,11 +1245,11 @@ const examData = {
                 "exams": [
                     {
                         "name": "Paper 1",
-                        "datetime": "2025-05-16T09:00:00"
+                        "datetime": "2026-05-16T09:00:00"
                     },
                     {
                         "name": "Paper 2",
-                        "datetime": "2025-06-06T13:30:00"
+                        "datetime": "2026-06-06T13:30:00"
                     }
                 ]
             },
@@ -393,11 +1259,11 @@ const examData = {
                 "exams": [
                     {
                         "name": "Paper 1",
-                        "datetime": "2025-05-13T09:00:00"
+                        "datetime": "2026-05-13T09:00:00"
                     },
                     {
                         "name": "Paper 2",
-                        "datetime": "2025-05-23T09:00:00"
+                        "datetime": "2026-05-23T09:00:00"
                     }
                 ]
             }
@@ -524,7 +1390,7 @@ const examData = {
                 "exams": [
                     {
                         "name": "Paper 1",
-                        "datetime": "2025-05-20T13:30:00"
+                        "datetime": "2025-06-20T13:30:00"
                     },
                     {
                         "name": "Paper 2",
@@ -655,183 +1521,619 @@ const examData = {
         ]
     },
     "OCR": {
-        "name": "OCR",
-        "subjects": [
+        name: "OCR",
+        subjects: [
             {
-                "name": "English Literature",
-                "icon": "book",
-                "exams": [
+                name: "Ancient History",
+                icon: "book", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-14T09:00:00"
+                        name: "J198/01: Greece and Persia",
+                        datetime: "2026-05-14T13:30:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-05-22T09:00:00"
+                        name: "J198/02: Rome and its neighbours",
+                        datetime: "2026-05-22T09:00:00"
                     }
                 ]
             },
             {
-                "name": "Mathematics",
-                "icon": "calculator",
-                "exams": [
+                name: "Biology A",
+                icon: "microscope", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1 (Non-Calculator)",
-                        "datetime": "2025-05-16T09:30:00"
+                        name: "J247/01: Paper 1 (Foundation tier)",
+                        datetime: "2026-05-12T13:30:00"
                     },
                     {
-                        "name": "Paper 2 (Calculator)",
-                        "datetime": "2025-06-05T09:30:00"
+                        name: "J247/02: Paper 2 (Foundation tier)",
+                        datetime: "2026-06-08T09:00:00"
                     },
                     {
-                        "name": "Paper 3 (Calculator)",
-                        "datetime": "2025-06-12T09:30:00"
+                        name: "J247/03: Paper 3 (Higher tier)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J247/04: Paper 4 (Higher tier)",
+                        datetime: "2026-06-08T09:00:00"
                     }
                 ]
             },
             {
-                "name": "English Language",
-                "icon": "book",
-                "exams": [
+                name: "Biology B",
+                icon: "microscope", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-20T09:00:00"
+                        name: "J257/01: Breadth in biology (Foundation)",
+                        datetime: "2026-05-12T13:30:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-06T09:00:00"
+                        name: "J257/02: Depth in biology (Foundation)",
+                        datetime: "2026-06-08T09:00:00"
+                    },
+                    {
+                        name: "J257/03: Breadth in biology (Higher)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J257/04: Depth in biology (Higher)",
+                        datetime: "2026-06-08T09:00:00"
                     }
                 ]
             },
             {
-                "name": "Science A",
-                "icon": "beaker",
-                "exams": [
+                name: "Business",
+                icon: "briefcase", // Placeholder icon
+                exams: [
                     {
-                        "name": "Biology Paper 1",
-                        "datetime": "2025-05-15T13:30:00"
+                        name: "J204/01: Business 1: business activity, marketing and people",
+                        datetime: "2026-05-11T13:30:00"
                     },
                     {
-                        "name": "Chemistry Paper 1",
-                        "datetime": "2025-05-21T13:30:00"
-                    },
-                    {
-                        "name": "Physics Paper 1",
-                        "datetime": "2025-05-23T13:30:00"
-                    },
-                    {
-                        "name": "Biology Paper 2",
-                        "datetime": "2025-06-11T13:30:00"
-                    },
-                    {
-                        "name": "Chemistry Paper 2",
-                        "datetime": "2025-06-16T13:30:00"
-                    },
-                    {
-                        "name": "Physics Paper 2",
-                        "datetime": "2025-06-18T13:30:00"
+                        name: "J204/02: Business 2: operations, finance and influences on business",
+                        datetime: "2026-05-21T13:30:00"
                     }
                 ]
             },
             {
-                "name": "Science B (Twenty First Century Science)",
-                "icon": "beaker",
-                "exams": [
+                name: "Chemistry A",
+                icon: "bi-flask-fill", // Placeholder icon
+                exams: [
                     {
-                        "name": "Biology Paper 1",
-                        "datetime": "2025-05-16T13:30:00"
+                        name: "J248/01: Paper 1 (Foundation tier)",
+                        datetime: "2026-05-18T09:00:00"
                     },
                     {
-                        "name": "Chemistry Paper 1",
-                        "datetime": "2025-05-22T13:30:00"
+                        name: "J248/02: Paper 2 (Foundation tier)",
+                        datetime: "2026-06-12T09:00:00"
                     },
                     {
-                        "name": "Physics Paper 1",
-                        "datetime": "2025-05-27T09:00:00"
+                        name: "J248/03: Paper 3 (Higher tier)",
+                        datetime: "2026-05-18T09:00:00"
                     },
                     {
-                        "name": "Biology Paper 2",
-                        "datetime": "2025-06-12T13:30:00"
-                    },
-                    {
-                        "name": "Chemistry Paper 2",
-                        "datetime": "2025-06-17T13:30:00"
-                    },
-                    {
-                        "name": "Physics Paper 2",
-                        "datetime": "2025-06-19T13:30:00"
+                        name: "J248/04: Paper 4 (Higher tier)",
+                        datetime: "2026-06-12T09:00:00"
                     }
                 ]
             },
             {
-                "name": "Geography A",
-                "icon": "globe",
-                "exams": [
+                name: "Chemistry B",
+                icon: "flask", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-16T09:00:00"
+                        name: "J258/01: Breadth in chemistry (Foundation)",
+                        datetime: "2026-05-18T09:00:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-09T09:00:00"
+                        name: "J258/02: Depth in chemistry (Foundation)",
+                        datetime: "2026-06-12T09:00:00"
                     },
                     {
-                        "name": "Paper 3",
-                        "datetime": "2025-06-12T09:00:00"
+                        name: "J258/03: Breadth in chemistry (Higher)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J258/04: Depth in chemistry (Higher)",
+                        datetime: "2026-06-12T09:00:00"
                     }
                 ]
             },
             {
-                "name": "Geography B (Schools for the Future)",
-                "icon": "globe",
-                "exams": [
+                name: "Citizenship Studies",
+                icon: "flag", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-19T09:00:00"
+                        name: "J270/01: Our Rights, Our Society",
+                        datetime: "2026-05-07T13:30:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-06-10T09:00:00"
+                        name: "J270/02: Our World, Our Community",
+                        datetime: "2026-05-14T13:30:00"
                     },
                     {
-                        "name": "Paper 3",
-                        "datetime": "2025-06-13T09:00:00"
+                        name: "J270/03: Citizenship in Action",
+                        datetime: "2026-06-01T09:00:00"
                     }
                 ]
             },
             {
-                "name": "French",
-                "icon": "translate",
-                "exams": [
+                name: "Classical Civilisation",
+                icon: "columns-gap", // Placeholder icon
+                exams: [
                     {
-                        "name": "Listening",
-                        "datetime": "2025-05-20T09:30:00"
+                        name: "J199/11: Myth and religion",
+                        datetime: "2026-05-19T13:30:00"
                     },
                     {
-                        "name": "Reading",
-                        "datetime": "2025-05-20T10:15:00"
+                        name: "J199/12: Women in the ancient world",
+                        datetime: "2026-05-19T13:30:00"
                     },
                     {
-                        "name": "Writing",
-                        "datetime": "2025-06-16T09:30:00"
+                        name: "J199/21: The Homeric world",
+                        datetime: "2026-06-01T09:00:00"
                     },
                     {
-                        "name": "Speaking",
-                        "datetime": "2025-04-28T09:00:00" // Window starts
+                        name: "J199/22: Roman city life",
+                        datetime: "2026-06-01T09:00:00"
+                    },
+                    {
+                        name: "J199/23: War and warfare",
+                        datetime: "2026-06-01T09:00:00"
                     }
                 ]
             },
             {
-                "name": "Religious Studies",
-                "icon": "book-half",
-                "exams": [
+                name: "Classical Greek",
+                icon: "book", // Placeholder icon
+                exams: [
                     {
-                        "name": "Paper 1",
-                        "datetime": "2025-05-15T09:00:00"
+                        name: "J292/01: Language",
+                        datetime: "2026-05-11T13:30:00"
                     },
                     {
-                        "name": "Paper 2",
-                        "datetime": "2025-05-22T09:00:00"
+                        name: "J292/02: Prose literature A",
+                        datetime: "2026-05-22T13:30:00"
+                    },
+                    {
+                        name: "J292/03: Prose literature B",
+                        datetime: "2026-05-22T13:30:00"
+                    },
+                    {
+                        name: "J292/04: Verse literature A",
+                        datetime: "2026-06-01T13:30:00"
+                    },
+                    {
+                        name: "J292/05: Verse literature B",
+                        datetime: "2026-06-01T13:30:00"
+                    },
+                    {
+                        name: "J292/06: Literature and culture",
+                        datetime: "2026-06-08T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Combined Science A",
+                icon: "atom", // Placeholder icon
+                exams: [
+                    {
+                        name: "J250/01: Paper 1 (Biology) (Foundation)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J250/02: Paper 2 (Biology) (Foundation)",
+                        datetime: "2026-06-08T09:00:00"
+                    },
+                    {
+                        name: "J250/03: Paper 3 (Chemistry) (Foundation)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J250/04: Paper 4 (Chemistry) (Foundation)",
+                        datetime: "2026-06-12T09:00:00"
+                    },
+                    {
+                        name: "J250/05: Paper 5 (Physics) (Foundation)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J250/06: Paper 6 (Physics) (Foundation)",
+                        datetime: "2026-06-15T09:00:00"
+                    },
+                    {
+                        name: "J250/07: Paper 7 (Biology) (Higher)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J250/08: Paper 8 (Biology) (Higher)",
+                        datetime: "2026-06-08T09:00:00"
+                    },
+                    {
+                        name: "J250/09: Paper 9 (Chemistry) (Higher)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J250/10: Paper 10 (Chemistry) (Higher)",
+                        datetime: "2026-06-12T09:00:00"
+                    },
+                    {
+                        name: "J250/11: Paper 11 (Physics) (Higher)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J250/12: Paper 12 (Physics) (Higher)",
+                        datetime: "2026-06-15T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Combined Science B",
+                icon: "atom", // Placeholder icon
+                exams: [
+                    {
+                        name: "J260/01: Biology (Foundation)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J260/02: Chemistry (Foundation)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J260/03: Physics (Foundation)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J260/04: Combined science (Foundation)",
+                        datetime: "2026-06-08T09:00:00"
+                    },
+                    {
+                        name: "J260/05: Biology (Higher)",
+                        datetime: "2026-05-12T13:30:00"
+                    },
+                    {
+                        name: "J260/06: Chemistry (Higher)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J260/07: Physics (Higher)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J260/08: Combined science (Higher)",
+                        datetime: "2026-06-08T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Computer Science",
+                icon: "code-slash", // Placeholder icon
+                exams: [
+                    {
+                        name: "J277/01: Computer Systems",
+                        datetime: "2026-05-13T13:30:00"
+                    },
+                    {
+                        name: "J277/02: Computational Thinking, Algorithms and Programming",
+                        datetime: "2026-05-19T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Design and Technology",
+                icon: "tools", // Placeholder icon
+                exams: [
+                    {
+                        name: "J310/01: Principles of Design and Technology",
+                        datetime: "2026-05-21T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Drama",
+                icon: "mask", // Placeholder icon
+                exams: [
+                    {
+                        name: "J316/01: Drama and Theatre",
+                        datetime: "2026-05-08T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Economics",
+                icon: "cash", // Placeholder icon
+                exams: [
+                    {
+                        name: "J205/01: Introduction to economics",
+                        datetime: "2026-05-07T13:30:00"
+                    },
+                    {
+                        name: "J205/02: The UK economy",
+                        datetime: "2026-05-15T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "English Language",
+                icon: "chat-left-text", // Placeholder icon
+                exams: [
+                    {
+                        name: "J351/01: Communicating Information and Ideas",
+                        datetime: "2026-05-21T13:30:00"
+                    },
+                    {
+                        name: "J351/02: Exploring Effects and Impact",
+                        datetime: "2026-06-09T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "English Literature",
+                icon: "book-half", // Placeholder icon
+                exams: [
+                    {
+                        name: "J352/01: Literary Heritage",
+                        datetime: "2026-05-19T13:30:00"
+                    },
+                    {
+                        name: "J352/02: Modern Texts and Poetry",
+                        datetime: "2026-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Food Preparation and Nutrition",
+                icon: "utensils", // Placeholder icon
+                exams: [
+                    {
+                        name: "J309/01: Food Preparation and Nutrition",
+                        datetime: "2026-05-20T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Geography A (Geographical Themes)",
+                icon: "globe-americas", // Placeholder icon
+                exams: [
+                    {
+                        name: "J383/01: Our Natural World",
+                        datetime: "2026-05-13T09:00:00"
+                    },
+                    {
+                        name: "J383/02: People and Society",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J383/03: Geographical Exploration",
+                        datetime: "2026-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Geography B (Geography for Enquiring Minds)",
+                icon: "globe-americas", // Placeholder icon
+                exams: [
+                    {
+                        name: "J384/01: Global Geographical Issues",
+                        datetime: "2026-05-13T09:00:00"
+                    },
+                    {
+                        name: "J384/02: UK Geographical Issues",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J384/03: People and the Planet",
+                        datetime: "2026-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "History A (Explaining the Modern World)",
+                icon: "hourglass-split", // Placeholder icon
+                exams: [
+                    {
+                        name: "J410/11-19: British history – thematic study and depth study",
+                        datetime: "2026-05-14T09:00:00"
+                    },
+                    {
+                        name: "J410/31-39: World history - period study and depth study",
+                        datetime: "2026-05-26T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "History B (Schools History Project)",
+                icon: "hourglass-split", // Placeholder icon
+                exams: [
+                    {
+                        name: "J411/11-19: British history – thematic study and depth study",
+                        datetime: "2026-05-14T09:00:00"
+                    },
+                    {
+                        name: "J411/31-39: World history - period study and depth study",
+                        datetime: "2026-05-26T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Latin",
+                icon: "book", // Placeholder icon
+                exams: [
+                    {
+                        name: "J282/01: Language",
+                        datetime: "2026-05-11T13:30:00"
+                    },
+                    {
+                        name: "J282/02: Prose literature A",
+                        datetime: "2026-05-22T13:30:00"
+                    },
+                    {
+                        name: "J282/03: Prose literature B",
+                        datetime: "2026-05-22T13:30:00"
+                    },
+                    {
+                        name: "J282/04: Verse literature A",
+                        datetime: "2026-06-01T13:30:00"
+                    },
+                    {
+                        name: "J282/05: Verse literature B",
+                        datetime: "2026-06-01T13:30:00"
+                    },
+                    {
+                        name: "J282/06: Literature and culture",
+                        datetime: "2026-06-08T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Mathematics",
+                icon: "calculator", // Placeholder icon
+                exams: [
+                    {
+                        name: "J560/01: Paper 1 (Foundation – calculator)",
+                        datetime: "2026-05-14T13:30:00"
+                    },
+                    {
+                        name: "J560/02: Paper 2 (Foundation – non-calculator)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J560/03: Paper 3 (Foundation – calculator)",
+                        datetime: "2026-06-05T09:00:00"
+                    },
+                    {
+                        name: "J560/04: Paper 4 (Higher – calculator)",
+                        datetime: "2026-05-14T13:30:00"
+                    },
+                    {
+                        name: "J560/05: Paper 5 (Higher – non-calculator)",
+                        datetime: "2026-05-18T09:00:00"
+                    },
+                    {
+                        name: "J560/06: Paper 6 (Higher – calculator)",
+                        datetime: "2026-06-05T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Media Studies",
+                icon: "camera-video", // Placeholder icon
+                exams: [
+                    {
+                        name: "J200/01: Media Industries and Audiences",
+                        datetime: "2026-05-18T13:30:00"
+                    },
+                    {
+                        name: "J200/02: Media Forms and Products",
+                        datetime: "2026-06-09T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Music",
+                icon: "music-note", // Placeholder icon
+                exams: [
+                    {
+                        name: "J536/01: Listening and Appraising",
+                        datetime: "2026-06-03T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Physical Education",
+                icon: "person-running", // Placeholder icon
+                exams: [
+                    {
+                        name: "J587/01: Physical Factors Affecting Performance",
+                        datetime: "2026-05-11T13:30:00"
+                    },
+                    {
+                        name: "J587/02: Socio-cultural Issues and Sports Psychology",
+                        datetime: "2026-05-26T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Physics A",
+                icon: "lightbulb", // Placeholder icon
+                exams: [
+                    {
+                        name: "J249/01: Paper 1 (Foundation tier)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J249/02: Paper 2 (Foundation tier)",
+                        datetime: "2026-06-15T09:00:00"
+                    },
+                    {
+                        name: "J249/03: Paper 3 (Higher tier)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J249/04: Paper 4 (Higher tier)",
+                        datetime: "2026-06-15T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Physics B",
+                icon: "lightbulb", // Placeholder icon
+                exams: [
+                    {
+                        name: "J259/01: Breadth in physics (Foundation)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J259/02: Depth in physics (Foundation)",
+                        datetime: "2026-06-15T09:00:00"
+                    },
+                    {
+                        name: "J259/03: Breadth in physics (Higher)",
+                        datetime: "2026-06-02T09:00:00"
+                    },
+                    {
+                        name: "J259/04: Depth in physics (Higher)",
+                        datetime: "2026-06-15T09:00:00"
+                    }
+                ]
+            },
+            {
+                name: "Religious Studies",
+                icon: "church", // Placeholder icon
+                exams: [
+                    {
+                        name: "J625/01: Beliefs and Teachings",
+                        datetime: "2026-05-20T13:30:00"
+                    },
+                    {
+                        name: "J625/02: Practices",
+                        datetime: "2026-05-22T13:30:00"
+                    },
+                    {
+                        name: "J625/03: Philosophy and Ethics",
+                        datetime: "2026-06-01T09:00:00"
+                    },
+                    {
+                        name: "J625/04: Study of a Religion",
+                        datetime: "2026-06-03T13:30:00"
+                    },
+                    {
+                        name: "J625/05: Study of a Religion",
+                        datetime: "2026-06-05T13:30:00"
+                    }
+                ]
+            },
+            {
+                name: "Sociology",
+                icon: "people", // Placeholder icon
+                exams: [
+                    {
+                        name: "J206/01: Introduction to Sociology",
+                        datetime: "2026-05-26T13:30:00"
+                    },
+                    {
+                        name: "J206/02: Social Issues and Research Methods",
+                        datetime: "2026-06-11T09:00:00"
                     }
                 ]
             }
@@ -1313,9 +2615,7 @@ function init() {
     renderTimetableGrid();
     updateUserProfileDisplay();
     initMusicPlayer();
-    initTracker();
     setupExamRules();
-
 }
 
 // Load user data from localStorage
@@ -1523,11 +2823,11 @@ function setupEventListeners() {
         document.getElementById('topicsContainer').innerHTML = '';
 
         // Add default topics if available
-        if (gcseSubjects[subjectName]?.topics) {
-            gcseSubjects[subjectName].topics.forEach(topic => {
-                addTopicInput(topic);
-            });
-        }
+        //if (gcseSubjects[subjectName]?.topics) {//
+        //gcseSubjects[subjectName].topics.forEach(topic => {//
+        //addTopicInput(topic);//
+        //});//
+        //}//
     });
     document.getElementById('multiTopicMode').addEventListener('change', function () {
         multiTopicMode = this.checked;
@@ -1911,160 +3211,160 @@ function logStudySession(event) {
 }
 
 const NotesManager = {
-  // Safe ID generator
-  generateId() {
-    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  },
+    // Safe ID generator
+    generateId() {
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+            return crypto.randomUUID();
+        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    },
 
-  init() {
-    this.setupEventListeners();
-    this.renderSubjectOptions();
-    this.renderAllNotes();
-  },
+    init() {
+        this.setupEventListeners();
+        this.renderSubjectOptions();
+        this.renderAllNotes();
+    },
 
-  setupEventListeners() {
-    // Study session tracker notes
-    document.getElementById('saveCurrentNote')?.addEventListener('click', () => this.saveCurrentNote());
-    document.getElementById('viewOtherNotes')?.addEventListener('click', () => this.showNotesModal());
-    
-    // Standalone notes form
-    document.getElementById('standaloneNoteForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.saveStandaloneNote();
-    });
-    
-    // Subject selection changes
-    document.getElementById('noteSubjects')?.addEventListener('change', () => this.handleSubjectSelection());
-  },
+    setupEventListeners() {
+        // Study session tracker notes
+        document.getElementById('saveCurrentNote')?.addEventListener('click', () => this.saveCurrentNote());
+        document.getElementById('viewOtherNotes')?.addEventListener('click', () => this.showNotesModal());
 
-  handleSubjectSelection() {
-    const topicSelect = document.getElementById('noteTopic');
-    const selectedSubjects = Array.from(
-      document.getElementById('noteSubjects').selectedOptions
-    ).map(opt => opt.value);
-    
-    topicSelect.disabled = selectedSubjects.length > 1;
-    
-    if (selectedSubjects.length === 1 && selectedSubjects[0] !== 'general') {
-      this.populateTopicOptions(selectedSubjects[0]);
-    } else {
-      topicSelect.innerHTML = '<option value="">Select topic...</option>';
-    }
-  },
+        // Standalone notes form
+        document.getElementById('standaloneNoteForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.saveStandaloneNote();
+        });
 
-  renderSubjectOptions() {
-    const select = document.getElementById('noteSubjects');
-    if (!select) return;
-    
-    // Clear existing options except "General Note"
-    while (select.options.length > 1) {
-      select.remove(1);
-    }
-    
-    // Add user's subjects
-    userData.subjects.forEach(subject => {
-      const option = new Option(subject.displayName || subject.name, subject.name);
-      select.add(option);
-    });
-  },
+        // Subject selection changes
+        document.getElementById('noteSubjects')?.addEventListener('change', () => this.handleSubjectSelection());
+    },
 
-  populateTopicOptions(subjectName) {
-    const select = document.getElementById('noteTopic');
-    if (!select) return;
-    
-    select.innerHTML = '<option value="">Select topic...</option>';
-    
-    const subjectData = gcseSubjects[subjectName];
-    if (subjectData?.topics) {
-      subjectData.topics.forEach(topic => {
-        select.add(new Option(topic, topic));
-      });
-    }
-  },
+    handleSubjectSelection() {
+        const topicSelect = document.getElementById('noteTopic');
+        const selectedSubjects = Array.from(
+            document.getElementById('noteSubjects').selectedOptions
+        ).map(opt => opt.value);
 
-  saveCurrentNote() {
-    const noteContent = document.getElementById('currentNote')?.value.trim();
-    const currentSubject = subjectSelect.value;
-    
-    if (!currentSubject) {
-      alert('Please select a subject first');
-      return;
-    }
-    
-    if (!noteContent) {
-      alert('Note cannot be empty');
-      return;
-    }
-    
-    const newNote = {
-      id: this.generateId(),
-      type: 'session',
-      subject: currentSubject,
-      topic: topicSelect.value || 'General Study',
-      content: noteContent,
-      createdAt: new Date().toISOString(),
-      sessionId: currentSession?.id
-    };
-    
-    this.saveNote(newNote);
-    document.getElementById('currentNote').value = '';
-    
-    // Visual feedback
-    const btn = document.getElementById('saveCurrentNote');
-    if (btn) {
-      btn.textContent = '✓ Saved';
-      setTimeout(() => {
-        btn.textContent = 'Save';
-      }, 2000);
-    }
-  },
+        topicSelect.disabled = selectedSubjects.length > 1;
 
-  saveStandaloneNote() {
-    const content = document.getElementById('noteContent')?.value.trim();
-    const subjectSelect = document.getElementById('noteSubjects');
-    const subjects = Array.from(subjectSelect.selectedOptions).map(opt => opt.value);
-    const topic = document.getElementById('noteTopic')?.value;
-    
-    if (!content) {
-      alert('Note content cannot be empty');
-      return;
-    }
-    
-    if (subjects.length === 0) {
-      alert('Please select at least one subject');
-      return;
-    }
-    
-    const newNote = {
-      id: this.generateId(),
-      type: 'standalone',
-      subjects: subjects,
-      topic: subjects.length === 1 ? topic || null : null,
-      content: content,
-      createdAt: new Date().toISOString()
-    };
-    
-    this.saveNote(newNote);
-    this.renderAllNotes();
-    document.getElementById('standaloneNoteForm').reset();
-    
-    // Visual feedback
-    const btn = document.querySelector('#standaloneNoteForm [type="submit"]');
-    if (btn) {
-      const originalText = btn.textContent;
-      btn.textContent = '✓ Saved';
-      setTimeout(() => {
-        btn.textContent = originalText;
-      }, 2000);
-    }
-  },
+        if (selectedSubjects.length === 1 && selectedSubjects[0] !== 'general') {
+            this.populateTopicOptions(selectedSubjects[0]);
+        } else {
+            topicSelect.innerHTML = '<option value="">Select topic...</option>';
+        }
+    },
+
+    renderSubjectOptions() {
+        const select = document.getElementById('noteSubjects');
+        if (!select) return;
+
+        // Clear existing options except "General Note"
+        while (select.options.length > 1) {
+            select.remove(1);
+        }
+
+        // Add user's subjects
+        userData.subjects.forEach(subject => {
+            const option = new Option(subject.displayName || subject.name, subject.name);
+            select.add(option);
+        });
+    },
+
+    populateTopicOptions(subjectName) {
+        const select = document.getElementById('noteTopic');
+        if (!select) return;
+
+        select.innerHTML = '<option value="">Select topic...</option>';
+
+        const subjectData = gcseSubjects[subjectName];
+        if (subjectData?.topics) {
+            subjectData.topics.forEach(topic => {
+                select.add(new Option(topic, topic));
+            });
+        }
+    },
+
+    saveCurrentNote() {
+        const noteContent = document.getElementById('currentNote')?.value.trim();
+        const currentSubject = subjectSelect.value;
+
+        if (!currentSubject) {
+            alert('Please select a subject first');
+            return;
+        }
+
+        if (!noteContent) {
+            alert('Note cannot be empty');
+            return;
+        }
+
+        const newNote = {
+            id: this.generateId(),
+            type: 'session',
+            subject: currentSubject,
+            topic: topicSelect.value || 'General Study',
+            content: noteContent,
+            createdAt: new Date().toISOString(),
+            sessionId: currentSession?.id
+        };
+
+        this.saveNote(newNote);
+        document.getElementById('currentNote').value = '';
+
+        // Visual feedback
+        const btn = document.getElementById('saveCurrentNote');
+        if (btn) {
+            btn.textContent = '✓ Saved';
+            setTimeout(() => {
+                btn.textContent = 'Save';
+            }, 2000);
+        }
+    },
+
+    saveStandaloneNote() {
+        const content = document.getElementById('noteContent')?.value.trim();
+        const subjectSelect = document.getElementById('noteSubjects');
+        const subjects = Array.from(subjectSelect.selectedOptions).map(opt => opt.value);
+        const topic = document.getElementById('noteTopic')?.value;
+
+        if (!content) {
+            alert('Note content cannot be empty');
+            return;
+        }
+
+        if (subjects.length === 0) {
+            alert('Please select at least one subject');
+            return;
+        }
+
+        const newNote = {
+            id: this.generateId(),
+            type: 'standalone',
+            subjects: subjects,
+            topic: subjects.length === 1 ? topic || null : null,
+            content: content,
+            createdAt: new Date().toISOString()
+        };
+
+        this.saveNote(newNote);
+        this.renderAllNotes();
+        document.getElementById('standaloneNoteForm').reset();
+
+        // Visual feedback
+        const btn = document.querySelector('#standaloneNoteForm [type="submit"]');
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Saved';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+    },
 
 
     // Save note to storage
@@ -2093,8 +3393,8 @@ const NotesManager = {
         });
     },
 
-// Show notes modal in study session tracker
-showNotesModal() {
+    // Show notes modal in study session tracker
+    showNotesModal() {
         const currentSubject = subjectSelect.value;
         if (!currentSubject) {
             alert('Please select a subject first');
@@ -2355,6 +3655,37 @@ function addSubject() {
     addSubjectModal.hide();
     document.dispatchEvent(new Event('subjectsUpdated'));
 }
+function updateAddSubjectTopics() {
+    const subjectName = subjectInput.value;
+    const examBoard = document.getElementById('examBoard').value;
+    const topicsContainer = document.getElementById('topicsContainer');
+    topicsContainer.innerHTML = '';
+
+    // Only show topics if both subject and exam board are selected
+    if (subjectName && examBoard && gcseSubjects[subjectName]) {
+        let topics = [];
+        // If subject has exam-board-specific topics
+        if (gcseSubjects[subjectName][examBoard] && gcseSubjects[subjectName][examBoard].topics) {
+            topics = gcseSubjects[subjectName][examBoard].topics;
+        } else if (gcseSubjects[subjectName].topics) {
+            // Fallback for subjects without exam board split
+            topics = gcseSubjects[subjectName].topics;
+        }
+        topics.forEach(topic => addTopicInput(topic));
+    }
+}
+
+// Update event listeners for subject and exam board selects in the modal
+subjectInput.addEventListener('change', () => {
+    if (subjectInput.value === "Mathematics") {
+        mathOptions.classList.remove('d-none');
+    } else {
+        mathOptions.classList.add('d-none');
+    }
+    updateAddSubjectTopics();
+});
+
+document.getElementById('examBoard').addEventListener('change', updateAddSubjectTopics);
 // Delete selected subject
 function deleteSelectedSubject() {
     userData.subjects = userData.subjects.filter(subject => subject.name !== selectedSubject);
@@ -4478,6 +5809,8 @@ function initExamDatesTab(examData) {
     const secondsToggle = document.getElementById('exam-dates-seconds-toggle');
     const subjectFilter = document.getElementById('exam-dates-subject-filter');
     const boardFilter = document.getElementById('exam-dates-board-filter');
+    const noExamsPlaceholder = document.getElementById('noExamsPlaceholder');
+    const removePastExamsBtn = document.getElementById('removePastExamsBtn');
 
     let isListView = false;
     let showSeconds = true;
@@ -4499,6 +5832,23 @@ function initExamDatesTab(examData) {
     boardFilter.addEventListener('change', function () {
         currentBoard = this.value;
         renderExams();
+    });
+
+    // Add event listener for Remove Past Exams button
+    removePastExamsBtn.addEventListener('click', function () {
+        // Remove cards for exams that have passed
+        examCards = examCards.filter(({ element, exam }) => {
+            const now = new Date();
+            if (exam.datetime < now) {
+                if (element.parentElement) element.parentElement.removeChild(element);
+                return false;
+            }
+            return true;
+        });
+        // If all exams are gone, show the placeholder
+        if (examCards.length === 0) {
+            noExamsPlaceholder.style.display = '';
+        }
     });
 
     renderExams(); // Initial rendering of exams
@@ -4524,6 +5874,21 @@ function initExamDatesTab(examData) {
     }
 
     function setupSubjectFilter() {
+        subjectFilter.innerHTML = ''; // Clear existing options
+
+        // Add "My Subjects" option
+        const mySubjectsOption = document.createElement('option');
+        mySubjectsOption.value = 'my_subjects';
+        mySubjectsOption.textContent = 'My Subjects';
+        subjectFilter.appendChild(mySubjectsOption);
+
+        // Add "All Subjects" option
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = 'All Subjects';
+        subjectFilter.appendChild(allOption);
+
+        // Add all available subjects
         const allSubjects = new Set();
         for (const board in examData) {
             examData[board].subjects.forEach(subject => {
@@ -4569,7 +5934,11 @@ function initExamDatesTab(examData) {
     function getFilteredExams() {
         let filtered = allExams;
 
-        if (currentSubject !== 'all') {
+        if (currentSubject === 'my_subjects') {
+            // Only show exams for subjects in userData.subjects
+            const mySubjectNames = userData.subjects.map(s => s.name);
+            filtered = filtered.filter(exam => mySubjectNames.includes(exam.subjectName));
+        } else if (currentSubject !== 'all') {
             filtered = filtered.filter(exam => exam.subjectName === currentSubject);
         }
 
@@ -4604,12 +5973,17 @@ function initExamDatesTab(examData) {
         examCards = []; // Clear the cards array
         const filteredExams = getFilteredExams();
 
-        if (filteredExams.length === 0) {
-            examGrid.innerHTML = '<div class="empty-state"><i class="bi bi-search"></i><p>No exams match your filters</p></div>';
-            return;
+        // Only show future exams
+        const now = new Date();
+        const futureExams = filteredExams.filter(exam => exam.datetime > now);
+
+        if (futureExams.length === 0) {
+            noExamsPlaceholder.style.display = '';
+        } else {
+            noExamsPlaceholder.style.display = 'none';
         }
 
-        filteredExams.forEach(exam => {
+        futureExams.forEach(exam => {
             const card = createExamCard(exam);
             examGrid.appendChild(card);
             examCards.push({
