@@ -3764,7 +3764,98 @@ select:not(.multi-select) {
     color: #e31937;
     font-weight: 600;
 }
+.subcategory-container {
+  background: #fff;
+  border-radius: 16px;
+}
 
+/* Header: stack vertically, center text and button */
+.subcategory-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.subcategory-header h2 {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.back-to-specs {
+  align-self: flex-start;
+  font-size: 1rem;
+  color: #007bff;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.back-to-specs:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+/* Fix for subject specs subcategory layout */
+.specs-subcategory {
+  /* Remove flex, let .resource-category.active's grid apply */
+  border-radius: 16px;
+  gap: 2rem;
+}
+
+/* Make the header span the full grid width */
+.specs-subcategory-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0;
+  gap: 1.5rem;
+  background: none;
+}
+
+.specs-subcategory-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+  color: var(--dark-color);
+}
+
+.specs-back-btn {
+  font-size: 1rem;
+  color: #007bff;
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+  border-radius: 6px;
+  transition: background 0.2s;
+  margin-left: auto;
+}
+
+.specs-back-btn:hover {
+  color: #0056b3;
+  background: #f0f4ff;
+  text-decoration: none;
+}
+
+/* Ensure the grid for cards is correct */
+.specs-subcategory-grid {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
     :root {

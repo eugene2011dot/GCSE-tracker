@@ -4700,16 +4700,24 @@ function setupResourcesTab() {
     // Category switching
     document.querySelectorAll('.resource-categories .category').forEach(category => {
         category.addEventListener('click', function () {
+            // Remove active from all categories
             document.querySelectorAll('.resource-categories .category').forEach(c => {
                 c.classList.remove('active');
             });
             this.classList.add('active');
 
             const categoryId = this.dataset.category;
-            document.querySelectorAll('.resource-category').forEach(cat => {
+            // Hide ALL resource-category elements in the resources grid
+            document.querySelectorAll('.resources-grid .resource-category').forEach(cat => {
                 cat.classList.remove('active');
+                cat.classList.add('d-none');
             });
-            document.getElementById(categoryId).classList.add('active');
+            // Show the selected category
+            const target = document.getElementById(categoryId);
+            if (target) {
+                target.classList.add('active');
+                target.classList.remove('d-none');
+            }
         });
     });
 
@@ -4722,6 +4730,35 @@ function setupResourcesTab() {
         });
     });
 }
+
+// Also update your subcategory logic to only hide/show inside .resources-grid:
+document.addEventListener('DOMContentLoaded', function () {
+    // Open subcategory when card is clicked
+    document.querySelectorAll('.open-subcategory').forEach(card => {
+        card.addEventListener('click', function () {
+            const subcatId = this.dataset.subcategory;
+            // Hide all resource categories
+            document.querySelectorAll('.resource-category').forEach(cat => cat.classList.remove('active'));
+            document.querySelectorAll('.resource-category').forEach(cat => cat.classList.add('d-none'));
+            // Show the sub-category
+            document.getElementById(subcatId).classList.remove('d-none');
+            document.getElementById(subcatId).classList.add('active');
+        });
+    });
+
+    // Back button to return to Subject Specs
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('back-to-specs')) {
+            // Hide all resource categories
+            document.querySelectorAll('.resource-category').forEach(cat => cat.classList.remove('active'));
+            document.querySelectorAll('.resource-category').forEach(cat => cat.classList.add('d-none'));
+            // Show the main Subject Specs category
+            document.getElementById('specs').classList.remove('d-none');
+            document.getElementById('specs').classList.add('active');
+        }
+    });
+});
+
 
 // Timetable Functions
 function renderTimetableSubjects() {
