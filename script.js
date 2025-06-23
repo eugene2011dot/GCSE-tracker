@@ -4758,6 +4758,89 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const resourceSearchInput = document.querySelector('.search-container input[type="text"]');
+    const resourcesGrid = document.querySelector('.resources-grid');
+    if (!resourceSearchInput || !resourcesGrid) return;
+
+    resourceSearchInput.addEventListener('input', function () {
+        const query = this.value.trim().toLowerCase();
+        const allCategories = resourcesGrid.querySelectorAll('.resource-category');
+        let anyVisible = false;
+
+        if (query) {
+            // Show all categories for searching
+            allCategories.forEach(category => {
+                category.classList.remove('d-none');
+                category.classList.add('searching');
+                // Hide all cards first
+                const cards = category.querySelectorAll('.resource-card');
+                let categoryHasVisible = false;
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        card.style.display = '';
+                        categoryHasVisible = true;
+                        anyVisible = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                // Hide category if no cards match
+                category.style.display = categoryHasVisible ? '' : 'none';
+
+                // Handle empty state per category
+                let emptyState = category.querySelector('.empty-state');
+                if (!categoryHasVisible) {
+                    if (!emptyState) {
+                        emptyState = document.createElement('div');
+                        emptyState.className = 'empty-state';
+                        emptyState.innerHTML = '<i class="bi bi-search"></i><p>No resources found.</p>';
+                        category.appendChild(emptyState);
+                    }
+                } else if (emptyState) {
+                    emptyState.remove();
+                }
+            });
+
+            // Global empty state if nothing found
+            let globalEmpty = resourcesGrid.querySelector('.global-empty-state');
+            if (!anyVisible) {
+                if (!globalEmpty) {
+                    globalEmpty = document.createElement('div');
+                    globalEmpty.className = 'global-empty-state';
+                    globalEmpty.innerHTML = '<i class="bi bi-search"></i><p>No resources found in any category.</p>';
+                    resourcesGrid.appendChild(globalEmpty);
+                }
+            } else if (globalEmpty) {
+                globalEmpty.remove();
+            }
+        } else {
+            // Restore original visibility: show only the active category
+            allCategories.forEach(category => {
+                category.classList.remove('searching');
+                // Remove empty states
+                const emptyState = category.querySelector('.empty-state');
+                if (emptyState) emptyState.remove();
+                // Restore card visibility
+                category.querySelectorAll('.resource-card').forEach(card => {
+                    card.style.display = '';
+                });
+                // Show only active, hide others
+                if (category.classList.contains('active')) {
+                    category.classList.remove('d-none');
+                    category.style.display = '';
+                } else {
+                    category.classList.add('d-none');
+                    category.style.display = 'none';
+                }
+            });
+            // Remove global empty state
+            const globalEmpty = resourcesGrid.querySelector('.global-empty-state');
+            if (globalEmpty) globalEmpty.remove();
+        }
+    });
+});
 
 
 // Timetable Functions
